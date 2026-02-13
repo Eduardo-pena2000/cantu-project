@@ -1,0 +1,5 @@
+export const ATTENDANCE_STATUS = {
+  PRESENT: "PRESENTE",
+  ABSENT: "AUSENTE",
+  EXCUSED: "EXCUSADO",
+};
