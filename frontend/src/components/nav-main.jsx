@@ -30,7 +30,7 @@ export function NavMain({ pathname }) {
                 asChild
                 className={cn(
                   isLinkActive(item.url, pathname) &&
-                    "bg-accent-foreground text-accent shadow-md hover:bg-accent-foreground hover:text-accent"
+                  "bg-sidebar-primary text-sidebar-primary-foreground shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground"
                 )}
               >
                 <Link href={item.url}>

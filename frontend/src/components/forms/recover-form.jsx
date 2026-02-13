@@ -30,16 +30,16 @@ const formSchema = z.object({
 export function RecoverForm({ className, ...props }) {
   const form = useForm({ resolver: zodResolver(formSchema), defaultValues: { email: "" } });
 
-  async function onSubmit(values) {}
+  async function onSubmit(values) { }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Image
-        className="size-40 shadow-sm aspect-square object-cover object-center rounded-full mx-auto"
-        src="/globe.svg"
+        className="h-32 w-auto object-contain mx-auto mb-4 rounded-xl"
+        src="/logo.jpg"
         alt="El ofertón de Cantú logo"
-        width={160}
-        height={160}
+        width={200}
+        height={100}
         priority
       />
       <Form {...form}>

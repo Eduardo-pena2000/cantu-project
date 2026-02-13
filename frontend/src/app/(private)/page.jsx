@@ -75,6 +75,9 @@ function rowsAdapter(scheduleEmployees) {
   }));
 }
 
+import { WelcomeHero } from "@/components/dashboard/welcome-hero";
+import { StatsCards } from "@/components/dashboard/stats-cards";
+
 export default async function Page() {
   const session = await auth();
 
@@ -94,19 +97,27 @@ export default async function Page() {
     );
 
     return (
-      <>
-        <header className="max-w-prose">
+      <div className="flex flex-col gap-6 animate-fade-in">
+        <header className="flex flex-col gap-1">
           <Title>Resumen de actividades</Title>
-          <Subtitle>{session.store.name}</Subtitle>
-          <p className="text-muted-foreground text-sm">{formatDate({ date })}</p>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Subtitle className="text-sidebar-primary">{session.store.name}</Subtitle>
+            <span>•</span>
+            <p className="text-sm">{formatDate({ date })}</p>
+          </div>
         </header>
 
         {schedule ? (
-          <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
+          <>
+            <StatsCards scheduleEmployees={rowsAdapter(scheduleEmployees)} />
+            <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
+          </>
         ) : (
-          <div>¡No se encontró un turno activo en este momento!</div>
+          <div className="p-8 border rounded-xl bg-muted/20 text-center animate-slide-up">
+            <p className="text-muted-foreground">¡No se encontró un turno activo en este momento!</p>
+          </div>
         )}
-      </>
+      </div>
     );
   }
 
@@ -122,27 +133,33 @@ export default async function Page() {
     );
 
     return (
-      <>
-        <header className="max-w-prose">
+      <div className="flex flex-col gap-6 animate-fade-in">
+        <header className="flex flex-col gap-1">
           <Title>Resumen de actividades</Title>
-          <Subtitle>{session.store.name}</Subtitle>
-          <p className="text-muted-foreground text-sm">{formatDate({ date })}</p>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Subtitle className="text-sidebar-primary">{session.store.name}</Subtitle>
+            <span>•</span>
+            <p className="text-sm">{formatDate({ date })}</p>
+          </div>
         </header>
 
         {schedule ? (
-          <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
+          <>
+            <StatsCards scheduleEmployees={rowsAdapter(scheduleEmployees)} />
+            <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
+          </>
         ) : (
-          <div>¡No se encontró un turno activo en este momento!</div>
+          <div className="p-8 border rounded-xl bg-muted/20 text-center animate-slide-up">
+            <p className="text-muted-foreground">¡No se encontró un turno activo en este momento!</p>
+          </div>
         )}
-      </>
+      </div>
     );
   }
 
   return (
     <>
-      <header className="max-w-prose">
-        <Title>Inicio</Title>
-      </header>
+      <WelcomeHero session={session} />
     </>
   );
 }
