@@ -184,7 +184,7 @@ export class UserDatasourceImpl implements UserDatasource {
           include: [
             {
               as: "activities_asigments",
-              attributes: ["id", "deadline", "is_completed", "note", "is_late"],
+              attributes: ["id", "deadline", "is_completed", "note", "is_late", "date_completed", "manager_note", "shift_manager_note"],
               include: [
                 {
                   as: "activity",

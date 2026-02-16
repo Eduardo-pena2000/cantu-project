@@ -29,4 +29,9 @@ export const ROLES = {
     name: "Encargado de turno temporal",
     slug: "temporary_shift_manager",
   },
+  SUPERVISOR: {
+    id: 7,
+    name: "Supervisor",
+    slug: "supervisor",
+  },
 };

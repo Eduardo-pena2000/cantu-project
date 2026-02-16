@@ -7,7 +7,7 @@ export class GetActiveShiftUseCase {
     private shiftRepository: ShiftRepository,
     private teamRepository: TeamRepository,
     private userRepository: UserRepository
-  ) {}
+  ) { }
 
   async execute(store_id: number, user_id: number): Promise<ShiftScheduleEntity | null> {
     const schedules = await this.shiftRepository.findAllSchedules(store_id);
@@ -26,14 +26,15 @@ export class GetActiveShiftUseCase {
     const currentMinutes = this.timeToMinutes(currentTime);
 
     if (user.roles.some((role) =>
-        [
-          Roles.admin,
-          Roles.general_manager,
-          Roles.store_manager,
-          Roles.shift_manager,
-          Roles.temporary_shift_manager,
-        ].includes(role.id)
-      )) {
+      [
+        Roles.admin,
+        Roles.general_manager,
+        Roles.store_manager,
+        Roles.shift_manager,
+        Roles.temporary_shift_manager,
+        Roles.supervisor,
+      ].includes(role.id)
+    )) {
       return (
         schedules.find(
           ({ end_time, start_time, week_day }) =>

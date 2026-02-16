@@ -12,6 +12,12 @@ import { Subtitle } from "@/components/subtitle";
 import { DataTable } from "../_home/data-table";
 import { columns } from "../_home/columns";
 
+import { WelcomeHero } from "@/components/dashboard/welcome-hero";
+import { StatsCards } from "@/components/dashboard/stats-cards";
+import { DashboardCharts } from "@/components/dashboard/charts";
+import { NavigationCards } from "@/components/dashboard/navigation-cards";
+
+
 async function getActiveShift(storeId, accessToken) {
   const res = await fetchApi(`/shift/active?store=${storeId}`, {
     method: "GET",
@@ -71,12 +77,11 @@ function rowsAdapter(scheduleEmployees) {
     pending: attendance.pending,
     late: attendance.late,
     score: attendance.score,
+    overallStatus: attendance.overallStatus,
     assignments: attendance.assignments,
   }));
 }
 
-import { WelcomeHero } from "@/components/dashboard/welcome-hero";
-import { StatsCards } from "@/components/dashboard/stats-cards";
 
 export default async function Page() {
   const session = await auth();
@@ -86,7 +91,11 @@ export default async function Page() {
   }
 
   if (
-    hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug]) &&
+    hasRole(session, [
+      ROLES.ADMIN.slug,
+      ROLES.GENERAL_MANAGER.slug,
+      ROLES.STORE_MANAGER.slug,
+    ]) &&
     session.store
   ) {
     const { date, schedule } = await getActiveShift(session.store.id, session.accessToken);
@@ -95,6 +104,8 @@ export default async function Page() {
       session.store.id,
       session.accessToken
     );
+
+
 
     return (
       <div className="flex flex-col gap-6 animate-fade-in">
@@ -107,9 +118,13 @@ export default async function Page() {
           </div>
         </header>
 
+        {/* Quick Access Navigation */}
+        <NavigationCards />
+
         {schedule ? (
           <>
             <StatsCards scheduleEmployees={rowsAdapter(scheduleEmployees)} />
+            <DashboardCharts employees={rowsAdapter(scheduleEmployees)} />
             <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
           </>
         ) : (
@@ -143,9 +158,13 @@ export default async function Page() {
           </div>
         </header>
 
+        {/* Quick Access Navigation */}
+        <NavigationCards />
+
         {schedule ? (
           <>
             <StatsCards scheduleEmployees={rowsAdapter(scheduleEmployees)} />
+            <DashboardCharts employees={rowsAdapter(scheduleEmployees)} />
             <DataTable columns={columns} data={rowsAdapter(scheduleEmployees)} />
           </>
         ) : (

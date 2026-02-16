@@ -1,0 +1,128 @@
+2026-02-16T08:37:52.730Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:38:01.269Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:38:01.524Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:39:19.336Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:40:12.916Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:40:56.408Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:42:08.497Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}
+2026-02-16T08:42:19.577Z - Validation Error: {
+  "url": "/store/NaN",
+  "params": {
+    "id": "NaN"
+  },
+  "query": {},
+  "errors": [
+    {
+      "type": "field",
+      "value": "NaN",
+      "msg": "El parámetro 'id' debe ser un número entero positivo.",
+      "path": "id",
+      "location": "params"
+    }
+  ]
+}

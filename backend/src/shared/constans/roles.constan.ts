@@ -5,6 +5,7 @@ export enum Roles {
   shift_manager = 4,
   employee = 5,
   temporary_shift_manager = 6,
+  supervisor = 7,
 }
 
 export const rolesWithAccessToApp: Roles[] = [
@@ -13,4 +14,5 @@ export const rolesWithAccessToApp: Roles[] = [
   Roles.store_manager,
   Roles.shift_manager,
   Roles.temporary_shift_manager,
+  Roles.supervisor,
 ];

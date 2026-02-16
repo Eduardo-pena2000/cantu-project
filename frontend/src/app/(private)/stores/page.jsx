@@ -24,7 +24,12 @@ export default async function Page({ searchParams }) {
   }
 
   if (
-    !hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug]) ||
+    !hasRole(session, [
+      ROLES.ADMIN.slug,
+      ROLES.GENERAL_MANAGER.slug,
+      ROLES.STORE_MANAGER.slug,
+      ROLES.SUPERVISOR.slug,
+    ]) ||
     session.store
   ) {
     redirect("/");

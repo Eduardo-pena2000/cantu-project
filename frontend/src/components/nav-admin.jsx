@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  Boxes,
-  CalendarClock,
-  ClipboardList,
-  Handshake,
-  Store,
-  UserCheck,
-  UsersRound,
-} from "lucide-react";
+import { MENU_ITEMS as items } from "@/data/menu-items";
 
 import { cn } from "@/lib/utils";
 import { hasRole } from "@/utils/user";
@@ -24,30 +16,22 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const items = {
-  primary: [
-    { id: 1, label: "Usuarios", url: "/users", icon: UsersRound },
-    { id: 2, label: "Tiendas", url: "/stores", icon: Store },
-  ],
-  secondary: [
-    { id: 3, label: "Empleados", url: "/store/employees", icon: UsersRound },
-    { id: 4, label: "Áreas", url: "/store/areas", icon: Boxes },
-    { id: 5, label: "Turnos", url: "/store/shifts", icon: CalendarClock },
-    { id: 6, label: "Equipos de trabajo", url: "/store/work-teams", icon: Handshake },
-    { id: 7, label: "Actividades", url: "/store/activities", icon: ClipboardList },
-    { id: 8, label: "Asistencia", url: "/store/attendance", icon: UserCheck },
-  ],
-  general: [
-    { id: 1, label: "Actividades", url: "/store/activities", icon: ClipboardList },
-    { id: 2, label: "Asistencia", url: "/store/attendance", icon: UserCheck },
-  ],
-};
-
 export function NavAdmin({ session, pathname }) {
+  const isAdminOrManager = hasRole(session, [
+    ROLES.ADMIN.slug,
+    ROLES.GENERAL_MANAGER.slug,
+    ROLES.STORE_MANAGER.slug,
+    ROLES.SUPERVISOR.slug,
+  ]);
   if (
     session &&
-    !session.store &&
-    hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug])
+    (!session.store || hasRole(session, ROLES.SUPERVISOR.slug)) &&
+    hasRole(session, [
+      ROLES.ADMIN.slug,
+      ROLES.GENERAL_MANAGER.slug,
+      ROLES.STORE_MANAGER.slug,
+      ROLES.SUPERVISOR.slug,
+    ])
   ) {
     return (
       <SidebarGroup>
@@ -78,7 +62,11 @@ export function NavAdmin({ session, pathname }) {
 
   if (
     session &&
-    hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug]) &&
+    hasRole(session, [
+      ROLES.ADMIN.slug,
+      ROLES.GENERAL_MANAGER.slug,
+      ROLES.STORE_MANAGER.slug,
+    ]) &&
     session.store
   ) {
     return (

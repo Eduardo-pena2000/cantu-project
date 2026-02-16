@@ -25,6 +25,10 @@ export const roles = [
     value: String(ROLES.EMPLOYEE.id),
     label: ROLES.EMPLOYEE.name,
   },
+  {
+    value: String(ROLES.SUPERVISOR.id),
+    label: ROLES.SUPERVISOR.name,
+  },
 ];
 
 export const administrativeRoles = [
@@ -39,6 +43,10 @@ export const administrativeRoles = [
   {
     value: String(ROLES.STORE_MANAGER.id),
     label: ROLES.STORE_MANAGER.name,
+  },
+  {
+    value: String(ROLES.SUPERVISOR.id),
+    label: ROLES.SUPERVISOR.name,
   },
 ];
 
