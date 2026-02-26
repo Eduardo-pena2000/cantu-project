@@ -122,32 +122,37 @@ export function SelectUsers({ area, onCancel }) {
   }, [data, area, setSelectedEmployees]);
 
   return (
-    <div className="space-y-4">
-      <div className="max-w-prose">
-        <Subtitle className="font-normal items-baseline">
-          <UsersRound /> Empleados
+    <div className="space-y-6 relative rounded-2xl border border-border/60 bg-card/80 shadow-xl shadow-black/5 backdrop-blur-3xl overflow-hidden p-6">
+      {/* Decorative Top Edge */}
+      <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-sidebar-primary/50 to-transparent" />
+
+      <div className="max-w-prose relative z-10">
+        <Subtitle className="font-semibold items-baseline text-sidebar-primary text-xl tracking-tight">
+          <UsersRound className="mr-2" strokeWidth={2.5} /> Empleados
         </Subtitle>
-        <p className="text-muted-foreground  text-sm">
+        <p className="text-muted-foreground text-sm mt-2">
           Selecciona los empleados que deseas asignar al área. Puedes desmarcar aquellos que ya no
           deberían pertenecer.
         </p>
-        <p className="text-muted-foreground leading-tight text-sm">
+        <p className="text-muted-foreground leading-relaxed text-sm mt-1">
           Finalmente revisa los cambios y confirma la asignación de empleados para el área
           seleccionada.
         </p>
       </div>
 
-      <ClientSearch placeholder="Buscar por nombre" search={search} onSearch={handleSearch} />
+      <div className="bg-background/80 shadow-inner rounded-xl border border-border/60 p-1 relative z-10">
+        <ClientSearch placeholder="Buscar por nombre..." search={search} onSearch={handleSearch} />
+      </div>
 
       <RenderData
         isPending={isPending}
         isError={isError}
         data={data}
         Component={({ data }) => (
-          <div className="space-y-4">
-            <ul className="space-y-4">
+          <div className="space-y-6 relative z-10">
+            <ul className="space-y-3">
               {data.data.map((employee) => (
-                <li key={employee.id} className="flex items-center gap-4">
+                <li key={employee.id} className="flex items-center gap-4 bg-background/60 border border-border/40 p-3 rounded-xl shadow-sm hover:shadow-md hover:bg-muted/50 hover:border-sidebar-primary/40 transform hover:-translate-y-0.5 transition-all duration-300">
                   <Checkbox
                     id={employee.id}
                     checked={
@@ -156,25 +161,26 @@ export function SelectUsers({ area, onCancel }) {
                       !!addedEmployees.current.get(employee.id)
                     }
                     onCheckedChange={handleSelectEmployee(employee)}
+                    className="data-[state=checked]:bg-sidebar-primary data-[state=checked]:text-sidebar-primary-foreground"
                   />
-                  <div className="flex gap-4">
-                    <Avatar className="size-9 shadow-sm shrink-0 object-cover aspect-square">
+                  <div className="flex gap-4 items-center">
+                    <Avatar className="size-11 shadow-sm shrink-0 object-cover aspect-square ring-1 ring-border/50">
                       <AvatarImage
                         src={employee.image ?? "/user-round.svg"}
-                        className="size-9 shadow-sm shrink-0 object-cover aspect-square"
+                        className="size-11 shadow-sm shrink-0 object-cover aspect-square"
                       />
-                      <AvatarFallback className="size-9 shadow-sm shrink-0 object-cover aspect-square">
-                        <UserRound />
+                      <AvatarFallback className="size-11 shadow-sm bg-muted text-muted-foreground">
+                        <UserRound className="size-6" strokeWidth={1.5} />
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col leading-none">
                       <label
                         htmlFor={employee.id}
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="text-[15px] font-semibold text-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                       >
                         {employee.fullName}
                       </label>
-                      <p className="text-sm text-muted-foreground">{employee.email}</p>
+                      <p className="text-sm text-muted-foreground mt-1.5">{employee.email}</p>
                     </div>
                   </div>
                 </li>

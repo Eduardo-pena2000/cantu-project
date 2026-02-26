@@ -2,13 +2,34 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Store, Users, FileText } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { ArrowRight, Store, Users, FileText, DoorOpen } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { hasRole } from "@/utils/user";
+import { ROLES } from "@/data/constants";
 
-export function WelcomeHero({ session }) {
+export function WelcomeHero({ session: initialSession }) {
+    const { data: sessionData, status, update } = useSession();
+    const router = useRouter();
+
+    // Fallback to passed session prop if useSession hasn't loaded 
+    const session = sessionData || initialSession;
     const userName = session?.user?.shortFullName || "Usuario";
+
+    const isSupervisorOnly =
+        hasRole(session, [ROLES.SUPERVISOR.slug]) &&
+        !hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug]);
+
+    async function handleCompleteStoreManagement(e) {
+        e.preventDefault();
+        if (session?.store) {
+            await update({ store: null });
+            router.replace("/");
+        }
+    }
 
     return (
         <div className="flex flex-col gap-8 animate-fade-in max-w-5xl mx-auto py-10">
@@ -52,19 +73,31 @@ export function WelcomeHero({ session }) {
             </div>
 
             {/* Quick Access Cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-                <QuickAccessCard
-                    href="/stores"
-                    icon={Store}
-                    title="Gestión de Tiendas"
-                    description="Administra sucursales y configuraciones."
-                />
-                <QuickAccessCard
-                    href="/users"
-                    icon={Users}
-                    title="Personal"
-                    description="Gestiona empleados y roles."
-                />
+            <div className="grid md:grid-cols-2 gap-6">
+                {session?.store ? (
+                    <QuickAccessCard
+                        href="#"
+                        onClick={handleCompleteStoreManagement}
+                        icon={DoorOpen}
+                        title="Finalizar gestión de tienda"
+                        description="Regresar al menú principal para elegir sucursal."
+                    />
+                ) : isSupervisorOnly ? (
+                    <QuickAccessCard
+                        href="/supervisor"
+                        icon={Users}
+                        title="Supervisión"
+                        description="Administra sucursales de encargados y personal."
+                    />
+                ) : (
+                    <QuickAccessCard
+                        href="/stores"
+                        icon={Store}
+                        title="Gestión de Tiendas"
+                        description="Administra sucursales y configuraciones."
+                    />
+                )}
+
                 <QuickAccessCard
                     href="/reports"
                     icon={FileText}
@@ -76,18 +109,30 @@ export function WelcomeHero({ session }) {
     );
 }
 
-function QuickAccessCard({ href, icon: Icon, title, description }) {
+function QuickAccessCard({ href, onClick, icon: Icon, title, description }) {
     return (
-        <Link href={href} className="group block h-full">
-            <Card className="h-full hover:border-sidebar-primary/50 hover:shadow-md transition-all duration-300 group-hover:-translate-y-1 overflow-hidden relative">
-                <div className="absolute top-0 left-0 w-1 h-full bg-sidebar-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CardContent className="p-6 flex flex-col gap-4">
-                    <div className="p-3 bg-primary/5 rounded-xl w-fit group-hover:bg-sidebar-primary/20 transition-colors">
-                        <Icon className="size-6 text-primary group-hover:text-sidebar-primary transition-colors" />
+        <Link href={href} onClick={onClick} className="group relative block h-full">
+            <div className="absolute inset-0 bg-gradient-to-r from-sidebar-primary/10 to-sidebar-primary/0 rounded-xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+            <Card className="relative h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur-md shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-sidebar-primary/5 hover:-translate-y-1">
+                {/* Decorative gradients */}
+                <div className="absolute top-0 right-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-sidebar-primary/10 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:bg-sidebar-primary/20" />
+                <div className="absolute bottom-0 left-0 -ml-4 -mb-4 h-20 w-20 rounded-full bg-primary/10 blur-xl transition-all duration-500 group-hover:scale-150" />
+
+                <div className="absolute top-0 left-0 h-full w-[3px] bg-gradient-to-b from-sidebar-primary/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                <CardContent className="relative z-10 p-6 flex flex-col h-full justify-between gap-6">
+                    <div className="flex items-start justify-between">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-sidebar-primary/10 to-sidebar-primary/5 border border-sidebar-primary/10 shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
+                            <Icon className="size-6 text-sidebar-primary drop-shadow-[0_0_8px_rgba(var(--sidebar-primary),0.5)]" />
+                        </div>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted/50 transition-colors duration-300 group-hover:bg-sidebar-primary text-muted-foreground group-hover:text-primary-foreground">
+                            <ArrowRight className="size-4 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{title}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{description}</p>
+
+                    <div className="space-y-1.5">
+                        <h3 className="font-semibold text-xl tracking-tight text-foreground transition-colors duration-300 group-hover:text-sidebar-primary">{title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
                     </div>
                 </CardContent>
             </Card>

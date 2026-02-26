@@ -10,11 +10,16 @@ export class SocketConfig {
 
   static socketHandler: SocketHandler;
 
-  constructor(private readonly socketHandler: SocketHandler) {}
+  constructor(private readonly socketHandler: SocketHandler) { }
 
   public initializeServer(httpServer: HttpServer): void {
     if (!SocketConfig.io) {
-      SocketConfig.io = new SocketIOServer(httpServer);
+      SocketConfig.io = new SocketIOServer(httpServer, {
+        cors: {
+          origin: "*", // Allow all origins for now to rule out CORS issues
+          methods: ["GET", "POST"],
+        },
+      });
 
       SocketConfig.io.on("connection", (socket: Socket) => this.socketHandler.handleConnection(socket));
 

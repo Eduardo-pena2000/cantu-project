@@ -83,6 +83,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> {
     User.hasMany(models.UserDevice, { as: "devices_tokens", foreignKey: "user_id" });
 
     User.hasMany(models.Notification, { as: "notifications", foreignKey: "user_id" });
+
+    User.hasMany(models.Incident, { as: "reported_incidents", foreignKey: "reported_by_id" });
   }
 
   static initModel(sequelize: Sequelize) {

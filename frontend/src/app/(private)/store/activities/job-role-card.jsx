@@ -62,13 +62,14 @@ export function JobRoleCard({ jobRole }) {
   });
 
   return (
-    <Card className="relative sm:max-w-lg">
-      <CardHeader className="flex flex-col">
-        <CardTitle>{jobRole.name}</CardTitle>
-        <CardDescription>{jobRole.code}</CardDescription>
+    <Card className="relative w-full bg-card/60 backdrop-blur-xl border border-border/50 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group">
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sidebar-primary/30 to-transparent" />
+      <CardHeader className="flex flex-col bg-muted/20 border-b border-border/40 pb-4">
+        <CardTitle className="text-xl text-foreground/90">{jobRole.name}</CardTitle>
+        <CardDescription className="font-mono bg-background/50 w-fit px-2 py-0.5 rounded text-xs border border-border/30">{jobRole.code}</CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-6">
         <Collapsible open={open} onOpenChange={setOpen} className="space-y-2">
           <div className="flex flex-wrap justify-between items-center gap-y-2 gap-x-4">
             <CollapsibleTrigger
@@ -136,18 +137,21 @@ export function JobRoleCard({ jobRole }) {
         </Collapsible>
       </CardContent>
 
-      <CardFooter>
-        <CardAction className="w-full flex items-center gap-2">
-          <DeleteJobRoleButton id={jobRole.id} />
-          <Button asChild variant="ghost" size="icon">
-            <Link
-              href={`/store/activities/job-roles/${safeUrlEncode(jobRole.id)}/edit`}
-              className="cursor-default"
-            >
-              <SquarePen />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="sm" className="ml-auto">
+      <div className="absolute top-4 right-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <Button asChild variant="ghost" size="icon" className="size-8 bg-background/50 backdrop-blur-md rounded-lg shadow-sm hover:bg-background border border-border/40">
+          <Link
+            href={`/store/activities/job-roles/${safeUrlEncode(jobRole.id)}/edit`}
+            className="cursor-pointer"
+          >
+            <SquarePen className="size-3.5" />
+          </Link>
+        </Button>
+        <DeleteJobRoleButton id={jobRole.id} className="size-8" />
+      </div>
+
+      <CardFooter className="bg-muted/10 border-t border-border/40 pt-4">
+        <CardAction className="w-full flex items-center gap-2 justify-end">
+          <Button asChild variant="outline" size="sm" className="ml-auto shadow-sm hover:bg-sidebar-primary hover:text-sidebar-primary-foreground hover:border-sidebar-primary transition-all duration-300">
             <Link href={`/store/activities/job-roles/${safeUrlEncode(jobRole.id)}`}>
               Ver detalles
             </Link>

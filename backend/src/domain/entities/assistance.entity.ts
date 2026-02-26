@@ -1,5 +1,6 @@
 import { ActivitieAssignmentEntity } from "./activitie.entity";
 import { UserEntity } from "./user.entity";
+import { StoreEntity } from "./store.entity";
 
 export class AssistanceEntity {
   constructor(
@@ -13,8 +14,9 @@ export class AssistanceEntity {
     public assistance_image_url: string | null,
     public activities_asigments?: ActivitieAssignmentEntity[],
     public employee?: UserEntity,
-    public taken_employee?: UserEntity
-  ) {}
+    public taken_employee?: UserEntity,
+    public store?: StoreEntity
+  ) { }
 
   static fromObject(object: { [key: string]: any }): AssistanceEntity {
     const {
@@ -29,6 +31,7 @@ export class AssistanceEntity {
       assistance_image_url,
       employee,
       taken_employee,
+      store,
     } = object;
 
     return new AssistanceEntity(
@@ -42,7 +45,8 @@ export class AssistanceEntity {
       assistance_image_url,
       activities_asigments,
       employee,
-      taken_employee
+      taken_employee,
+      store
     );
   }
 }

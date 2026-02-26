@@ -6,6 +6,7 @@ import {
     Store,
     UserCheck,
     UsersRound,
+    MessageSquareWarning
 } from "lucide-react";
 
 export const MENU_ITEMS = {
@@ -21,9 +22,11 @@ export const MENU_ITEMS = {
         { id: 6, label: "Equipos de trabajo", url: "/store/work-teams", icon: Handshake, description: "Organización de equipos" },
         { id: 7, label: "Actividades", url: "/store/activities", icon: ClipboardList, description: "Registro y seguimiento de actividades" },
         { id: 8, label: "Asistencia", url: "/store/attendance", icon: UserCheck, description: "Control de asistencia" },
+        { id: 9, label: "Incidencias", url: "/store/incidents", icon: MessageSquareWarning, description: "Buzón de reportes y resoluciones" },
     ],
     general: [
         { id: 1, label: "Actividades", url: "/store/activities", icon: ClipboardList, description: "Registro y seguimiento de actividades" },
         { id: 2, label: "Asistencia", url: "/store/attendance", icon: UserCheck, description: "Control de asistencia" },
+        { id: 9, label: "Incidencias", url: "/store/incidents", icon: MessageSquareWarning, description: "Buzón de reportes y resoluciones" },
     ],
 };

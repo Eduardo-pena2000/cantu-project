@@ -7,7 +7,9 @@ import {
   routeAdapter,
   updateStoreValidator,
   upload,
+  RoleHandler,
 } from "../../infraestructure";
+import { Roles } from "../../shared";
 import {
   makeCreateStoreController,
   makeDeleteStoreController,
@@ -20,9 +22,20 @@ export class StoreRoutes {
   static get routes(): Router {
     const router = Router();
 
-    router.post("/", upload.single("avatar"), createStoreValidator.validate, routeAdapter(makeCreateStoreController()));
+    router.post(
+      "/",
+      upload.single("avatar"),
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager]),
+      createStoreValidator.validate,
+      routeAdapter(makeCreateStoreController())
+    );
 
-    router.delete("/:id", paramsIdValidator.validate, routeAdapter(makeDeleteStoreController()));
+    router.delete(
+      "/:id",
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager]),
+      paramsIdValidator.validate,
+      routeAdapter(makeDeleteStoreController())
+    );
 
     router.get("/:id", paramsIdValidator.validate, routeAdapter(makeGetStoreController()));
 
@@ -31,6 +44,7 @@ export class StoreRoutes {
     router.patch(
       "/:id",
       upload.single("avatar"),
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager]),
       paramsIdValidator.validate,
       updateStoreValidator.validate,
       routeAdapter(makeUpdateStoreController())

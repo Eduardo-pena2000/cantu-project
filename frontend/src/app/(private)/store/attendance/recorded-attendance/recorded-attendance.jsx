@@ -56,8 +56,8 @@ export function RecordedAttendance({ scheduleId }) {
   }
 
   return (
-    <section className="space-y-4 overflow-x-hidden">
-      <p className="max-w-prose text-muted-foreground leading-tight text-sm">
+    <section className="space-y-6 overflow-x-hidden relative min-h-[400px]">
+      <p className="max-w-prose text-sm text-foreground/70 bg-card/60 backdrop-blur-md px-4 py-3 rounded-xl border border-border/40 leading-relaxed shadow-sm relative z-10">
         Consulta quiénes han sido registrados como presentes durante el turno y revisa las
         actividades que ya han sido asignadas. También puedes agregar nuevas actividades a los
         empleados directamente desde esta sección.
@@ -77,48 +77,56 @@ export function RecordedAttendance({ scheduleId }) {
                     <li
                       key={employee.id}
                       className={cn(
-                        "border p-3 rounded-md grid gap-3",
-                        !isPresent && "bg-accent opacity-70"
+                        "bg-card/80 backdrop-blur-md border border-border/50 p-4 rounded-2xl grid gap-4 relative overflow-hidden transition-all duration-300 group hover:shadow-md",
+                        !isPresent ? "opacity-60 grayscale-[0.5]" : "shadow-sm"
                       )}
                     >
-                      <div className="flex flex-wrap justify-between gap-3">
+                      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-sidebar-primary/40 group-hover:bg-sidebar-primary transition-colors" />
+                      <div className="flex flex-wrap justify-between gap-3 pl-2">
                         <div className="flex items-center gap-4">
-                          <Avatar className="shadow size-9 shrink-0 object-cover aspect-square">
+                          <Avatar className="shadow-md size-11 ring-2 ring-background shrink-0 object-cover aspect-square transition-transform group-hover:scale-105">
                             <AvatarImage
                               src={employee.image ?? "/user-round.svg"}
-                              className="size-9 shrink-0 object-cover aspect-square"
+                              className="size-11 shrink-0 object-cover aspect-square"
                             />
-                            <AvatarFallback className="size-9 shrink-0 object-cover aspect-square">
-                              <UserRound />
+                            <AvatarFallback className="size-11 shrink-0 object-cover aspect-square bg-sidebar-primary/10 text-sidebar-primary">
+                              <UserRound className="size-5" />
                             </AvatarFallback>
                           </Avatar>
-                          <div className="flex flex-col leading-none">
-                            <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                          <div className="flex flex-col leading-none space-y-1">
+                            <span className="text-[15px] font-semibold tracking-tight text-foreground transition-colors group-hover:text-sidebar-primary">
                               {employee.fullName}
                             </span>
-                            <p className="text-sm text-muted-foreground">{employee.email}</p>
+                            <p className="text-xs text-muted-foreground font-medium">{employee.email}</p>
                           </div>
                         </div>
 
                         {isPresent && (
-                          <Button onClick={handleSelectEmployee(employee.id)} size="icon">
-                            <ClipboardList />
+                          <Button onClick={handleSelectEmployee(employee.id)} size="icon" variant="outline" className="shadow-sm hover:shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground hover:border-sidebar-primary transition-all duration-300 rounded-xl size-9">
+                            <ClipboardList className="size-4" />
                           </Button>
                         )}
                       </div>
                       {employee.areas.length > 0 && (
-                        <div>
-                          <span className="font-semibold text-muted-foreground">Áreas</span>
-                          <p>{employee.areas.map((area) => area.name).join(", ")}</p>
+                        <div className="pl-2 pt-2 border-t border-border/40 mt-1">
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-2">Áreas asignadas</span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {employee.areas.map((area) => (
+                              <span key={area.id} className="text-xs font-medium bg-muted/50 border border-border/50 px-2 py-0.5 rounded-md text-foreground/80">{area.name}</span>
+                            ))}
+                          </div>
                         </div>
                       )}
-                      <div className="flex flex-col min-[30rem]:flex-row min-[30rem]:justify-between min-[30rem]:items-center gap-2">
-                        <p className="text-sm text-muted-foreground font-semibold">
-                          Asistencia registrada: {employee.attendance.status}
-                        </p>
+                      <div className="flex flex-col min-[30rem]:flex-row min-[30rem]:justify-between min-[30rem]:items-center gap-3 pl-2 pt-3 border-t border-border/40 mt-1">
+                        <div className="flex items-center gap-2">
+                          <div className={cn("w-2 h-2 rounded-full", isPresent ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : "bg-muted-foreground")} />
+                          <p className="text-[13px] text-foreground font-medium">
+                            Asistencia: <span className="font-bold text-foreground capitalize">{employee.attendance.status}</span>
+                          </p>
+                        </div>
                         {employee.attendance.activities.length > 0 && (
-                          <Badge>
-                            {employee.attendance.activities.length} actividades asignadas
+                          <Badge variant="secondary" className="bg-sidebar-primary/10 text-sidebar-primary border-sidebar-primary/20 shadow-sm px-2.5 py-0.5 whitespace-nowrap">
+                            {employee.attendance.activities.length} actividades
                           </Badge>
                         )}
                       </div>
@@ -142,29 +150,34 @@ export function RecordedAttendance({ scheduleId }) {
                 Elige las actividades que el empleado deberá realizar. Las actividades se encuentran
                 organizadas por áreas de trabajo para facilitar su selección.
               </DialogDescription>
-              <div className="my-4 grid gap-4">
+              <div className="my-6 grid gap-6 bg-muted/20 p-5 rounded-2xl border border-border/40">
                 <div className="flex items-center gap-4">
-                  <Avatar className="shadow size-9 shrink-0 object-cover aspect-square">
+                  <Avatar className="shadow-md size-12 ring-2 ring-background shrink-0 object-cover aspect-square">
                     <AvatarImage
                       src={employee?.image ?? "/user-round.svg"}
-                      className="size-9 shrink-0 object-cover aspect-square"
+                      className="size-12 shrink-0 object-cover aspect-square"
                     />
-                    <AvatarFallback className="size-9 shrink-0 object-cover aspect-square">
-                      <UserRound />
+                    <AvatarFallback className="size-12 shrink-0 object-cover aspect-square bg-sidebar-primary/10 text-sidebar-primary">
+                      <UserRound className="size-5" />
                     </AvatarFallback>
                   </Avatar>
-                  <div className="flex flex-col leading-none">
-                    <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  <div className="flex flex-col leading-none space-y-1.5">
+                    <span className="text-base font-semibold tracking-tight text-foreground">
                       {employee?.fullName}
                     </span>
-                    <p className="text-sm text-muted-foreground">{employee?.email}</p>
+                    <p className="text-sm text-muted-foreground font-medium">{employee?.email}</p>
                   </div>
                 </div>
-                <div>
-                  {employee?.areas?.map((area) => (
-                    <Badge key={area.id}>{area.name}</Badge>
-                  ))}
-                </div>
+                {employee?.areas && employee.areas.length > 0 && (
+                  <div className="pt-4 border-t border-border/40">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground block mb-2.5">Áreas de especialidad</span>
+                    <div className="flex flex-wrap gap-2">
+                      {employee.areas.map((area) => (
+                        <Badge key={area.id} variant="secondary" className="bg-background shadow-sm border-border/50">{area.name}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </DialogHeader>
             <Areas

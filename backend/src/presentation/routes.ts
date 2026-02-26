@@ -11,6 +11,7 @@ import { ActivitieRoutes } from "./routes/activitie.routes";
 import { JobRoleRoutes } from "./routes/job-role.routes";
 import { AssistanceRoutes } from "./routes/assistance.routes";
 import { ReportRoutes } from "./routes/report.routes";
+import { IncidentRoutes } from "./incident/incident.routes";
 
 import { AuthAdapter } from "../infraestructure";
 
@@ -19,6 +20,7 @@ export class AppRoutes {
     const router = Router();
 
     router.use("/auth", AuthRoutes.routes);
+    router.use("/api/auth", AuthRoutes.routes);
 
     const authAdapterInstance = new AuthAdapter();
 
@@ -36,6 +38,9 @@ export class AppRoutes {
     router.use("/job-role", JobRoleRoutes.routes);
     router.use("/assistance", AssistanceRoutes.routes);
     router.use("/reports", ReportRoutes.routes);
+    router.use("/api/assistances", AssistanceRoutes.routes);
+    router.use("/api/reports", ReportRoutes.routes);
+    router.use("/api/incidents", IncidentRoutes.routes);
 
     return router;
   }

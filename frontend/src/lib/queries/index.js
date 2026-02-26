@@ -8,6 +8,7 @@ export {
   getUserActivitiesReport,
   getUsersTeamReport,
 } from "./reports";
+export * from "./incidents";
 export { getShifts } from "./shifts";
 export { getStores } from "./stores";
 export { getEmployeesWithoutTeam, getTeamById, getTeams } from "./teams";

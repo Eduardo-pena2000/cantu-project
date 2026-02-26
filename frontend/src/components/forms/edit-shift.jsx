@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { AlarmClock, Loader, Plus, Save, Trash2 } from "lucide-react";
+import { AlarmClock, Loader, Plus, Save, Trash2, Sun, Moon } from "lucide-react";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
@@ -136,45 +136,75 @@ export function EditShiftForm({ shift, onFormSubmit, className }) {
                   )}
                 </div>
                 {!!schedulesField[schedule.week_day] && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="grid w-full max-w-3xs items-start gap-2">
-                      <FormField
-                        control={form.control}
-                        name={`schedules.${schedule.week_day}.start_time`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="w-fit">Hora inicio</FormLabel>
-                            <FormControl>
-                              <Input type="time" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  <div className="flex flex-col gap-3">
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-7 text-xs gap-1.5"
+                        onClick={() => {
+                          form.setValue(`schedules.${schedule.week_day}.start_time`, "07:00");
+                          form.setValue(`schedules.${schedule.week_day}.end_time`, "15:00");
+                        }}
+                      >
+                        <Sun className="h-3.5 w-3.5" /> Mañana (7am - 3pm)
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-7 text-xs gap-1.5"
+                        onClick={() => {
+                          form.setValue(`schedules.${schedule.week_day}.start_time`, "15:00");
+                          form.setValue(`schedules.${schedule.week_day}.end_time`, "22:00");
+                        }}
+                      >
+                        <Moon className="h-3.5 w-3.5" /> Tarde (3pm - 10pm)
+                      </Button>
                     </div>
-                    <div className="grid w-full max-w-sm items-center gap-1.5">
-                      <FormField
-                        control={form.control}
-                        name={`schedules.${schedule.week_day}.end_time`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="w-fit">Hora fin</FormLabel>
-                            <FormControl>
-                              <Input type="time" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="grid w-full max-w-3xs items-start gap-2">
+                        <FormField
+                          control={form.control}
+                          name={`schedules.${schedule.week_day}.start_time`}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="w-fit">Hora inicio</FormLabel>
+                              <FormControl>
+                                <Input type="time" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <FormField
+                          control={form.control}
+                          name={`schedules.${schedule.week_day}.end_time`}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="w-fit">Hora fin</FormLabel>
+                              <FormControl>
+                                <Input type="time" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
               </li>
             ))}
           </ul>
-          {form.formState.errors.schedules?.root && (
-            <FormMessage>{form.formState.errors.schedules.root.message}</FormMessage>
-          )}
+          {
+            form.formState.errors.schedules?.root && (
+              <FormMessage>{form.formState.errors.schedules.root.message}</FormMessage>
+            )
+          }
         </div>
 
         <div className="flex gap-4">

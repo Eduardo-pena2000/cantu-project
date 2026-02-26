@@ -30,7 +30,6 @@ export class GetActiveShiftUseCase {
         Roles.admin,
         Roles.general_manager,
         Roles.store_manager,
-        Roles.shift_manager,
         Roles.temporary_shift_manager,
         Roles.supervisor,
       ].includes(role.id)
@@ -53,7 +52,7 @@ export class GetActiveShiftUseCase {
 
       const teams = await this.teamRepository.findByActiveShift(activeSchedule.id);
 
-      if (teams?.managers?.some((user) => user.id === user_id)) {
+      if (teams?.managers?.some((manager) => manager.id === user_id)) {
         return activeSchedule;
       }
 

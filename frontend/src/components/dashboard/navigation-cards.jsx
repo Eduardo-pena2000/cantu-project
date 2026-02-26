@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { MENU_ITEMS } from "@/data/menu-items";
+import { ArrowRight } from "lucide-react";
 
 export function NavigationCards({ role }) {
     // Select items based on role or context. 
@@ -37,21 +38,32 @@ export function NavigationCards({ role }) {
             className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8"
         >
             {items.map((menuItem) => (
-                <motion.div key={menuItem.id} variants={item}>
-                    <Link href={menuItem.url}>
-                        <Card className="glass hover-glow-border cursor-pointer h-full group border-0 shadow-sm">
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
-                                    {menuItem.label}
-                                </CardTitle>
-                                <div className="p-2 bg-sidebar-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                                    <menuItem.icon className="h-4 w-4 text-sidebar-primary group-hover:text-primary transition-colors" />
+                <motion.div key={menuItem.id} variants={item} className="h-full">
+                    <Link href={menuItem.url} className="group relative block h-full">
+                        <div className="absolute inset-0 bg-gradient-to-r from-sidebar-primary/10 to-transparent rounded-xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+                        <Card className="relative h-full overflow-hidden border-border/40 bg-card/60 backdrop-blur-md shadow-sm transition-all duration-500 hover:shadow-lg hover:shadow-sidebar-primary/5 hover:-translate-y-1">
+                            {/* Decorative gradients */}
+                            <div className="absolute top-0 right-0 -mr-6 -mt-6 h-24 w-24 rounded-full bg-sidebar-primary/10 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:bg-sidebar-primary/20" />
+                            <div className="absolute bottom-0 left-0 h-full w-[3px] bg-gradient-to-b from-sidebar-primary/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                            <CardContent className="relative z-10 p-6 flex flex-col h-full justify-between gap-6">
+                                <div className="flex items-start justify-between">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-sidebar-primary/10 to-sidebar-primary/5 border border-sidebar-primary/10 shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
+                                        <menuItem.icon className="size-6 text-sidebar-primary drop-shadow-[0_0_8px_rgba(var(--sidebar-primary),0.5)]" />
+                                    </div>
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted/50 transition-colors duration-300 group-hover:bg-sidebar-primary text-muted-foreground group-hover:text-primary-foreground">
+                                        <ArrowRight className="size-4 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />
+                                    </div>
                                 </div>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-xs text-muted-foreground mt-1">
-                                    {menuItem.description || "Ir a la sección"}
-                                </p>
+
+                                <div className="space-y-1.5 flex flex-col items-start text-left">
+                                    <h3 className="font-semibold text-xl tracking-tight text-foreground transition-colors duration-300 group-hover:text-sidebar-primary">
+                                        {menuItem.label}
+                                    </h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                        {menuItem.description || "Gestionar esta sección"}
+                                    </p>
+                                </div>
                             </CardContent>
                         </Card>
                     </Link>

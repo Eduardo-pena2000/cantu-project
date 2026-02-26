@@ -19,14 +19,16 @@ export class ErrorMiddleware {
     next: NextFunction
   ): void => {
     if (error instanceof AppError) {
-      const { message, name, stack, validationErrors } = error;
+      const { message, name, validationErrors } = error;
       const statusCode = error.statusCode || HttpCode.INTERNAL_SERVER_ERROR;
+      const stack = process.env.NODE_ENV === "development" ? error.stack : undefined;
       res.status(statusCode).json({ name, message, validationErrors, stack });
     } else {
       const name = "InternalServerError";
       const message = "An internal server error occurred";
       const statusCode = HttpCode.INTERNAL_SERVER_ERROR;
-      res.status(statusCode).json({ name, message, stack: error?.stack || String(error) });
+      const stack = process.env.NODE_ENV === "development" ? (error?.stack || String(error)) : undefined;
+      res.status(statusCode).json({ name, message, stack });
     }
 
     next();

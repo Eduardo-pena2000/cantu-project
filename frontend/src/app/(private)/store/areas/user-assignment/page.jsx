@@ -23,23 +23,28 @@ export default async function Page() {
   const links = [{ label: session.store.code, href: "/" }, { label: "Áreas" }];
 
   return (
-    <>
-      <CustomBreadcrumb links={links} />
+    <div className="flex flex-col gap-6 animate-fade-in">
+      <div className="flex flex-col gap-2">
+        <CustomBreadcrumb links={links} />
+        <Title>Áreas</Title>
+      </div>
 
-      <Title>Áreas</Title>
-
-      <Tabs value="user-assignment" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger asChild>
+      <Tabs value="user-assignment" className="space-y-6">
+        <TabsList className="grid w-full max-w-md grid-cols-2 bg-muted/40 p-1 rounded-xl shadow-inner border border-border/50">
+          <TabsTrigger value="general" asChild className="rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300">
             <Link href="/store/areas">General</Link>
           </TabsTrigger>
-          <TabsTrigger data-state="active">Asignar usuarios</TabsTrigger>
+          <TabsTrigger value="user-assignment" className="rounded-lg data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all duration-300">
+            Asignar usuarios
+          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="user-assignment">
-          <AssignUsers />
+        <TabsContent value="user-assignment" className="m-0">
+          <section className="animate-slide-up" style={{ animationDelay: '100ms' }}>
+            <AssignUsers />
+          </section>
         </TabsContent>
       </Tabs>
-    </>
+    </div>
   );
 }

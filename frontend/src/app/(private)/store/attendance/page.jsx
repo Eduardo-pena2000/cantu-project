@@ -115,93 +115,117 @@ export default async function Page() {
       hasRole(session, [ROLES.ADMIN.slug, ROLES.GENERAL_MANAGER.slug, ROLES.STORE_MANAGER.slug])
     ) {
       return (
-        <>
-          <Card className="max-w-prose">
-            <CardHeader>
-              <CardTitle>{schedule.shift.name}</CardTitle>
-              <CardDescription>{formatDate({ date })}</CardDescription>
+        <div className="flex flex-col gap-6 animate-fade-in relative max-w-[100vw] overflow-x-hidden pb-10">
+          {/* Glow Blob */}
+          <div className="absolute top-[-5%] right-[-5%] -z-10 w-96 h-96 bg-sidebar-primary/10 rounded-full blur-[120px] pointer-events-none" />
+
+          <CustomBreadcrumb links={links} />
+
+          <div className="flex items-center gap-3">
+            <div className="w-1.5 h-8 bg-sidebar-primary rounded-full shadow-[0_0_10px_rgba(var(--sidebar-primary),0.5)]" />
+            <Title className="max-w-prose truncate text-3xl tracking-tight text-foreground/90">Asistencia</Title>
+          </div>
+
+          <Card className="max-w-prose bg-card/60 backdrop-blur-xl border border-border/50 shadow-sm relative overflow-hidden group">
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sidebar-primary/30 to-transparent" />
+            <CardHeader className="bg-muted/30 border-b border-border/40 pb-4">
+              <CardTitle className="text-xl text-foreground/90">{schedule.shift.name}</CardTitle>
+              <CardDescription className="font-medium flex items-center gap-2">
+                <CalendarX2 className="size-4" />
+                {formatDate({ date })}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6 pt-6">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-muted-foreground text-sm font-semibold">
+                <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+                  <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">
                     Día de la semana
                   </span>
-                  <p className="capitalize">{date.toLocaleString("es", { weekday: "long" })}</p>
+                  <p className="capitalize font-medium text-foreground">{date.toLocaleString("es", { weekday: "long" })}</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-muted-foreground text-sm font-semibold">Hora inicio</span>
-                  <p>{formatTime(schedule.startTime)}</p>
+                <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+                  <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">Hora inicio</span>
+                  <p className="font-mono text-foreground font-medium">{formatTime(schedule.startTime)}</p>
                 </div>
-                <div>
-                  <span className="text-muted-foreground text-sm font-semibold">Hora fin</span>
-                  <p>{formatTime(schedule.endTime)}</p>
+                <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+                  <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">Hora fin</span>
+                  <p className="font-mono text-foreground font-medium">{formatTime(schedule.endTime)}</p>
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex-col">
-              <Alert className="max-w-prose p-0 border-none">
-                <Handshake className="size-4" />
-                <AlertTitle>No hay equipo de trabajo asignado.</AlertTitle>
-                <AlertDescription>
+            <CardFooter className="flex-col bg-muted/10 border-t border-border/40 pt-4">
+              <Alert className="max-w-prose border border-orange-500/30 bg-orange-500/5 shadow-sm rounded-xl">
+                <Handshake className="size-5 text-orange-500" />
+                <AlertTitle className="text-orange-600 dark:text-orange-400">No hay equipo de trabajo asignado.</AlertTitle>
+                <AlertDescription className="text-foreground/80 leading-relaxed mt-2">
                   Actualmente, no hay un equipo de trabajo asignado a este turno de trabajo. Por
                   favor, asegúrate de haber asignado un equipo de trabajo para el turno{" "}
-                  {schedule.shift.name}, y así, continuar el registro de asistencia y asignar
+                  <span className="font-semibold text-foreground">{schedule.shift.name}</span>, y así, continuar el registro de asistencia y asignar
                   actividades.
                 </AlertDescription>
-                <div className="col-start-2 mt-2">
-                  <Button asChild className="w-full">
+                <div className="col-start-2 mt-4">
+                  <Button asChild className="w-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
                     <Link href="/store/work-teams">Gestionar equipos</Link>
                   </Button>
                 </div>
               </Alert>
             </CardFooter>
           </Card>
-        </>
+        </div>
       );
     }
   }
 
   return (
-    <>
-      <CustomBreadcrumb links={links} />
+    <div className="flex flex-col gap-6 animate-fade-in relative max-w-[100vw] overflow-x-hidden pb-10">
+      {/* Decorative Glow Blob */}
+      <div className="absolute top-[-5%] left-[-2%] -z-10 w-72 h-72 bg-sidebar-primary/20 rounded-full blur-[100px] opacity-70 animate-pulse pointer-events-none" />
 
-      <div className="max-w-prose flex flex-col gap-1.5">
-        <Title>Asistencia</Title>
-        <p className="text-sm text-muted-foreground">
-          Para continuar, selecciona un turno activo. Esto te permitirá registrar la asistencia del
-          equipo y asignar las actividades correspondientes.
-        </p>
+      <div className="flex flex-col gap-2 relative">
+        <CustomBreadcrumb links={links} />
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 max-w-prose">
+          <div className="flex items-center gap-3">
+            <div className="w-1.5 h-8 bg-sidebar-primary rounded-full shadow-[0_0_10px_rgba(var(--sidebar-primary),0.5)]" />
+            <Title className="text-3xl tracking-tight text-foreground/90">Asistencia</Title>
+          </div>
+          <p className="text-sm text-foreground/70 bg-muted/40 px-3 py-1.5 rounded-lg border border-border/30 backdrop-blur-sm max-w-xs leading-relaxed">
+            Selecciona un turno activo para continuar el registro de asistencia y actividades.
+          </p>
+        </div>
       </div>
 
-      <Card className="max-w-prose">
-        <CardHeader>
-          <CardTitle>{schedule.shift.name}</CardTitle>
-          <CardDescription>{formatDate({ date })}</CardDescription>
+      <Card className="max-w-prose bg-card/60 backdrop-blur-xl border border-border/50 shadow-sm hover:shadow-md transition-shadow duration-300 relative overflow-hidden group">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sidebar-primary/30 to-transparent" />
+        <CardHeader className="bg-muted/20 border-b border-border/40 pb-4">
+          <CardTitle className="text-xl text-foreground/90">{schedule.shift.name}</CardTitle>
+          <CardDescription className="font-medium flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-sidebar-primary animate-pulse" />
+            {formatDate({ date })}
+          </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6 pt-6">
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <span className="text-muted-foreground text-sm font-semibold">Día de la semana</span>
-              <p className="capitalize">{date.toLocaleString("es", { weekday: "long" })}</p>
+            <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+              <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">Día de la semana</span>
+              <p className="capitalize font-medium text-foreground">{date.toLocaleString("es", { weekday: "long" })}</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <span className="text-muted-foreground text-sm font-semibold">Hora inicio</span>
-              <p>{formatTime(schedule.startTime)}</p>
+            <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+              <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">Hora inicio</span>
+              <p className="font-mono text-foreground font-medium">{formatTime(schedule.startTime)}</p>
             </div>
-            <div>
-              <span className="text-muted-foreground text-sm font-semibold">Hora fin</span>
-              <p>{formatTime(schedule.endTime)}</p>
+            <div className="bg-background/50 p-4 rounded-xl border border-border/30 hover:bg-muted/30 transition-colors">
+              <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider block mb-1">Hora fin</span>
+              <p className="font-mono text-foreground font-medium">{formatTime(schedule.endTime)}</p>
             </div>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="bg-muted/10 border-t border-border/40 pt-4">
           <CardAction className="w-full">
-            <Button asChild className="w-full">
+            <Button asChild className="w-full shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 h-12 text-md rounded-xl">
               <Link
                 href={`/store/attendance/record-attendance?team=${safeUrlEncode(
                   schedule.shift.team.id
@@ -215,6 +239,6 @@ export default async function Page() {
           </CardAction>
         </CardFooter>
       </Card>
-    </>
+    </div>
   );
 }

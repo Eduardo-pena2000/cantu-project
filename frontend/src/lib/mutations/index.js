@@ -6,3 +6,4 @@ export {
 export { assignEmployeesToArea } from "./areas";
 export { takeEmployeeAttendance } from "./attendance";
 export { assignEmployeeToTeam, removeEmployeeFromTeam } from "./teams";
+export * from "./incidents";

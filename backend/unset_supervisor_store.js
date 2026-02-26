@@ -26,7 +26,10 @@ async function unsetSupervisorStore() {
 
         // Direct Update Query
         const [results, metadata] = await sequelize.query(
-            `UPDATE users SET store_id = NULL WHERE id = ${supervisorId}`
+            "UPDATE users SET store_id = NULL WHERE id = $1",
+            {
+                bind: [supervisorId],
+            }
         );
 
         console.log(`Supervisor (ID: ${supervisorId}) store_id set to NULL.`);

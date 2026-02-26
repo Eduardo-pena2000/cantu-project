@@ -61,7 +61,7 @@ export function LoginForm({ className, ...props }) {
     } else {
       const session = await getSession();
 
-      router.replace(params.get("callbackUrl") ?? "/");
+      router.replace("/");
 
       if (
         hasRole(session, ROLES.SHIFT_MANAGER.slug, ROLES.TEMPORARY_SHIFT_MANAGER.slug) &&
@@ -142,12 +142,6 @@ export function LoginForm({ className, ...props }) {
                     <FormItem>
                       <div className="flex items-center">
                         <FormLabel className="text-white/90">Contraseña</FormLabel>
-                        <Link
-                          href="/recover"
-                          className="ml-auto inline-block text-sm text-white/60 underline-offset-4 hover:underline hover:text-white/80 transition-colors"
-                        >
-                          ¿Olvidaste tu contraseña?
-                        </Link>
                       </div>
                       <FormControl>
                         <Input

@@ -42,7 +42,7 @@ class UserShiftSchedule extends Model<UserScheduleAttributes, UserScheduleCreati
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
-            model: "schedules",
+            model: "shift_schedules",
             key: "id",
           },
           onDelete: "CASCADE",

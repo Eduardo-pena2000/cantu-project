@@ -42,6 +42,8 @@ class Store extends Model<StoreAttributes, StoreCreationAttributes> {
     Store.hasMany(models.JobRole, { as: "job_roles", foreignKey: "store_id" });
 
     Store.hasMany(models.Assistance, { as: "assistances", foreignKey: "store_id" });
+
+    Store.hasMany(models.Incident, { as: "incidents", foreignKey: "store_id" });
   }
 
   static initModel(sequelize: Sequelize) {

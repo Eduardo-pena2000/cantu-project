@@ -65,6 +65,12 @@ export class AreaDatasourceImpl implements AreaDatasource {
           attributes: ["id", "names", "last_names", "email", "username", "avatar_url"],
           model: User,
         },
+        {
+          as: "users",
+          attributes: ["id", "names", "last_names", "email", "username", "avatar_url"],
+          model: User,
+          through: { attributes: [] }
+        },
       ],
       where: { id },
     });

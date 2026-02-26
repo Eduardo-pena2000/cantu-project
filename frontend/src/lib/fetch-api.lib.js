@@ -1,5 +1,6 @@
 export async function fetchApi(url, options = {}) {
-  return fetch(process.env.API_URL + url, {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
+  return fetch(apiUrl + url, {
     ...options,
   });
 }

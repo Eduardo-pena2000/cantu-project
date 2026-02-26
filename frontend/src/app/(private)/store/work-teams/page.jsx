@@ -63,15 +63,22 @@ export default async function Page({ searchParams }) {
   const links = [{ label: session.store.code, href: "/" }, { label: "Equipos de trabajo" }];
 
   return (
-    <>
-      <CustomBreadcrumb links={links} />
+    <div className="flex flex-col gap-6 animate-fade-in relative max-w-[100vw] overflow-x-hidden pb-10">
+      {/* Decorative Glow Blob */}
+      <div className="absolute top-[-5%] left-[-2%] -z-10 w-72 h-72 bg-sidebar-primary/20 rounded-full blur-[100px] opacity-70 animate-pulse pointer-events-none" />
 
-      <Title>Equipos de trabajo</Title>
+      <div className="flex flex-col gap-2 relative">
+        <CustomBreadcrumb links={links} />
+        <div className="flex items-center gap-3">
+          <div className="w-1.5 h-8 bg-sidebar-primary rounded-full shadow-[0_0_10px_rgba(var(--sidebar-primary),0.5)]" />
+          <Title className="text-3xl tracking-tight text-foreground/90">Equipos de trabajo</Title>
+        </div>
+      </div>
 
-      <Tabs value="general" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger data-state="active">General</TabsTrigger>
-          <TabsTrigger asChild>
+      <Tabs value="general" className="space-y-6 relative z-10 w-full mt-2">
+        <TabsList className="grid w-full max-w-md grid-cols-2 bg-background/60 p-1.5 rounded-xl shadow-sm border border-border/60 backdrop-blur-md">
+          <TabsTrigger value="general" className="rounded-lg py-2 data-[state=active]:bg-sidebar-primary data-[state=active]:text-sidebar-primary-foreground data-[state=active]:shadow-md transition-all duration-300 font-medium">General</TabsTrigger>
+          <TabsTrigger value="assignment" asChild className="rounded-lg py-2 text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-all duration-300 font-medium">
             <Link href="/store/work-teams/user-assignment">Asignar empleados</Link>
           </TabsTrigger>
         </TabsList>
@@ -87,6 +94,6 @@ export default async function Page({ searchParams }) {
           </section>
         </TabsContent>
       </Tabs>
-    </>
+    </div>
   );
 }

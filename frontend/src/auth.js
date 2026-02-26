@@ -124,6 +124,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return session;
     },
+    authorized: async ({ auth }) => {
+      // Return true if the user is authenticated, otherwise false which triggers a redirect to signIn page.
+      return !!auth;
+    },
   },
   pages: {
     signIn: "/login",

@@ -9,7 +9,9 @@ import {
   routeAdapter,
   updateUserValidator,
   upload,
+  RoleHandler,
 } from "../../infraestructure";
+import { Roles } from "../../shared";
 import {
   makeCreateUserController,
   makeAssignAreaToUsersController,
@@ -31,6 +33,7 @@ export class UserRoutes {
     router.post(
       "/create",
       upload.single("avatar"),
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager, Roles.store_manager]),
       createUserValidator.validate,
       routeAdapter(makeCreateUserController())
     );
@@ -39,7 +42,12 @@ export class UserRoutes {
 
     router.post("/assign-area", assignAreaToUsersValidator.validate, routeAdapter(makeAssignAreaToUsersController()));
 
-    router.delete("/:id", paramsIdValidator.validate, routeAdapter(makeDeleteUserController()));
+    router.delete(
+      "/:id",
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager]),
+      paramsIdValidator.validate,
+      routeAdapter(makeDeleteUserController())
+    );
 
     router.get("/:id", paramsIdValidator.validate, routeAdapter(makeGetUserController()));
 
@@ -67,6 +75,7 @@ export class UserRoutes {
     router.patch(
       "/:id",
       upload.single("avatar"),
+      RoleHandler.hasRole([Roles.admin, Roles.general_manager, Roles.store_manager]),
       paramsIdValidator.validate,
       updateUserValidator.validate,
       routeAdapter(makeUpdateUserController())

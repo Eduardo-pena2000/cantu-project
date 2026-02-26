@@ -36,7 +36,7 @@ export function Notifications() {
   function handleClick(notification) {
     if (notification?.metadata?.assignment_activitie_id) {
       router.push(
-        `/assignment/details/${safeUrlEncode(notification?.metadata?.assignment_activitie_id)}`
+        `/assignment/rate/${safeUrlEncode(notification?.metadata?.assignment_activitie_id)}`
       );
       socket.emit("read-notification", { id: notification.id });
     }

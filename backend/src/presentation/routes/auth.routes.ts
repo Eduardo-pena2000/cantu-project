@@ -10,5 +10,6 @@ export class AuthRoutes {
     router.post("/login", loginValidator.validate, routeAdapter(makeLoginController()));
 
     return router;
+
   }
 }

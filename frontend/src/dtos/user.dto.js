@@ -12,6 +12,7 @@ export function userDto({
   is_active,
   store,
   roles,
+  teams,
 }) {
   return {
     id,
@@ -25,16 +26,18 @@ export function userDto({
     phone,
     lastLogin: last_login
       ? new Date(last_login).toLocaleDateString("es-MX", {
-          weekday: "short",
-          year: "numeric",
-          month: "long",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
+        weekday: "short",
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
       : null,
     isActive: is_active,
-    roles: roles.map((role) => ({ id: role.id, name: role.name })),
+    roles: roles?.map((role) => ({ id: role.id, name: role.name })) || [],
+    store: store ? { id: store.id, name: store.name } : null,
+    teams: teams?.map((team) => ({ id: team.id, name: team.name })) || [],
   };
 }

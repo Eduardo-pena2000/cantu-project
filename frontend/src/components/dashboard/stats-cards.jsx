@@ -55,29 +55,38 @@ export function StatsCards({ scheduleEmployees }) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: stat.delay }}
+                    className="h-full"
                 >
-                    <Card className="hover:shadow-lg hover:shadow-sidebar-primary/10 transition-all duration-300 hover:-translate-y-1 border-primary/10 h-full">
-                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-muted-foreground">
-                                {stat.title}
-                            </CardTitle>
-                            <div className="p-2 bg-sidebar-primary/10 rounded-full">
-                                <stat.icon className="h-4 w-4 text-sidebar-primary" />
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <div className="text-2xl font-bold text-primary">
-                                <CountUp
-                                    end={stat.value}
-                                    duration={2}
-                                    suffix={stat.suffix || ""}
-                                />
-                            </div>
-                            <p className="text-xs text-muted-foreground mt-1">
-                                {stat.description}
-                            </p>
-                        </CardContent>
-                    </Card>
+                    <div className="group relative block h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+                        <Card className="relative h-full overflow-hidden border-border/40 bg-card/60 backdrop-blur-md shadow-sm transition-all duration-500 hover:shadow-lg hover:shadow-sidebar-primary/5 hover:-translate-y-1">
+                            {/* Decorative elements */}
+                            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-sidebar-primary/5 blur-2xl transition-transform duration-500 group-hover:scale-150" />
+                            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-sidebar-primary/60 via-primary/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                            <CardHeader className="relative z-10 flex flex-row items-center justify-between space-y-0 pb-2 pt-5">
+                                <CardTitle className="text-sm font-semibold tracking-wide text-muted-foreground transition-colors group-hover:text-sidebar-primary uppercase">
+                                    {stat.title}
+                                </CardTitle>
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-muted/50 to-muted shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:bg-sidebar-primary/10">
+                                    <stat.icon className="size-5 text-muted-foreground group-hover:text-sidebar-primary transition-colors duration-300" />
+                                </div>
+                            </CardHeader>
+                            <CardContent className="relative z-10 pb-5">
+                                <div className="text-3xl font-extrabold text-foreground group-hover:text-primary transition-colors duration-300">
+                                    <CountUp
+                                        end={stat.value}
+                                        duration={2.5}
+                                        suffix={stat.suffix || ""}
+                                        useEasing={true}
+                                    />
+                                </div>
+                                <p className="text-sm mt-1.5 font-medium text-muted-foreground/80 leading-snug">
+                                    {stat.description}
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </motion.div>
             ))}
         </div>

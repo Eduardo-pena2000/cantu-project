@@ -17,6 +17,7 @@ export interface IQualifyActivitieRequest {
     mimetype: string;
     originalname: string;
   };
+  user?: any;
 }
 
 export interface IUpdateActivitieNoteRequest {

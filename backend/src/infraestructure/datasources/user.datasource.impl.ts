@@ -336,7 +336,7 @@ export class UserDatasourceImpl implements UserDatasource {
     if (team_id) {
       Object.assign(filterIdQuery, {
         [Op.or]: [
-          Sequelize.literal(`id IN (SELECT user_id FROM team_users WHERE team_id = ${team_id})`),
+          Sequelize.literal(`id IN (SELECT user_id FROM team_users WHERE team_id = $teamId)`),
           Sequelize.literal(`id NOT IN (SELECT user_id FROM team_users)`),
         ],
         [Op.notIn]: Sequelize.literal(`(SELECT user_id FROM team_managers)`),
@@ -370,6 +370,7 @@ export class UserDatasourceImpl implements UserDatasource {
         store_id,
         id: filterIdQuery,
       },
+      bind: { teamId: team_id },
     });
 
     return users.map(UserEntity.fromObject);

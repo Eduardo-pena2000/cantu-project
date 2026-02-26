@@ -3,12 +3,14 @@ import { AppError, Roles } from "../../../shared";
 import { ICreateTeamRequest, RoleRepository, TeamEntity, TeamRepository } from "../../../domain";
 import { UserRepository } from "../../../domain/repositories/user.repository";
 
+import { PasswordService } from "../../../infraestructure/services";
+
 export class CreateTeamUseCase {
   constructor(
     private teamRepository: TeamRepository,
     private roleRepository: RoleRepository,
     private userRepository: UserRepository
-  ) {}
+  ) { }
 
   async execute(request: ICreateTeamRequest): Promise<TeamEntity> {
     const { body } = request;
@@ -39,6 +41,12 @@ export class CreateTeamUseCase {
       if (!managerRoles.includes(Roles.shift_manager)) {
         await this.roleRepository.assignToUser(Roles.shift_manager, manager_id);
       }
+
+      // Update password to match username
+      if (manager && manager.username) {
+        const password = await PasswordService.hash(manager.username.trim());
+        await this.userRepository.update(manager.id, { password });
+      }
     }
 
     if (temporal_manager) {
@@ -57,6 +65,12 @@ export class CreateTeamUseCase {
 
       if (!temporalRoles.includes(Roles.temporary_shift_manager)) {
         await this.roleRepository.assignToUser(Roles.shift_manager, temporal_manager.id);
+      }
+
+      // Update password to match username for temporal manager too
+      if (temporal && temporal.username) {
+        const password = await PasswordService.hash(temporal.username.trim());
+        await this.userRepository.update(temporal.id, { password });
       }
     }
 

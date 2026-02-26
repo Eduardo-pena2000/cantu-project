@@ -38,22 +38,32 @@ export function NavAdmin({ session, pathname }) {
         <SidebarGroupLabel>Gestión global</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {items.primary.map((item) => (
-              <SidebarMenuItem key={item.id}>
-                <SidebarMenuButton
-                  asChild
-                  className={cn(
-                    isLinkActive(item.url, pathname) &&
-                    "bg-sidebar-primary text-sidebar-primary-foreground shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground"
-                  )}
-                >
-                  <Link href={item.url}>
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {items.primary
+              .filter((item) => {
+                if (item.url === "/users" || item.url === "/stores") {
+                  return hasRole(session, [ROLES.ADMIN.slug]);
+                }
+                if (item.url === "/supervisor") {
+                  return !hasRole(session, [ROLES.ADMIN.slug]);
+                }
+                return true;
+              })
+              .map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton
+                    asChild
+                    className={cn(
+                      isLinkActive(item.url, pathname) &&
+                      "bg-sidebar-primary text-sidebar-primary-foreground shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground"
+                    )}
+                  >
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -66,6 +76,7 @@ export function NavAdmin({ session, pathname }) {
       ROLES.ADMIN.slug,
       ROLES.GENERAL_MANAGER.slug,
       ROLES.STORE_MANAGER.slug,
+      ROLES.SUPERVISOR.slug
     ]) &&
     session.store
   ) {
@@ -74,22 +85,39 @@ export function NavAdmin({ session, pathname }) {
         <SidebarGroupLabel>Gestión de tienda</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {items.secondary.map((item) => (
-              <SidebarMenuItem key={item.id}>
-                <SidebarMenuButton
-                  asChild
-                  className={cn(
-                    isLinkActive(item.url, pathname) &&
-                    "bg-sidebar-primary text-sidebar-primary-foreground shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground"
-                  )}
-                >
-                  <Link href={item.url}>
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {items.secondary
+              .filter(item => {
+                if (item.id === 9) { // Incidencias
+                  return hasRole(session, [
+                    ROLES.ADMIN.slug,
+                    ROLES.GENERAL_MANAGER.slug,
+                    ROLES.STORE_MANAGER.slug,
+                    ROLES.SUPERVISOR.slug
+                  ]);
+                }
+                // Everything else remains untouched
+                return hasRole(session, [
+                  ROLES.ADMIN.slug,
+                  ROLES.GENERAL_MANAGER.slug,
+                  ROLES.STORE_MANAGER.slug,
+                ]);
+              })
+              .map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton
+                    asChild
+                    className={cn(
+                      isLinkActive(item.url, pathname) &&
+                      "bg-sidebar-primary text-sidebar-primary-foreground shadow-md hover:bg-sidebar-primary hover:text-sidebar-primary-foreground"
+                    )}
+                  >
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>

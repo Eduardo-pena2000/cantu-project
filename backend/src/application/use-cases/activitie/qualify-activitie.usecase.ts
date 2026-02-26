@@ -16,7 +16,7 @@ export class QualifyActivitieUseCase {
     private readonly notificationRepository: NotificationRepository,
     private readonly roleRepository: RoleRepository,
     private readonly socketAdapter: SocketAdapter
-  ) {}
+  ) { }
 
   async execute(request: IQualifyActivitieRequest): Promise<void> {
     const { body, file } = request;
@@ -34,11 +34,20 @@ export class QualifyActivitieUseCase {
       activitie_image_url,
     });
 
+    // CRITICAL FIX: Update the activitie object with the new image URL so the notification logic sees it
+    if (activitie_image_url) {
+      activitie.activitie_image_url = activitie_image_url;
+    }
+
+    console.log("Activity updated. Calling notification services...");
+
     await this.notifyShiftManagerIfNeeded(body, activitie, assignment_activitie_id!);
 
     await this.notifyGeneralManagersIfNeeded(body, activitie, assignment_activitie_id!);
 
     await this.sendNotificationIfApplicable(activitie, assignment_activitie_id!);
+
+    await this.notifySupervisorIfNeeded(activitie, assignment_activitie_id!, request.user);
   }
 
   private async findActivitieOrFail(assignmentActivitieId: number) {
@@ -154,5 +163,74 @@ export class QualifyActivitieUseCase {
     const notifications = await this.notificationRepository.findAllByUser(user_id);
 
     this.socketAdapter.emitToUser(user_id, "notifications", notifications);
+  }
+
+  private async notifySupervisorIfNeeded(
+    activitie: ActivitieAssignmentEntity,
+    assignment_activitie_id: number,
+    currentUser: any
+  ) {
+    // 1. Verify if image exists (evidence)
+    console.log("Checking for evidence...");
+    console.log("Image URL:", activitie.activitie_image_url);
+    if (!activitie.activitie_image_url) {
+      console.log("No evidence (image) found. Skipping notification.");
+      return;
+    }
+
+    // 2. Get Supervisor and Admin Roles and Users
+    const supervisorRole = await this.roleRepository.findBySlug("supervisor");
+    const adminRole = await this.roleRepository.findBySlug("admin");
+
+    const supervisors = supervisorRole?.users ?? [];
+    const admins = adminRole?.users ?? [];
+
+    const recipients = [...supervisors, ...admins];
+
+    // Remove duplicates using Set and map by ID
+    const uniqueRecipients = Array.from(new Map(recipients.map((user) => [user.id, user])).values());
+
+    console.log(`Found ${uniqueRecipients.length} recipients for notification.`);
+
+    if (uniqueRecipients.length === 0) return;
+
+    // 3. Prepare Notification Data
+    const storeName = activitie.assistance?.store?.name || "Tienda desconocida";
+    const workerName = activitie.assistance?.employee?.names || "Trabajador";
+    const managerName = currentUser?.names || "Encargado";
+
+    const title = "Nueva evidencia cargada";
+    const description = `El encargado ${managerName} subió evidencia en ${storeName} para la tarea asignada a ${workerName}.`;
+
+    console.log("Creating notifications for:", uniqueRecipients.map(u => u.email));
+
+    // 4. Send Notifications
+    await Promise.all(
+      uniqueRecipients.map(async (recipient) => {
+        try {
+          const notification = await this.notificationRepository.create({
+            title,
+            description,
+            user_id: recipient.id,
+            type: "EVIDENCE_UPLOADED",
+            metadata: {
+              assignment_activitie_id,
+              store_id: activitie.assistance?.store?.id,
+              worker_id: activitie.assistance?.employee?.id,
+              manager_id: currentUser?.id,
+            },
+            date: new Date(),
+          });
+
+          console.log(`Notification created for user ${recipient.id}: ${notification.id}`);
+
+          this.socketAdapter.emitToUser(recipient.id, "recent-notification", notification);
+          const notifications = await this.notificationRepository.findAllByUser(recipient.id);
+          this.socketAdapter.emitToUser(recipient.id, "notifications", notifications);
+        } catch (error) {
+          console.error(`Error sending notification to user ${recipient.id}:`, error);
+        }
+      })
+    );
   }
 }
