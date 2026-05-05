@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
-import { fetchApi } from "@/lib";
+import { fetchApi, AppError } from "@/lib";
 import { formatDate, hasRole } from "@/utils";
 import { activeScheduleDto, employeeAssignmentDto } from "@/dtos";
 
@@ -30,6 +30,9 @@ async function getActiveShift(storeId, accessToken) {
   });
 
   if (!res.ok) {
+    if (res.status === 404) {
+      return { date: new Date(), schedule: null };
+    }
     throw AppError.applicationError(
       "Ha ocurrido un error inesperado. Por favor, intenta nuevamente."
     );

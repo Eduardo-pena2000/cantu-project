@@ -12,6 +12,7 @@ import { JobRoleRoutes } from "./routes/job-role.routes";
 import { AssistanceRoutes } from "./routes/assistance.routes";
 import { ReportRoutes } from "./routes/report.routes";
 import { IncidentRoutes } from "./incident/incident.routes";
+import { PublicRoutes } from "./routes/public.routes";
 
 import { AuthAdapter } from "../infraestructure";
 
@@ -21,6 +22,9 @@ export class AppRoutes {
 
     router.use("/auth", AuthRoutes.routes);
     router.use("/api/auth", AuthRoutes.routes);
+
+    // Rutas públicas (antes del middleware de auth)
+    router.use("/public", PublicRoutes.routes);
 
     const authAdapterInstance = new AuthAdapter();
 
