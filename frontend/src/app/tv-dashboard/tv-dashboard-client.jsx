@@ -11,18 +11,25 @@ import Image from "next/image";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchStores = async () => {
-  const res = await fetch(`${API_URL}/public/stores`);
-  if (!res.ok) throw new Error("Error fetching stores");
-  const data = await res.json();
-  return data.body?.data || data.body?.stores || [];
+  // Datos quemados para propósitos de visualización
+  return [
+    { id: "1", name: "Matriz Centro", code: "MAT-001" },
+    { id: "2", name: "Sucursal Valle", code: "VAL-002" },
+    { id: "3", name: "Sucursal Norte", code: "NOR-003" }
+  ];
 };
 
 const fetchDashboard = async (storeId) => {
   if (!storeId) return [];
-  const res = await fetch(`${API_URL}/public/tv-dashboard/${storeId}`);
-  if (!res.ok) throw new Error("Error fetching dashboard");
-  const data = await res.json();
-  return data.body || [];
+  // Datos quemados de empleados para la TV
+  return [
+    { id: 101, names: "Carlos", last_names: "Ramírez", email: "carlos@example.com" },
+    { id: 102, names: "Ana Sofía", last_names: "López", email: "ana@example.com" },
+    { id: 103, names: "Luis", last_names: "Martínez", email: "luis@example.com" },
+    { id: 104, names: "María", last_names: "Gómez", email: "maria@example.com" },
+    { id: 105, names: "Roberto", last_names: "Torres", email: "roberto@example.com" },
+    { id: 106, names: "Diana", last_names: "Fernández", email: "diana@example.com" }
+  ];
 };
 
 // Sonido de victoria (Web Audio API) - No requiere archivos externos
