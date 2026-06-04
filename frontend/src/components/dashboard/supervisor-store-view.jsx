@@ -1,6 +1,7 @@
 "use client";
 
-import { Crown, CalendarCheck, AlertCircle, LayoutDashboard, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Crown, CalendarCheck, AlertCircle, LayoutDashboard, ArrowLeft, ClipboardCheck } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -9,6 +10,7 @@ import { Subtitle } from "@/components/subtitle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { DashboardCharts } from "@/components/dashboard/charts";
@@ -38,6 +40,16 @@ export function SupervisorStoreView({ session, store, schedule, scheduleEmployee
                     </div>
                 </div>
             </header>
+
+            {/* Acciones de Supervisor */}
+            <div className="flex justify-end mt-[-10px] mb-2">
+                <Button asChild size="sm" className="gap-2 bg-blue-600 hover:bg-blue-700 text-white">
+                    <Link href={`/stores/${store.id}/checklist`}>
+                        <ClipboardCheck className="size-4" />
+                        Checklist Diario
+                    </Link>
+                </Button>
+            </div>
 
             {/* KPI Cards */}
             <StatsCards scheduleEmployees={employeesData} />
