@@ -12,57 +12,23 @@ import { Subtitle } from "@/components/subtitle";
 import { SupervisorStoreCard } from "@/components/dashboard/supervisor-store-card";
 
 async function getStores(accessToken) {
-    const res = await fetchApi("/store", {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    });
-
-    if (!res.ok) {
-        if (res.status === 404) {
-            return [];
-        }
-        throw new Error("Failed to fetch stores");
-    }
-
-    const json = await res.json();
-
-    // Handle different response structures (direct array or paginated)
-    let stores = [];
-    if (Array.isArray(json.body)) {
-        stores = json.body;
-    } else if (json.body && Array.isArray(json.body.data)) {
-        stores = json.body.data;
-    } else if (json.body && Array.isArray(json.body.rows)) {
-        stores = json.body.rows;
-    }
-
-    return stores;
+    // Mock data for local testing
+    return [
+      { id: 1, name: "Matriz Centro", code: "MAT-001" },
+      { id: 2, name: "Sucursal Valle", code: "VAL-002" },
+      { id: 3, name: "Sucursal Norte", code: "NOR-003" }
+    ];
 }
 
 async function getStoreTeamLeader(storeId, accessToken) {
-    // Fetching all teams for the store to find leaders
-    try {
-        const res = await fetchApi(`/team?store=${storeId}`, {
-            headers: { Authorization: `Bearer ${accessToken}` }
-        });
-
-        if (res.ok) {
-            const json = await res.json();
-            // The backend returns a paginated response in body.data
-            const teams = json.body?.data || [];
-
-            // Returning all team leaders for this store
-            return teams.map(t => ({
-                teamName: t.name,
-                manager: t.managers?.[0], // The backend returns an array of managers
-                isActive: t.is_active // Use the actual active status from the team entity
-            }));
-        }
-    } catch (error) {
-        console.error(`Error fetching teams for store ${storeId}`, error);
-    }
-    return [];
+    // Mock data for local testing
+    return [
+      {
+        teamName: "Turno Matutino",
+        manager: { names: "Encargado", last_names: "Demo", avatar_url: "https://i.pravatar.cc/150?u=" + storeId },
+        isActive: true
+      }
+    ];
 }
 
 

@@ -29,7 +29,7 @@ export function StoreSwitcher({
       className={className}
       {...props}
     >
-      <Settings2 />
+      {props.children || <Settings2 />}
     </Button>
   );
 }

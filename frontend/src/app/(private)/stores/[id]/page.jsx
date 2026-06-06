@@ -16,42 +16,21 @@ import { AdminStoreView } from "@/components/dashboard/admin-store-view";
 
 // Helper functions for Supervisor Data
 async function getActiveShift(storeId, accessToken) {
-  const res = await fetchApi(`/shift/active?store=${storeId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    return { date: new Date(), schedule: null };
-  }
-
-  const json = await res.json();
-  const { body } = json;
-  const date = new Date();
-  const schedule = activeScheduleDto(body);
-
-  return { date, schedule };
+  // Mock local data
+  return { date: new Date(), schedule: { id: 1, name: "Turno Mock" } };
 }
 
 async function getScheduleEmployees(scheduleId, storeId, accessToken) {
-  if (!scheduleId) return [];
-
-  const res = await fetchApi(`/user/activities/schedule/${scheduleId}/store/${storeId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!res.ok) return [];
-
-  const json = await res.json();
-  const { body } = json;
-  return body.map((employee) => employeeAssignmentDto(employee));
+  // Mock local data
+  return [
+    {
+      id: 101,
+      image: "https://i.pravatar.cc/150?u=1",
+      shortFullName: "Empleado Uno",
+      email: "emp1@example.com",
+      attendance: { completed: 2, pending: 1, late: 0, score: 85, overallStatus: "GOOD", assignments: [] }
+    }
+  ];
 }
 
 function rowsAdapter(scheduleEmployees) {
@@ -95,30 +74,18 @@ export default async function Page({ params }) {
   const decodeId = Number(safeUrlDecode(id));
 
   // Fetch Store Details (Common)
-  const res = await fetchApi(`/store/${decodeId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
-
-  if (!res.ok) {
-    if (res.status === 404) {
-      notFound();
-    } else {
-      throw AppError.applicationError(
-        "Hubo un error al intentar obtener la tienda. Por favor, intenta nuevamente."
-      );
-    }
-  }
-
-  const json = await res.json();
-  const { body } = json;
+  // MOCK LOCAL DATA
+  const body = {
+    id: decodeId,
+    name: "Sucursal Ficticia " + decodeId,
+    code: "SUC-" + decodeId,
+    is_active: true,
+    timezone: "America/Mexico_City"
+  };
   const store = storeDto(body);
 
   // *** SUPERVISOR VIEW LOGIC ***
-  if (hasRole(session, ROLES.SUPERVISOR.slug)) {
+  if (hasRole(session, ROLES.SUPERVISOR.slug) && !hasRole(session, ROLES.ADMIN.slug)) {
     const { date, schedule } = await getActiveShift(store.id, session.accessToken);
     const scheduleEmployees = await getScheduleEmployees(
       schedule?.id,
@@ -140,9 +107,16 @@ export default async function Page({ params }) {
 
   // *** ADMIN VIEW ***
   const actions = (
-    <div className="absolute right-0 bottom-0 space-x-2">
-      <StoreSwitcher sessionStore={{ id: store.id, name: store.name, code: store.code }} />
-      <Button asChild size="icon" variant="ghost">
+    <div className="absolute right-4 -bottom-5 flex items-center gap-2">
+      <StoreSwitcher 
+         sessionStore={{ id: store.id, name: store.name, code: store.code }}
+         className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center gap-2 px-6 py-5 rounded-full font-bold transition-all"
+         variant="default"
+         size="default"
+      >
+        Gestionar Tienda
+      </StoreSwitcher>
+      <Button asChild size="icon" variant="outline" className="rounded-full size-10 shadow-sm border-2">
         <Link href={`/stores/${id}/edit`} className="cursor-default">
           <SquarePen />
         </Link>

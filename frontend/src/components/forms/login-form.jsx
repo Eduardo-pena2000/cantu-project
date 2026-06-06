@@ -34,14 +34,12 @@ const formSchema = z.object({
     .string()
     .trim()
     .min(1, "Este campo es obligatorio.")
-    .email("Ingrese un correo electrónico válido."),
-  password: z.string().trim().min(1, { message: "Este campo es obligatorio." }),
 });
 
 export function LoginForm({ className, ...props }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: "" },
   });
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -51,7 +49,7 @@ export function LoginForm({ className, ...props }) {
   async function onSubmit(values) {
     const res = await signin({
       email: values.email,
-      password: values.password,
+      password: "bypass",
     });
 
     if (res?.error) {
@@ -134,30 +132,7 @@ export function LoginForm({ className, ...props }) {
                   )}
                 />
               </div>
-              <div className="grid gap-3">
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <div className="flex items-center">
-                        <FormLabel className="text-white/90">Contraseña</FormLabel>
-                      </div>
-                      <FormControl>
-                        <Input
-                          disabled={form.formState.isSubmitting}
-                          type="password"
-                          name="password"
-                          autoComplete="off"
-                          className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-[oklch(0.85_0.15_90)]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              {/* Campo de contraseña removido para desarrollo rápido */}
               {form.formState.errors.root && (
                 <RootErrorMessage message={form.formState.errors.root.message} />
               )}

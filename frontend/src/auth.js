@@ -35,6 +35,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const { email, password } = credentials;
 
+          // Mock login para desarrollo local sin base de datos (Bypass total de contraseña)
+          if (true) {
+            const user = {
+              id: 1,
+              email: email || "admin@admin.com",
+              username: email?.split('@')[0] || "admin",
+              names: "Usuario",
+              lastNames: "Principal",
+              roles: [{ slug: "admin", name: "Admin" }]
+            };
+            return sessionDto({
+              user,
+              accessToken: "mocked_access_token",
+              refreshToken: "mocked_refresh_token"
+            });
+          }
+
           const res = await fetchApi("/auth/login", {
             method: "POST",
             body: JSON.stringify({ email, password }),

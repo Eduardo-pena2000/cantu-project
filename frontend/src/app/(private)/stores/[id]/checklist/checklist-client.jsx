@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { ChecklistForm } from "@/components/dashboard/checklist-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CHECKLIST_SECTIONS } from "@/data/constants";
 
 export function ChecklistClient({ store }) {
     const [history, setHistory] = useState([]);
@@ -93,14 +94,51 @@ export function ChecklistClient({ store }) {
                                         </CardTitle>
                                     </CardHeader>
                                     <CardContent>
-                                        <div className="flex justify-between items-center mt-2">
-                                            <div className="text-sm">
-                                                <span className="text-muted-foreground">Puntuación Total: </span>
-                                                <span className="font-bold">{record.totalScore} / {record.maxScore}</span>
+                                        <div className="flex flex-col gap-4 mt-2">
+                                            <div className="flex justify-between items-center">
+                                                <div className="text-sm">
+                                                    <span className="text-muted-foreground">Puntuación Total: </span>
+                                                    <span className="font-bold">{record.totalScore} / {record.maxScore}</span>
+                                                </div>
+                                                <Badge variant={record.totalScore >= record.maxScore * 0.8 ? "default" : "destructive"}>
+                                                    {((record.totalScore / record.maxScore) * 100).toFixed(0)}%
+                                                </Badge>
                                             </div>
-                                            <Badge variant={record.totalScore >= record.maxScore * 0.8 ? "default" : "destructive"}>
-                                                {((record.totalScore / record.maxScore) * 100).toFixed(0)}%
-                                            </Badge>
+
+                                            {/* Render comments if any exist */}
+                                            {(() => {
+                                                const comments = Object.entries(record.answers || {})
+                                                    .filter(([_, answer]) => answer.observation && answer.observation.trim() !== "")
+                                                    .map(([itemId, answer]) => {
+                                                        let itemText = "Elemento";
+                                                        let sectionText = "Categoría";
+                                                        CHECKLIST_SECTIONS.forEach(sec => {
+                                                            const found = sec.items.find(i => i.id === itemId);
+                                                            if (found) {
+                                                                itemText = found.text;
+                                                                sectionText = sec.title;
+                                                            }
+                                                        });
+                                                        return { section: sectionText, text: itemText, observation: answer.observation };
+                                                    });
+
+                                                if (comments.length === 0) return null;
+
+                                                return (
+                                                    <div className="mt-2 pt-4 border-t border-slate-100">
+                                                        <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Comentarios Adicionales</p>
+                                                        <div className="flex flex-col gap-3">
+                                                            {comments.map((comment, i) => (
+                                                                <div key={i} className="bg-slate-50 rounded-xl p-3 text-sm">
+                                                                    <p className="text-xs font-bold text-blue-600 uppercase mb-1">{comment.section}</p>
+                                                                    <p className="font-semibold text-slate-700 mb-1 leading-tight">{comment.text}</p>
+                                                                    <p className="text-slate-600 italic">"{comment.observation}"</p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
                                         </div>
                                     </CardContent>
                                 </Card>

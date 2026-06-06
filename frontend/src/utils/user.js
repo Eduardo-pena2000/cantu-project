@@ -1,6 +1,9 @@
 export function hasRole(session, roles) {
-  if (session) {
+  if (session && session.user && Array.isArray(session.user.roles)) {
     return session.user.roles.some((role) => roles.includes(role));
+  } else if (session && session.user && session.user.role) {
+    // Fallback in case token has old format with singular 'role'
+    return roles.includes(session.user.role.slug || session.user.role);
   }
 
   return false;

@@ -22,20 +22,15 @@ export default async function ChecklistPage({ params }) {
 
     const decodeId = Number(safeUrlDecode(id));
 
-    // Fetch Store Details
-    const res = await fetchApi(`/store/${decodeId}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session.accessToken}`,
-        },
-    });
-
-    let store = { id: decodeId, name: "Tienda Desconocida", code: "N/A" };
-    if (res.ok) {
-        const json = await res.json();
-        store = storeDto(json.body);
-    }
+    // MOCK LOCAL DATA
+    const body = {
+      id: decodeId,
+      name: "Sucursal Ficticia " + decodeId,
+      code: "SUC-" + decodeId,
+      is_active: true,
+      timezone: "America/Mexico_City"
+    };
+    const store = storeDto(body);
 
     return (
         <div className="flex flex-col gap-6 animate-fade-in p-6 max-w-5xl mx-auto">
