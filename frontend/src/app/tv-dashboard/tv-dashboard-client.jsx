@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Activity, Users, Store, Crown, Megaphone } from "lucide-react";
+import { Activity, Users, Store, Crown, Megaphone, Clock, Calendar } from "lucide-react";
 import Image from "next/image";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -111,11 +112,20 @@ const getStatus = (employee) => {
 
 function LiveClock() {
   const [time, setTime] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
+    setMounted(true);
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="flex flex-col items-end justify-center px-6 py-2 bg-slate-50 rounded-2xl border border-slate-100 min-w-[150px] min-h-[60px]">
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-end justify-center px-6 py-2 bg-slate-50 rounded-2xl border border-slate-100">
@@ -132,6 +142,7 @@ function LiveClock() {
 export function TvDashboardClient() {
   const [selectedStore, setSelectedStore] = useState("");
   const [controlsVisible, setControlsVisible] = useState(true);
+  const [selectedEmployeeTask, setSelectedEmployeeTask] = useState(null);
   const hideControlsTimeout = useRef(null);
   const prevScoresRef = useRef({});
 
@@ -339,7 +350,8 @@ export function TvDashboardClient() {
                     key={emp.id}
                     variants={itemVariants}
                     whileHover={{ y: -5, scale: 1.02 }}
-                    className={`group relative flex flex-col p-8 pt-10 rounded-[2.5rem] bg-white border ${isKing ? 'border-[#F5C518]/50 shadow-[0_0_40px_rgba(245,197,24,0.3)]' : 'border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)]'} hover:shadow-[0_12px_40px_rgba(27,79,143,0.08)] transition-all duration-300 overflow-hidden`}
+                    onClick={() => setSelectedEmployeeTask(emp)}
+                    className={`group relative flex flex-col p-8 pt-10 rounded-[2.5rem] bg-white border cursor-pointer ${isKing ? 'border-[#F5C518]/50 shadow-[0_0_40px_rgba(245,197,24,0.3)]' : 'border-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)]'} hover:shadow-[0_12px_40px_rgba(27,79,143,0.08)] hover:ring-4 hover:ring-[#1B4F8F]/10 transition-all duration-300 overflow-hidden`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${status.bgGradient} opacity-60 pointer-events-none`} />
                     {isKing && <div className="absolute inset-0 bg-gradient-to-tr from-[#F5C518]/5 via-transparent to-transparent pointer-events-none" />}
@@ -412,6 +424,79 @@ export function TvDashboardClient() {
           )}
         </div>
       </div>
+
+      {/* Modal de Tareas */}
+      <Dialog open={!!selectedEmployeeTask} onOpenChange={(open) => !open && setSelectedEmployeeTask(null)}>
+        <DialogContent className="sm:max-w-[500px] bg-white rounded-[2rem] p-0 overflow-hidden border-0 shadow-2xl">
+          {selectedEmployeeTask && (
+            <div className="flex flex-col">
+              <div className="bg-[#1B4F8F] p-6 text-white relative overflow-hidden">
+                 <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl transform translate-x-1/3 -translate-y-1/3" />
+                 <DialogHeader className="relative z-10">
+                   <div className="flex items-center gap-4 mb-2">
+                     <Avatar className="w-16 h-16 border-2 border-white/20 shadow-md bg-white">
+                        <AvatarImage src={selectedEmployeeTask.avatar_url || ""} />
+                        <AvatarFallback className="text-xl bg-[#1B4F8F] text-white">{selectedEmployeeTask.names.charAt(0)}</AvatarFallback>
+                     </Avatar>
+                     <div className="text-left">
+                       <DialogTitle className="text-2xl font-bold font-heading tracking-tight">{selectedEmployeeTask.names} {selectedEmployeeTask.last_names}</DialogTitle>
+                       <DialogDescription className="text-blue-100 font-medium text-sm mt-1">
+                         Tareas Asignadas del Día
+                       </DialogDescription>
+                     </div>
+                   </div>
+                 </DialogHeader>
+              </div>
+              
+              <div className="p-6 space-y-6">
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                  <div className="absolute top-0 left-0 w-1.5 h-full bg-[#F5C518]" />
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-yellow-100 text-yellow-800 shadow-sm">
+                      En progreso
+                    </span>
+                    <div className="flex items-center text-slate-400 text-xs font-semibold gap-1.5">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {new Date().toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short' }).toUpperCase()}
+                    </div>
+                  </div>
+                  
+                  <h4 className="text-lg font-bold text-slate-800 leading-snug mb-2 font-heading">
+                    Acomodar y surtir el pasillo principal
+                  </h4>
+                  <p className="text-slate-500 text-sm mb-5 leading-relaxed">
+                    Verificar caducidades, reponer inventario de las cabeceras y limpiar la zona de exhibición.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 border-t border-slate-200/60 pt-4 mt-2">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-50 rounded-xl text-[#1B4F8F]">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Asignada</span>
+                        <span className="text-sm font-semibold text-slate-700">08:30 AM</span>
+                      </div>
+                    </div>
+                    
+                    <div className="w-px h-8 bg-slate-200 hidden sm:block my-auto"></div>
+                    
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-red-50 rounded-xl text-red-600">
+                        <Activity className="w-4 h-4" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Fecha Límite</span>
+                        <span className="text-sm font-bold text-red-600">12:00 PM</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Marquesina Fija Inferior (Noticiero) */}
       <div className="fixed bottom-0 left-0 w-full bg-[#1B4F8F] text-white overflow-hidden flex items-center z-50 h-14 border-t-4 border-[#F5C518] shadow-[0_-10px_30px_rgba(27,79,143,0.3)]">
