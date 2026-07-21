@@ -16,35 +16,48 @@ import { AdminStoreView } from "@/components/dashboard/admin-store-view";
 
 // Helper functions for Supervisor Data
 async function getActiveShift(storeId, accessToken) {
-  // Mock local data
-  return { date: new Date(), schedule: { id: 1, name: "Turno Mock" } };
+  try {
+    const res = await fetchApi(`/user/assistance/schedule/${storeId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!res.ok) return { date: new Date(), schedule: null };
+    const json = await res.json();
+    const data = json.body;
+    if (data && data.schedule) {
+      return { date: data.date || new Date(), schedule: data.schedule };
+    }
+    return { date: new Date(), schedule: null };
+  } catch (error) {
+    return { date: new Date(), schedule: null };
+  }
 }
 
 async function getScheduleEmployees(scheduleId, storeId, accessToken) {
-  // Mock local data
-  return [
-    {
-      id: 101,
-      image: "https://i.pravatar.cc/150?u=1",
-      shortFullName: "Empleado Uno",
-      email: "emp1@example.com",
-      attendance: { completed: 2, pending: 1, late: 0, score: 85, overallStatus: "GOOD", assignments: [] }
-    }
-  ];
+  if (!scheduleId || !storeId) return [];
+  try {
+    const res = await fetchApi(`/user/activities/schedule/${scheduleId}/store/${storeId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.body || [];
+  } catch (error) {
+    return [];
+  }
 }
 
 function rowsAdapter(scheduleEmployees) {
-  return scheduleEmployees.map(({ id, image, shortFullName, email, attendance }) => ({
+  return scheduleEmployees.map(({ id, image, avatar_url, shortFullName, names, last_names, email, attendance }) => ({
     id,
-    image,
-    shortFullName,
+    image: image || avatar_url || null,
+    shortFullName: shortFullName || `${names || ""} ${last_names || ""}`.trim(),
     email,
-    completed: attendance.completed,
-    pending: attendance.pending,
-    late: attendance.late,
-    score: attendance.score,
-    overallStatus: attendance.overallStatus,
-    assignments: attendance.assignments,
+    completed: attendance?.completed ?? 0,
+    pending: attendance?.pending ?? 0,
+    late: attendance?.late ?? 0,
+    score: attendance?.score ?? 0,
+    overallStatus: attendance?.overallStatus ?? "PENDING",
+    assignments: attendance?.assignments ?? [],
   }));
 }
 
@@ -73,16 +86,18 @@ export default async function Page({ params }) {
 
   const decodeId = Number(safeUrlDecode(id));
 
-  // Fetch Store Details (Common)
-  // MOCK LOCAL DATA
-  const body = {
-    id: decodeId,
-    name: "Sucursal Ficticia " + decodeId,
-    code: "SUC-" + decodeId,
-    is_active: true,
-    timezone: "America/Mexico_City"
-  };
-  const store = storeDto(body);
+  // Fetch Store Details from real API
+  let store;
+  try {
+    const res = await fetchApi(`/store/${decodeId}`, {
+      headers: { Authorization: `Bearer ${session.accessToken}` },
+    });
+    if (!res.ok) return notFound();
+    const json = await res.json();
+    store = storeDto(json.body);
+  } catch (error) {
+    return notFound();
+  }
 
   // *** SUPERVISOR VIEW LOGIC ***
   if (hasRole(session, ROLES.SUPERVISOR.slug) && !hasRole(session, ROLES.ADMIN.slug)) {
@@ -127,3 +142,4 @@ export default async function Page({ params }) {
 
   return <AdminStoreView store={store} actions={actions} />;
 }
+

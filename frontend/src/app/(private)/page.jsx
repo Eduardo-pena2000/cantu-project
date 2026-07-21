@@ -21,11 +21,20 @@ import { userDto } from "@/dtos";
 import { RealtimeRefresh } from "@/components/dashboard/realtime-refresh";
 
 async function getActiveShift(storeId, accessToken) {
-  // Mock local data so the dashboard charts are always visible
-  return { 
-    date: new Date(), 
-    schedule: { id: 1, name: "Turno Matutino (Mock)" } 
-  };
+  try {
+    const res = await fetchApi(`/user/assistance/schedule/${storeId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!res.ok) return { date: new Date(), schedule: null };
+    const json = await res.json();
+    const data = json.body;
+    if (data && data.schedule) {
+      return { date: data.date || new Date(), schedule: data.schedule };
+    }
+    return { date: new Date(), schedule: null };
+  } catch (error) {
+    return { date: new Date(), schedule: null };
+  }
 }
 
 async function getScheduleEmployees(scheduleId, storeId, accessToken) {
