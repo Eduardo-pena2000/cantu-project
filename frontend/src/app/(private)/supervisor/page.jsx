@@ -26,14 +26,31 @@ async function getStores(accessToken) {
 }
 
 async function getStoreTeamLeader(storeId, accessToken) {
-    // Mock data for local testing
-    return [
-      {
-        teamName: "Turno Matutino",
-        manager: { names: "Encargado", last_names: "Demo", avatar_url: "https://i.pravatar.cc/150?u=" + storeId },
-        isActive: true
-      }
-    ];
+    try {
+        const res = await fetchApi(`/team?store=${storeId}&limit=100`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            }
+        });
+        const json = await res.json();
+        const teams = json.body?.data || [];
+        return teams.map(team => {
+            const mainManager = team.managers?.find(m => m.manager_info?.is_main_manager);
+            return {
+                teamName: team.name || "Sin nombre",
+                manager: mainManager ? {
+                    names: mainManager.names,
+                    last_names: mainManager.last_names,
+                    fullName: `${mainManager.names} ${mainManager.last_names}`,
+                    image: mainManager.avatar_url || null,
+                    avatar_url: mainManager.avatar_url || null,
+                } : null,
+                isActive: team.is_active,
+            };
+        });
+    } catch (error) {
+        return [];
+    }
 }
 
 
