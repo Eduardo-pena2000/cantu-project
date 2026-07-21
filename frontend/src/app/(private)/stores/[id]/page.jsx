@@ -14,43 +14,39 @@ import { DeleteButton } from "../delete-button";
 import { SupervisorStoreView } from "@/components/dashboard/supervisor-store-view";
 import { AdminStoreView } from "@/components/dashboard/admin-store-view";
 
-// Helper functions for Supervisor Data
-async function getActiveShift(storeId, accessToken) {
+// Fetch ALL employees for a store, independent of shift/schedule
+async function getStoreEmployees(storeId, accessToken) {
   try {
-    const res = await fetchApi(`/user/assistance/schedule/${storeId}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    if (!res.ok) return { date: new Date(), schedule: null };
-    const json = await res.json();
-    const data = json.body;
-    if (data && data.schedule) {
-      return { date: data.date || new Date(), schedule: data.schedule };
-    }
-    return { date: new Date(), schedule: null };
-  } catch (error) {
-    return { date: new Date(), schedule: null };
-  }
-}
-
-async function getScheduleEmployees(scheduleId, storeId, accessToken) {
-  if (!scheduleId || !storeId) return [];
-  try {
-    const res = await fetchApi(`/user/activities/schedule/${scheduleId}/store/${storeId}`, {
+    const res = await fetchApi(`/user?store=${storeId}&limit=100&page=1`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     if (!res.ok) return [];
     const json = await res.json();
-    return json.body || [];
+    const users = json.body?.data || [];
+    return users.map((user) => ({
+      id: user.id,
+      image: user.avatar_url || null,
+      shortFullName: `${user.names?.split(' ')[0] || ''} ${user.last_names?.split(' ')[0] || ''}`.trim() || user.username,
+      email: user.email,
+      attendance: {
+        completed: 0,
+        pending: 0,
+        late: 0,
+        score: null,
+        overallStatus: "NEW",
+        assignments: [],
+      },
+    }));
   } catch (error) {
     return [];
   }
 }
 
-function rowsAdapter(scheduleEmployees) {
-  return scheduleEmployees.map(({ id, image, avatar_url, shortFullName, names, last_names, email, attendance }) => ({
+function rowsAdapter(employees) {
+  return employees.map(({ id, image, shortFullName, email, attendance }) => ({
     id,
-    image: image || avatar_url || null,
-    shortFullName: shortFullName || `${names || ""} ${last_names || ""}`.trim(),
+    image,
+    shortFullName,
     email,
     completed: attendance?.completed ?? 0,
     pending: attendance?.pending ?? 0,
@@ -101,20 +97,15 @@ export default async function Page({ params }) {
 
   // *** SUPERVISOR VIEW LOGIC ***
   if (hasRole(session, ROLES.SUPERVISOR.slug) && !hasRole(session, ROLES.ADMIN.slug)) {
-    const { date, schedule } = await getActiveShift(store.id, session.accessToken);
-    const scheduleEmployees = await getScheduleEmployees(
-      schedule?.id,
-      store.id,
-      session.accessToken
-    );
-    const employeesData = rowsAdapter(scheduleEmployees || []);
+    const storeEmployees = await getStoreEmployees(store.id, session.accessToken);
+    const employeesData = rowsAdapter(storeEmployees);
 
     return (
       <SupervisorStoreView
         session={session}
         store={store}
-        schedule={schedule}
-        scheduleEmployees={scheduleEmployees}
+        schedule={null}
+        scheduleEmployees={storeEmployees}
         employeesData={employeesData}
       />
     );
