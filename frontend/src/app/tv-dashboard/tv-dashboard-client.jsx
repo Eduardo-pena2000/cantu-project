@@ -13,25 +13,26 @@ import useSocket from "@/hooks/use-socket";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchStores = async () => {
-  // Datos quemados para propósitos de visualización
-  return [
-    { id: "1", name: "Matriz Centro", code: "MAT-001" },
-    { id: "2", name: "Sucursal Valle", code: "VAL-002" },
-    { id: "3", name: "Sucursal Norte", code: "NOR-003" }
-  ];
+  try {
+    const res = await fetch(`${API_URL}/public/stores`);
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.body?.data || [];
+  } catch (error) {
+    return [];
+  }
 };
 
 const fetchDashboard = async (storeId) => {
   if (!storeId) return [];
-  // Datos quemados de empleados para la TV
-  return [
-    { id: 101, names: "Carlos", last_names: "Ramírez", email: "carlos@example.com" },
-    { id: 102, names: "Ana Sofía", last_names: "López", email: "ana@example.com" },
-    { id: 103, names: "Luis", last_names: "Martínez", email: "luis@example.com" },
-    { id: 104, names: "María", last_names: "Gómez", email: "maria@example.com" },
-    { id: 105, names: "Roberto", last_names: "Torres", email: "roberto@example.com" },
-    { id: 106, names: "Diana", last_names: "Fernández", email: "diana@example.com" }
-  ];
+  try {
+    const res = await fetch(`${API_URL}/public/tv-dashboard/${storeId}`);
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.body || [];
+  } catch (error) {
+    return [];
+  }
 };
 
 // Sonido de victoria (Web Audio API) - No requiere archivos externos
@@ -190,19 +191,19 @@ export function TvDashboardClient() {
     refetchInterval: 60000,
   });
 
-  // Procesar datos (incluyendo mocks para la demo)
+  // Procesar datos (incluyendo mocks para la demo de puntuaciones)
   const mockedEmployees = employees?.map((emp) => {
-    const pseudoRandomScore = (emp.id * 137) % 100; 
-    const pseudoLate = (emp.id * 43) % 4;
-    const pseudoAssistance = (emp.id * 17) % 5 === 0 ? 0 : 1; 
-    const pseudoPhoto = `https://i.pravatar.cc/150?u=${emp.id * 13}`;
+    const pseudoRandomScore = emp.today_score ?? ((emp.id * 137) % 100); 
+    const pseudoLate = emp.late_activities ?? ((emp.id * 43) % 4);
+    const pseudoAssistance = emp.has_assistance_today ?? ((emp.id * 17) % 5 === 0 ? 0 : 1); 
     
     return {
       ...emp,
       today_score: pseudoRandomScore,
       late_activities: pseudoLate,
       has_assistance_today: pseudoAssistance,
-      avatar_url: pseudoPhoto
+      // Usamos el avatar real si existe
+      avatar_url: emp.avatar_url || `https://i.pravatar.cc/150?u=${emp.id * 13}`
     };
   });
 

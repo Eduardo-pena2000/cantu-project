@@ -12,12 +12,16 @@ import { Subtitle } from "@/components/subtitle";
 import { SupervisorStoreCard } from "@/components/dashboard/supervisor-store-card";
 
 async function getStores(accessToken) {
-    // Mock data for local testing
-    return [
-      { id: 1, name: "Matriz Centro", code: "MAT-001" },
-      { id: 2, name: "Sucursal Valle", code: "VAL-002" },
-      { id: 3, name: "Sucursal Norte", code: "NOR-003" }
-    ];
+    try {
+        const res = await fetchApi("/store?limit=100", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            }
+        });
+        return res.body?.data || [];
+    } catch (error) {
+        return [];
+    }
 }
 
 async function getStoreTeamLeader(storeId, accessToken) {
