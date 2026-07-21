@@ -18,7 +18,8 @@ async function getStores(accessToken) {
                 Authorization: `Bearer ${accessToken}`,
             }
         });
-        return res.body?.data || [];
+        const json = await res.json();
+        return json.body?.data || [];
     } catch (error) {
         return [];
     }
