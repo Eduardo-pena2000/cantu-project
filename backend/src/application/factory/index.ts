@@ -52,6 +52,7 @@ export {
   makeGetActivitiesController,
   makeUpdateActivitieController,
   makeAssigmentActivitieController,
+  makeBulkAssignmentActivitieController,
   makeDeleteAssignedActivitieController,
   makeUpdateAssignedActivitieController,
   makeGetActivitiesByAreaController,

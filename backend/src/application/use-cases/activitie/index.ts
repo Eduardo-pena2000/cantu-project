@@ -4,9 +4,11 @@ export * from "./delete-activitie.usecase";
 export * from "./get-activitie.usecase";
 export * from "./get-activities.usecase";
 export * from "./assigment-activitie.usecase";
+export * from "./bulk-assigment-activitie.usecase";
 export * from "./delete-assigned-activitie.usecase";
 export * from "./update-assigned-activitie.usecase";
 export * from "./get-actitivies-by-area.usecase";
 export * from "./qualify-activitie.usecase";
 export * from "./update-note-activitie.usecase";
 export * from "./get-assigned-activitie.usecase";
+

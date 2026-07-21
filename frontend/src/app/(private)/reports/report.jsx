@@ -4,131 +4,87 @@ import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 
-import { getTeamsReport } from "@/lib/queries";
+import { getAssistanceHistory } from "@/lib/queries";
+import { employeeAssignmentDto } from "@/dtos";
 
 import { Filters } from "@/app/(private)/reports/filters";
-import { UserList } from "@/app/(private)/reports/user-list";
-import { ReportDetails } from "@/app/(private)/reports/report-details";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { EmployeePerformanceGrid } from "@/components/dashboard/employee-performance-grid";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Title } from "@/components/title";
 
 const defaultValues = {
-  date: { from: undefined, to: undefined },
+  date: { from: new Date(), to: undefined },
   store: undefined,
   area: undefined,
-  status: undefined,
-  order: "asc",
+  role: undefined,
+  name: "",
 };
 
 export function Report() {
-  const [team, setTeam] = React.useState(null);
-  const [assignment, setAssignment] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
   const [filters, setFilters] = React.useState(defaultValues);
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["teams-report", filters],
+    queryKey: ["assistance-history", filters],
     queryFn: () =>
-      getTeamsReport({
-        startDate: format(filters.date.from, "yyyy-MM-dd"),
-        endDate: format(filters.date.to, "yyyy-MM-dd"),
-        store: filters.store,
-        area: filters.area,
-        status: filters.status,
-        order: filters.order,
+      getAssistanceHistory({
+        date: filters.date?.from ? format(filters.date.from, "yyyy-MM-dd") : undefined,
+        store_id: filters.store,
+        area_id: filters.area,
+        role_id: filters.role,
+        name: filters.name,
       }),
-    enabled: !!filters.date.from && !!filters.date.to && !!filters.store,
+    enabled: !!filters.date.from && !!filters.store,
   });
 
-  function handleFilter(filters) {
-    setFilters(filters);
+  function handleFilter(newFilters) {
+    setFilters(newFilters);
   }
 
-  function handleOpen(assignment) {
-    setAssignment(assignment);
-    setOpen(true);
-  }
+  // Use the exact same formatting we use for the live dashboard
+  const adaptedData = React.useMemo(() => {
+    if (!data?.data) return [];
+    
+    // The endpoint returns an array of AssistanceEntity joined with User.
+    // Wait, the backend endpoint returns Assistance models which have `employee` (User).
+    // The employeeAssignmentDto expects { id, avatar_url, email, names, username, last_names, assistance }
+    return data.data.map((assistance) => {
+      const user = assistance.employee;
+      return employeeAssignmentDto({
+        ...user,
+        assistance: assistance,
+      });
+    });
+  }, [data]);
 
-  if (isLoading) {
-    return (
-      <Accordion type="single" collapsible className="w-full">
-        {Array.from({ length: 4 }, (_, idx) => (
-          <AccordionItem key={idx}>
-            <AccordionTrigger disabled className="pb-4">
-              <Skeleton className="h-4 w-56 rounded-xs border" />
-            </AccordionTrigger>
-            <div className="text-muted-foreground text-sm space-y-2 pb-4">
-              <Skeleton className="h-4 w-32 rounded-xs border" />
-              <Skeleton className="h-3 w-32 rounded-xs border" />
-              <Skeleton className="h-3 w-24 rounded-xs border" />
-            </div>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    );
-  }
+  return (
+    <>
+      <Filters defaultValues={filters} onSubmit={handleFilter} />
 
-  if (!isLoading && !isError && data) {
-    return (
-      <>
-        <Accordion
-          type="single"
-          collapsible
-          value={team}
-          onValueChange={setTeam}
-          className="w-full"
-        >
-          {data.data.map(({ id, name, code, isActive }) => (
-            <AccordionItem key={id} value={id}>
-              <AccordionTrigger className="pb-2">{name}</AccordionTrigger>
-              <div className="text-muted-foreground text-sm pb-4">
-                <p className="font-semibold">{code}</p>
-                <p>25-09-2025</p>
-                <p>{isActive ? "Activo" : "Archivado"}</p>
-              </div>
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <UserList team={team} value={id} filters={filters} handleOpen={handleOpen} />
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+      {isLoading && (
+        <div className="space-y-4 mt-6">
+          <Skeleton className="h-16 w-full rounded-xl" />
+          <Skeleton className="h-16 w-full rounded-xl" />
+          <Skeleton className="h-16 w-full rounded-xl" />
+        </div>
+      )}
 
-        <Filters defaultValues={filters} onSubmit={handleFilter} />
+      {!isLoading && !isError && adaptedData && (
+        <div className="mt-8 space-y-4">
+          <div className="flex items-center gap-2">
+            <Title level={2} className="text-lg">Resultados Históricos</Title>
+            <span className="text-xs font-normal text-muted-foreground border px-2 py-0.5 rounded-full">
+              {adaptedData.length} registros
+            </span>
+          </div>
+          <EmployeePerformanceGrid employees={adaptedData} />
+        </div>
+      )}
 
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-w-prose">
-            <DialogHeader className="text-left">
-              <DialogTitle>Detalle de la actividad</DialogTitle>
-              <DialogDescription>
-                Consulta el detalle del cumplimiento y seguimiento de esta actividad.
-              </DialogDescription>
-            </DialogHeader>
-            <ReportDetails open={open} assignment={assignment} />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Regresar</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </>
-    );
-  }
-
-  return <Filters defaultValues={filters} onSubmit={handleFilter} />;
+      {!isLoading && !isError && adaptedData?.length === 0 && (
+         <div className="p-8 border rounded-xl bg-muted/20 text-center animate-slide-up mt-6">
+           <p className="text-muted-foreground">No se encontraron registros para los filtros seleccionados.</p>
+         </div>
+      )}
+    </>
+  );
 }

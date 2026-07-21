@@ -20,6 +20,13 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 function getEmployeeScore(score) {
     if (score === null || score === undefined) {
@@ -55,21 +62,6 @@ function getEmployeeScore(score) {
 
 export const columns = [
     {
-        id: "expander",
-        header: () => null,
-        cell: ({ row }) => {
-            // Only expandable if they have store or teams info
-            const hasDetails = row.original.store || row.original.teams?.length > 0;
-            return hasDetails ? (
-                <Button onClick={row.getToggleExpandedHandler()} variant="icon" className="cursor-pointer">
-                    <ChevronRight
-                        className={cn("transition-transform duration-300", row.getIsExpanded() && "rotate-90")}
-                    />
-                </Button>
-            ) : null;
-        },
-    },
-    {
         accessorKey: "name",
         header: "Nombre del Empleado",
         cell: ({ row }) => {
@@ -96,7 +88,24 @@ export const columns = [
     {
         accessorKey: "status",
         header: "Productividad",
-        cell: ({ row }) => getEmployeeScore(row.original.score),
+        cell: ({ row }) => {
+            const employee = row.original;
+            return (
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="ghost" className="p-0 h-auto hover:bg-transparent justify-start font-normal text-left">
+                            {getEmployeeScore(employee.score)}
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Detalles de Asignación</DialogTitle>
+                        </DialogHeader>
+                        <SubDataTable employee={employee} />
+                    </DialogContent>
+                </Dialog>
+            );
+        },
     },
 ];
 
@@ -150,9 +159,7 @@ export function GlobalEmployeesDataTable({ data }) {
     const table = useReactTable({
         data,
         columns,
-        getRowCanExpand: (row) => row.original.store || (row.original.teams && row.original.teams.length > 0),
         getCoreRowModel: getCoreRowModel(),
-        getExpandedRowModel: getExpandedRowModel(),
     });
 
     return (
@@ -184,14 +191,6 @@ export function GlobalEmployeesDataTable({ data }) {
                                         </TableCell>
                                     ))}
                                 </TableRow>
-
-                                {row.getIsExpanded() && (
-                                    <TableRow className="hover:bg-transparent bg-muted/5">
-                                        <TableCell colSpan={row.getVisibleCells().length} className="p-0">
-                                            <SubDataTable employee={row.original} />
-                                        </TableCell>
-                                    </TableRow>
-                                )}
                             </React.Fragment>
                         ))
                     ) : (

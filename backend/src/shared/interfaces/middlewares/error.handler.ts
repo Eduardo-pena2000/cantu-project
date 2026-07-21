@@ -21,13 +21,16 @@ export class ErrorMiddleware {
     if (error instanceof AppError) {
       const { message, name, validationErrors } = error;
       const statusCode = error.statusCode || HttpCode.INTERNAL_SERVER_ERROR;
-      const stack = process.env.NODE_ENV === "development" ? error.stack : undefined;
+      const stack = process.env.NODE_ENV !== "production" ? error.stack : undefined;
       res.status(statusCode).json({ name, message, validationErrors, stack });
     } else {
       const name = "InternalServerError";
       const message = "An internal server error occurred";
       const statusCode = HttpCode.INTERNAL_SERVER_ERROR;
-      const stack = process.env.NODE_ENV === "development" ? (error?.stack || String(error)) : undefined;
+      const stack = process.env.NODE_ENV !== "production" ? (error?.stack || String(error)) : undefined;
+      
+      console.error("🔥 BACKEND UNHANDLED ERROR CAUGHT:", error);
+      
       res.status(statusCode).json({ name, message, stack });
     }
 

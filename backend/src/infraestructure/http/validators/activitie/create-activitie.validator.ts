@@ -23,6 +23,10 @@ const createActivitie = [
     .withMessage("El campo 'job_role_id' es obligatorio.")
     .isNumeric()
     .withMessage("El campo 'job_role_id' debe ser un número."),
+  body("default_deadline")
+    .optional({ nullable: true })
+    .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
+    .withMessage("El campo 'default_deadline' debe tener el formato HH:mm."),
 ];
 
 export const createActivitieValidator = new ValidatorMiddleware(createActivitie);

@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { paramsIdValidator, routeAdapter, takeAssistanceValidator, upload } from "../../infraestructure";
-import { makeDeleteAssistanceController, makeTakeAssistanceController } from "../../application";
+import { AuthMiddleware, paramsIdValidator, routeAdapter, takeAssistanceValidator, upload } from "../../infraestructure";
+import { makeDeleteAssistanceController, makeTakeAssistanceController, makeGetAssistanceHistoryController } from "../../application";
 
 export class AssistanceRoutes {
   static get routes(): Router {
@@ -14,6 +14,13 @@ export class AssistanceRoutes {
       upload.single("image"),
       takeAssistanceValidator.validate,
       routeAdapter(makeTakeAssistanceController())
+    );
+
+    router.get(
+      "/history",
+      AuthMiddleware.validateJWT,
+      AuthMiddleware.verifyRoles(["admin", "general_manager"]),
+      routeAdapter(makeGetAssistanceHistoryController())
     );
 
     return router;

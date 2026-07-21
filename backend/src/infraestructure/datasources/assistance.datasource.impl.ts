@@ -1,8 +1,18 @@
 import { literal, Op } from "sequelize";
 
-import { AssistanceDatasource, AssistanceEntity, CreateAssistanceDto } from "../../domain";
-
+import {
+  AssistanceDatasource,
+  AssistanceEntity,
+  CreateAssistanceDto,
+  GetAssistanceHistoryDto,
+} from "../../domain";
+import { PaginatedResponse } from "../../../shared";
 import Assistance from "../database/models/assistence.model";
+import User from "../database/models/user.model";
+import ActivityAssignment from "../database/models/activity-assignment.model";
+import Activitie from "../database/models/activitie.model";
+import Role from "../database/models/role.model";
+import Area from "../database/models/area.model";
 
 export class AssistanceDatasourceImpl implements AssistanceDatasource {
   async create(dto: CreateAssistanceDto): Promise<AssistanceEntity> {
@@ -34,5 +44,68 @@ export class AssistanceDatasourceImpl implements AssistanceDatasource {
     });
 
     return assistance ? AssistanceEntity.fromObject(assistance) : null;
+  }
+
+  async getHistory(dto: GetAssistanceHistoryDto): Promise<PaginatedResponse<AssistanceEntity>> {
+    const { limit, page, date, store_id, name, area_id, role_id } = dto;
+    const offset = (page - 1) * limit;
+
+    const where: any = {};
+    if (store_id) where.store_id = store_id;
+    if (date) {
+      where[Op.and] = literal(`DATE(date_assistance) = '${date}'`);
+    }
+
+    const userWhere: any = {};
+    if (name) {
+      userWhere[Op.or] = [
+        { names: { [Op.like]: `%${name.trim()}%` } },
+        { last_names: { [Op.like]: `%${name.trim()}%` } },
+      ];
+    }
+
+    const roleInclude: any = { model: Role, as: "roles" };
+    if (role_id) {
+      roleInclude.where = { id: role_id };
+    }
+
+    const areaInclude: any = { model: Area, as: "areas" };
+    if (area_id) {
+      areaInclude.where = { id: area_id };
+    }
+
+    const { rows, count } = await Assistance.findAndCountAll({
+      where,
+      limit,
+      offset,
+      order: [["date_assistance", "DESC"]],
+      include: [
+        {
+          model: User,
+          as: "employee",
+          where: Object.keys(userWhere).length ? userWhere : undefined,
+          include: [roleInclude, areaInclude],
+        },
+        {
+          model: ActivityAssignment,
+          as: "activities_asigments",
+          include: [
+            {
+              model: Activitie,
+              as: "activity",
+            },
+          ],
+        },
+      ],
+      distinct: true, // important when using findAndCountAll with joins
+    });
+
+    return {
+      data: rows.map((r) => AssistanceEntity.fromObject(r)),
+      limit,
+      page,
+      total: count,
+      totalPages: Math.ceil(count / limit),
+    };
   }
 }

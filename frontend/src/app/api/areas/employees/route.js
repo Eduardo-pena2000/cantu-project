@@ -64,6 +64,7 @@ export const POST = auth(async function POST(request) {
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
+    console.error("Error in POST /api/areas/employees:", error);
     return new NextResponse(
       JSON.stringify({
         error: {

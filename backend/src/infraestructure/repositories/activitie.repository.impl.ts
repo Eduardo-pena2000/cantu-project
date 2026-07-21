@@ -4,6 +4,7 @@ import {
   ActivitieEntity,
   ActivitieRepository,
   AssigmentActivitieDto,
+  BulkAssignmentActivitieDto,
   CreateActivitieDto,
   IGetActivitiesParams,
   QualifyActivitieDto,
@@ -15,6 +16,10 @@ export class ActivitieRepositoryImpl implements ActivitieRepository {
 
   async assignment(data: AssigmentActivitieDto): Promise<ActivitieAssignmentEntity> {
     return await this.datasource.assignment(data);
+  }
+
+  async bulkAssignment(data: BulkAssignmentActivitieDto): Promise<ActivitieAssignmentEntity[]> {
+    return await this.datasource.bulkAssignment(data);
   }
 
   async create(data: CreateActivitieDto): Promise<ActivitieEntity> {

@@ -18,8 +18,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Areas } from "@/app/(private)/store/attendance/recorded-attendance/areas";
 import { RenderData } from "@/components/render-data";
+import { RoleActivitiesAssigner } from "./role-activities-assigner";
 
 export function RecordedAttendance({ scheduleId }) {
   const [open, setOpen] = React.useState(false);
@@ -178,14 +178,12 @@ export function RecordedAttendance({ scheduleId }) {
                     </div>
                   </div>
                 )}
+                
+                <div className="pt-4 mt-2 border-t border-border/40">
+                  <RoleActivitiesAssigner employee={employee} scheduleId={scheduleId} handleClose={handleClose} />
+                </div>
               </div>
             </DialogHeader>
-            <Areas
-              key={employee?.id}
-              handleClose={handleClose}
-              scheduleId={scheduleId}
-              employee={employee}
-            />
           </DialogContent>
         </Dialog>
       </div>

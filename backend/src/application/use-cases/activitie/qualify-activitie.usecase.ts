@@ -48,6 +48,12 @@ export class QualifyActivitieUseCase {
     await this.sendNotificationIfApplicable(activitie, assignment_activitie_id!);
 
     await this.notifySupervisorIfNeeded(activitie, assignment_activitie_id!, request.user);
+
+    // Emit global event to update dashboards in real-time
+    this.socketAdapter.emitGlobal("dashboard-updated", {
+      store_id: activitie.assistance?.store?.id,
+      assignment_activitie_id: assignment_activitie_id,
+    });
   }
 
   private async findActivitieOrFail(assignmentActivitieId: number) {

@@ -6,14 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MENU_ITEMS } from "@/data/menu-items";
 import { ArrowRight } from "lucide-react";
 
-export function NavigationCards({ role }) {
-    // Select items based on role or context. 
-    // For now, let's show Secondary items (Store Management) if available, 
-    // essentially what the user requested: "cuando se desplieguen las opciones de cada tienda"
-
-    // You might want to pass in 'items' as a prop or determine it here.
-    // Assuming this component is used inside a Store context:
-    const items = MENU_ITEMS.secondary;
+export function NavigationCards({ type = 'secondary' }) {
+    // Select items based on the requested type
+    const items = MENU_ITEMS[type] || MENU_ITEMS.secondary;
 
     const container = {
         hidden: { opacity: 0 },

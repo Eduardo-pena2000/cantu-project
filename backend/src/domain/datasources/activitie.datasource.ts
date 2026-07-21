@@ -2,6 +2,7 @@ import { PaginatedResponse } from "../../shared";
 
 import {
   AssigmentActivitieDto,
+  BulkAssignmentActivitieDto,
   CreateActivitieDto,
   IGetActivitiesParams,
   QualifyActivitieDto,
@@ -10,6 +11,7 @@ import { ActivitieAssignmentEntity, ActivitieEntity } from "../entities";
 
 export abstract class ActivitieDatasource {
   abstract assignment(data: AssigmentActivitieDto): Promise<ActivitieAssignmentEntity>;
+  abstract bulkAssignment(data: BulkAssignmentActivitieDto): Promise<ActivitieAssignmentEntity[]>;
   abstract create(data: CreateActivitieDto): Promise<ActivitieEntity>;
   abstract delete(id: number): Promise<void>;
   abstract deleteAssignedActivity(id: number): Promise<void>;
@@ -24,3 +26,4 @@ export abstract class ActivitieDatasource {
     data: Partial<AssigmentActivitieDto>
   ): Promise<ActivitieAssignmentEntity>;
 }
+

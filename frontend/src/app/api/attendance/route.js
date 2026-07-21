@@ -63,6 +63,7 @@ export const POST = auth(async function POST(request) {
 
     return new NextResponse(JSON.stringify({ status: res.status }), { status: res.status });
   } catch (error) {
+    console.error("Error en route API attendance:", error);
     return new NextResponse(
       JSON.stringify({
         error: {

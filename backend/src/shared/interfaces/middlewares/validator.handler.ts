@@ -12,6 +12,9 @@ export class ValidatorMiddleware {
 
     if (errors.isEmpty()) return next();
 
+    console.error("❌ Validación falló en body:", req.body);
+    console.error("Errores detallados:", errors.array());
+
     next(AppError.badRequest("Error de validación", errors));
   };
 }

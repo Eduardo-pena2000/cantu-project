@@ -10,13 +10,14 @@ export class ActivitieEntity {
     public description: string,
     public area: AreaEntity,
     public job_role: JobRoleEntity,
-    public created_at: string
+    public created_at: string,
+    public default_deadline?: string | null
   ) {}
 
   static fromObject(object: { [key: string]: any }): ActivitieEntity {
-    const { id, name, description, area, job_role, createdAt: created_at } = object;
+    const { id, name, description, area, job_role, createdAt: created_at, default_deadline } = object;
 
-    return new ActivitieEntity(id, name, description, area, job_role, created_at);
+    return new ActivitieEntity(id, name, description, area, job_role, created_at, default_deadline);
   }
 }
 

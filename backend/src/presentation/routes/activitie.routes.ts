@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   assigmentActivitieValidator,
+  bulkAssignmentActivitieValidator,
   createActivitieValidator,
   paginationValidator,
   paramsIdValidator,
@@ -14,6 +15,7 @@ import {
 import {
   makeCreateActivitieController,
   makeAssigmentActivitieController,
+  makeBulkAssignmentActivitieController,
   makeQualifyActivitieController,
   makeDeleteAssignedActivitieController,
   makeDeleteActivitieController,
@@ -33,6 +35,8 @@ export class ActivitieRoutes {
     router.post("/", createActivitieValidator.validate, routeAdapter(makeCreateActivitieController()));
 
     router.post("/assignment", assigmentActivitieValidator.validate, routeAdapter(makeAssigmentActivitieController()));
+
+    router.post("/assignment/bulk", bulkAssignmentActivitieValidator.validate, routeAdapter(makeBulkAssignmentActivitieController()));
 
     router.post(
       "/qualify",

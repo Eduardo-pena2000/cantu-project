@@ -86,6 +86,7 @@ export const GET = auth(async function GET(request) {
       { status: res.status }
     );
   } catch (error) {
+    console.error("Error in GET /api/areas:", error);
     return new NextResponse(
       JSON.stringify({
         error: {

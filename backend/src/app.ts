@@ -4,6 +4,7 @@ import { Server } from "./server";
 
 import { envs, initializeCronServer, SequelizeDatabase } from "./infraestructure";
 import { makeSocketConfig } from "./application";
+import { TemplateInjectorService } from "./application/services/template-injector.service";
 
 const main = async () => {
   const database = envs.DB_NAME;
@@ -13,6 +14,9 @@ const main = async () => {
   const port = envs.DB_PORT;
 
   await SequelizeDatabase.connect({ database, password, username, host, port });
+  
+  // Inject templates for existing stores (idempotent)
+  await TemplateInjectorService.injectAllStores();
 
   const server = new Server({ port: envs.APP_PORT || 4568, routes: AppRoutes.routes });
 

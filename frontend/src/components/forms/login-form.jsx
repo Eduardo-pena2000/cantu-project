@@ -33,13 +33,17 @@ const formSchema = z.object({
   email: z
     .string()
     .trim()
-    .min(1, "Este campo es obligatorio.")
+    .min(1, "Este campo es obligatorio."),
+  password: z
+    .string()
+    .trim()
+    .min(1, "Este campo es obligatorio."),
 });
 
 export function LoginForm({ className, ...props }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "" },
+    defaultValues: { email: "", password: "" },
   });
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -49,7 +53,7 @@ export function LoginForm({ className, ...props }) {
   async function onSubmit(values) {
     const res = await signin({
       email: values.email,
-      password: "bypass",
+      password: values.password,
     });
 
     if (res?.error) {
@@ -131,8 +135,28 @@ export function LoginForm({ className, ...props }) {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/90">Contraseña</FormLabel>
+                      <FormControl>
+                        <Input
+                          disabled={form.formState.isSubmitting}
+                          type="password"
+                          name="password"
+                          autoComplete="current-password"
+                          placeholder="••••••••"
+                          className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus-visible:ring-[oklch(0.85_0.15_90)]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              {/* Campo de contraseña removido para desarrollo rápido */}
               {form.formState.errors.root && (
                 <RootErrorMessage message={form.formState.errors.root.message} />
               )}

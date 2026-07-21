@@ -7,6 +7,7 @@ interface ActivitieAttributes {
   name: string;
   description: string;
   area_id: number;
+  default_deadline: string | null;
 }
 
 type ActivitieCreationAttributes = Partial<ActivitieAttributes>;
@@ -16,6 +17,7 @@ class Activitie extends Model<ActivitieAttributes, ActivitieCreationAttributes> 
   public name!: string;
   public description!: string;
   public area_id!: number;
+  public default_deadline!: string | null;
 
   static associate(models: { [key: string]: SequelizeModel }) {
     Activitie.belongsTo(models.Area, { as: "area", foreignKey: "area_id" });
@@ -52,6 +54,11 @@ class Activitie extends Model<ActivitieAttributes, ActivitieCreationAttributes> 
             key: "id",
           },
           onDelete: "CASCADE",
+        },
+        default_deadline: {
+          type: DataTypes.TIME,
+          allowNull: true,
+          defaultValue: null,
         },
       },
       { modelName: "Activitie", paranoid: true, sequelize }

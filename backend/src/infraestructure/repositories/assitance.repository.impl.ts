@@ -3,7 +3,9 @@ import {
   AssistanceEntity,
   AssistanceRepository,
   CreateAssistanceDto,
+  GetAssistanceHistoryDto,
 } from "../../domain";
+import { PaginatedResponse } from "../../../shared";
 
 export class AssistanceRepositoryImpl implements AssistanceRepository {
   constructor(private assistanceDatasource: AssistanceDatasource) {}
@@ -25,5 +27,9 @@ export class AssistanceRepositoryImpl implements AssistanceRepository {
     schedule_id: number
   ): Promise<AssistanceEntity | null> {
     return await this.assistanceDatasource.findByUserOnCurrentDay(user_id, schedule_id);
+  }
+
+  async getHistory(dto: GetAssistanceHistoryDto): Promise<PaginatedResponse<AssistanceEntity>> {
+    return this.assistanceDatasource.getHistory(dto);
   }
 }

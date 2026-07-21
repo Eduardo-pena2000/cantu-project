@@ -84,11 +84,13 @@ export default async function Page({ searchParams }) {
         <div className="relative w-full sm:max-w-md">
           <Search className="w-full bg-background/50 shadow-inner border-border/80 focus-within:ring-2 focus-within:ring-sidebar-primary/20 transition-all rounded-lg" placeholder="Buscar por nombre..." />
         </div>
-        <Button asChild className="w-full sm:w-auto shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 rounded-xl px-6">
-          <Link href="/store/activities/job-roles/new" scroll={false}>
-            <Plus className="mr-2 size-4" /> Nuevo rol de trabajo
-          </Link>
-        </Button>
+        {!hasRole(session, [ROLES.SHIFT_MANAGER.slug, ROLES.TEMPORARY_SHIFT_MANAGER.slug]) && (
+          <Button asChild className="w-full sm:w-auto shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90 rounded-xl px-6">
+            <Link href="/store/activities/job-roles/new" scroll={false}>
+              <Plus className="mr-2 size-4" /> Nuevo rol de trabajo
+            </Link>
+          </Button>
+        )}
       </div>
 
       {jobRoles.length ? (

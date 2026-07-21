@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Activity, Users, Store, Crown, Megaphone, Clock, Calendar } from "lucide-react";
 import Image from "next/image";
+import useSocket from "@/hooks/use-socket";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -145,6 +146,31 @@ export function TvDashboardClient() {
   const [selectedEmployeeTask, setSelectedEmployeeTask] = useState(null);
   const hideControlsTimeout = useRef(null);
   const prevScoresRef = useRef({});
+  const queryClient = useQueryClient();
+
+  const { socket, connectSocket, disconnectSocket } = useSocket({
+    url: process.env.NEXT_PUBLIC_WS_API_URL,
+    token: "", // Anonymous connection
+  });
+
+  useEffect(() => {
+    connectSocket();
+    return () => disconnectSocket();
+  }, [connectSocket, disconnectSocket]);
+
+  useEffect(() => {
+    if (!socket) return;
+    
+    const handleUpdate = (data) => {
+      // Refresh the query when any dashboard update is received
+      if (!data.store_id || String(data.store_id) === String(selectedStore)) {
+        queryClient.invalidateQueries({ queryKey: ["tv-dashboard", selectedStore] });
+      }
+    };
+
+    socket.on("dashboard-updated", handleUpdate);
+    return () => socket.off("dashboard-updated", handleUpdate);
+  }, [socket, selectedStore, queryClient]);
 
   const { data: stores } = useQuery({
     queryKey: ["public-stores"],

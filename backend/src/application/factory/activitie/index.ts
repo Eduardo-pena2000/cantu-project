@@ -4,6 +4,7 @@ export * from "./get-activitie.factory";
 export * from "./get-activities.factory";
 export * from "./update-activitie.factory";
 export * from "./assigment-activitie.factory";
+export * from "./bulk-assigment-activitie.factory";
 export * from "./delete-assigned-activitie.factory";
 export * from "./update-assigned-activitie.factory";
 export * from "./get-activities-by-area.factory";

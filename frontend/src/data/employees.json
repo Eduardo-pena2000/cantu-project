@@ -1,0 +1,623 @@
+[
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "NANCY ARACELI TORRES LLANAS",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8126287172",
+    "email": "paolajaqeline@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOe9w6CYYDzwzoXScfmlTvfuj99iNsTteO6G8JiQBmG-5BijQ9kLhuCy-CIcygbHBeNOziQMRvTKBrXbedT-qLaOqAFSIcNQgjjgEZSr9gbQSzUMDy7Ho5Ujbs5HLcK5jmGdSiL3nnA8lFLKAmnIKQeKflAHfNGbSQuvD9zKtg=s600",
+    "localPhotoUrl": "/images/employees/nancy_araceli_torres_llanas.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "MELISSA CURZ HERNANDEZ",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "4821048103",
+    "email": "melissahernandez8619@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdii4LO07rco4p2a-t6cKUeT7ePcqLsKVbXU54e3Mr8-8bJe4i04-YdXiu9-DReRJuW0DU786eU5EKYnqhN2fTnIBsRQacAjVZ_GI9kZgnUAggFPVR1Vu-EEssKrd0OAy7PVCCyXQ6E8C4vgipL15OStpkmBzpVHOQu8O0F5g=s600",
+    "localPhotoUrl": "/images/employees/melissa_curz_hernandez.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "MONICA RAMOS AGUILAR",
+    "puesto": "CAJERA",
+    "phone": "8114679110",
+    "email": "monicaguilarramos@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeuojFOwd__CfA0Y16Fp87T5vcNeoZdS_DWg8fT4eycjy8tcjxROOnRsUQPTW5aG6mLxhFCrLEjj1XE-2qr97xICp0vdtLAcjBfhvCDxKIa_k7jEHe4kewkj4J6UkZTriO5gItgV5YLDwfHfucGD4OkFpfN5JcWxWXPIp_ZiA=s600",
+    "localPhotoUrl": "/images/employees/monica_ramos_aguilar.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "STEHPANIA GONZALEZ HERNANDEZ",
+    "puesto": "CAJERA",
+    "phone": "8126282164",
+    "email": "stephaniagss067@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOddDQKzvbRAY0f5IEZtB2D_i0qGrA5TPXdfVskN0ScCDuHUIPoh9_whldNl6r7TlN_lDESf0HGmOgFrXnR68mItL1A97fubdd5jyJXkrhLfhdbfD656j8d1F9hTGzuf3U_sm-TITEY57lgSGwxKEyPDz-oy-usQZH7yoaDSdzXG=s600",
+    "localPhotoUrl": "/images/employees/stehpania_gonzalez_hernandez.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "RAMONA JANETH ALVARADO RUIZ",
+    "puesto": "CAJERA",
+    "phone": "8132480936",
+    "email": "ruizjaneth619@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeJm_tALgXj4WeRcBt196H6Ln_55g3blhLsfKPFoCA-CqJugZtGb0GnClN6o_fqbK1BTPKabIjMAVxMby19DNny4gtTG2Wv4KDkRaydlynicuVOKD46MWMvo_lR4mXw8A4D59LOCf1W2UAgOPjLuaG9ZdPmRqUU2QMgVGkujCos=s600",
+    "localPhotoUrl": "/images/employees/ramona_janeth_alvarado_ruiz.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "DIANA LAURA QUIROZ GONZALEZ",
+    "puesto": "CAJERA",
+    "phone": "8134693349",
+    "email": "",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeA2NsSOMRzgmqeavEODL1MG18bUlIT62orT4mq7rxEfntk0pilA9y1j3I5C_33XYHKfOsckIpvAjUKdIu3wBenXAKTz6-thRnUV7I6fGb25PUZnDODkaMxke6Bflx8i1b1vJfJq-Yp82nM5vY-ulXfAbNDpsoTycRMbta95T-5=s600",
+    "localPhotoUrl": "/images/employees/diana_laura_quiroz_gonzalez.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "ABRAHM ULISES BUSTOS LEAL",
+    "puesto": "TABLAJERO",
+    "phone": "6678283194",
+    "email": "abrahamleal500@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcwXo-vFsiZf0-FeLMEACaA0ozc50MP_tPBWBmjzRKnU5bAY1wjdpLJTQur-OOfn_g4Wyyh_BD-RyeDFnqMIQ-E1fJlB2nac-9doHxzkbqdiXM3jX2AkRjj3u-ho7fnxOsD_sHwDlBMfmfiJy0SfNfKP_s28vq2_3dwZUNy5FD7=s600",
+    "localPhotoUrl": "/images/employees/abrahm_ulises_bustos_leal.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "ROBERTO DANIEL HERNANDEZ GOMEZ",
+    "puesto": "TABLAJERO",
+    "phone": "8130731595",
+    "email": "rhg0862@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "ANGEL DAREIL MARTINEZ CARMONA",
+    "puesto": "AYUDANTE DE TABLAJERO",
+    "phone": "8141815013",
+    "email": "angelmartinez46826@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeNTrFjAh0Emrj0EGPl1cHRMka1iTHOBMs_OthwUH2Tn0DS1rohKphrSNCzkZNouXZ2a4CM9Vflkdk42GcXrNC4V7DWQm5GiuGdMCi_XxVbY_mgQrfLBAkx9PwArku9DGvZS3EaCdRzljrakg1B_xFHb3Fh2kxPqxa7kC89Y4K8=s600",
+    "localPhotoUrl": "/images/employees/angel_dareil_martinez_carmona.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "KALETH ISIDRO SERRATO ESTRADA",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8110329563",
+    "email": "kalethisidros@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOf1-homthjZkfdI6pBzIsGlZJeND4Eies5OqLU72UELf-o4HqO8jTYd9q_e7_9JeD8QoPXrGuorSiN1QHWpbQJxiUT7ecJL75azdENqr3o5CsOZuOK9qf_NvMvaurCV7k8XtHrKK1oC7ePG5FBFEJApEjtEC3KoSzkbdA1Ba099=s600",
+    "localPhotoUrl": "/images/employees/kaleth_isidro_serrato_estrada.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "ANGELICA ROBLES HERNANDEZ",
+    "puesto": "AYUDANTE GENERAL(CARNES FRIAS)",
+    "phone": "",
+    "email": "sergioarcadia1290@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "ESTEFANY PATRICIA MARTINEZ FUENTES",
+    "puesto": "LIMPIEZA",
+    "phone": "",
+    "email": "estefanymtz851@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcXjJ-Bdmkyed-daXGPMWu-w7kiK3HbsPtvhqIh_Ar2gfOQ6tTyjmrhiy-14iL2aFascxOMS2QORUWPRkRmel1f7FTAcfU59taNQAuiVixKtd9i5FfOKR0VsJy3GHOIZUIyGu7l9awZyphZRVTlRG3LVmp3uuLI5SaXaOD950gX=s600",
+    "localPhotoUrl": "/images/employees/estefany_patricia_martinez_fuentes.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "MELANIE JANETH SANCHEZ GUTIERREZ",
+    "puesto": "RECIBO",
+    "phone": "8131003632",
+    "email": "Melanie.yaneth2111@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfgBhaEKncS7zDuwhSO85hhJuKLt1-UXlafY8uCOgrPl9jzsVPqgKv-Oka157c3YKuP5nRDa6-CPpnc9Q3HeYXIytDX8LB3sYV_aDNTxpP64shRoZjYRsBkqXQAYo_iGbgAxz-rpamNd3Zhnf1eQ1iYeX_fExHTMG0PPHKgYtj_=s600",
+    "localPhotoUrl": "/images/employees/melanie_janeth_sanchez_gutierrez.jpg"
+  },
+  {
+    "sucursal": "ELOY CAVAZOS",
+    "nombre": "DEYANIRA VALADEZ QUINTANILLA",
+    "puesto": "PREVENCION",
+    "phone": "8131407742",
+    "email": "deyiss-86@hotmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdikwsKNjzPbX8PNr_hTjZro0pvJ1htGFLhp9c4IoOxB6e48661-XPuYWIN6D9aGJ2LP0gbrsCvwR5l8YiiEEu6LkO8BddDDdUQHBS1LtdX35Z8Sv7nVrXgXyKzpBtXKwALKdiz9fNy53QVsb590SOvBxoaIaWZ79hPOq2RtKEa=s600",
+    "localPhotoUrl": "/images/employees/deyanira_valadez_quintanilla.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "KAREN LIZZETH GARCIA RAMOS",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8148097323",
+    "email": "kgraciaramos@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfhP7QnhXJF45X-rM8ZkvOPCbDgWZ_kbvT2G2Q8UXne1OhffkX4h7u3uIvTNwcELYgmvy-OONO8O88gHjZuNfKjOMV4oidKjHi8bSWdzGmWxfMV520jjEl00frZxid1kQ0rTOfyidlhdpl6vgt3ezSjK_sG2RIS6Lobr_u_Gs06=s600",
+    "localPhotoUrl": "/images/employees/karen_lizzeth_garcia_ramos.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "MIGUEL EDUARDO ANTONIO PAVON",
+    "puesto": "ENCARGADO DE TIENDA",
+    "phone": "8129731518",
+    "email": "miguel.antonio@u-erre.mx",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOd8W879IOMrmRglYbQOt409U5mj1Nd7fbSIkJHlBBY7P-k7uy_ANDbLB-mwmwGShYHAGGEnVd7JKwWWUiSnHM0WEvFawVD2y0OxqSP3nq8pgFLBGNOeXmOy7OBYrM4VxKgrol-su9coCqx7yNmL-vx0Z9aFr2LgFXpvfM-196pB=s600",
+    "localPhotoUrl": "/images/employees/miguel_eduardo_antonio_pavon.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "MARTHA ELIZABETH REYES MONTAÑES",
+    "puesto": "CAJERA",
+    "phone": "8116735663",
+    "email": "marelii_pao@hotmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeKelrDd5DUncGdwDPVQWEKJ3AiLYlPLdUoOy8u4TyqZ0o83jwdQA82swKs3oGN19XSu1g3tiBCshhG_AeqXPl55oKf88OYckI_TdaR8bThLdFl4Kr01FsjowUE2ICVzWGztzDSy8sn-hzq9ikfXakdlu8OKmJKa3i2pjpcIg=s600",
+    "localPhotoUrl": "/images/employees/martha_elizabeth_reyes_monta_es.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "LITZY JOHANI TORRES SABALZA",
+    "puesto": "CAJERA",
+    "phone": "7531755699",
+    "email": "Litzy.st2016@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "FERNANDA CITLALI QUINTANILLA GUZMAN",
+    "puesto": "CAJERA",
+    "phone": "8135267366",
+    "email": "fercitlali2@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcf1Ojt0mHo9NX_zenItXs2e9XIARdyMdOK4Yyb6mrCfKSutYItNAwo5wHqnFcaiIgCb8qTpNEv0b_33oYqeDhyABD-MsxBCzvLKtnjEVld_KcpTSYWjXvmdZz-KcfaQ9CgLNU2eJ7q9Gq3nabUAqN-8gfoLcY0uVnO9cvXxrWQ=s600",
+    "localPhotoUrl": "/images/employees/fernanda_citlali_quintanilla_guzman.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "JESUS ANGEL HERNANDEZ MARCELINO",
+    "puesto": "TABLAJERO",
+    "phone": "5650716231",
+    "email": "angeeelhernaaandz@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfsr9TGO1g1lweRMgKBMIyebbT4lH2D599GiWra6a7KQ3ue0KclVeZstVVKOatI7DY-fai_jmzpGD2SNJtAkMSeX7Nm73YzsFKE2DW-S8H3eJEXswH4SZpEnxWLHER9CcLldyf9XKAzBLCDr38EpXLh3leCchfaSZ9DsKhe4Q=s600",
+    "localPhotoUrl": "/images/employees/jesus_angel_hernandez_marcelino.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "DIEGO HERNANDEZ TOLENTINO",
+    "puesto": "TABLAJERO",
+    "phone": "8132438634",
+    "email": "decoyarianne@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfxuYC3nLZRfAZNojBUZIL5udbpsNdsMdm5tR4Y-llTCRBonFODJSqP83XA0P_bq9p1PmO6fX1-zyvMiLPnjQwGT6vW3vXXm0nppPad0HJe3ZACHnNyv4SsuNkmd0lF_Es9Q123vfxMLHK2GA__-weN_uooaldSwGDDgcxzSoCp=s600",
+    "localPhotoUrl": "/images/employees/diego_hernandez_tolentino.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "JOSE SOLEDAD MARTINEZ MATA",
+    "puesto": "TABLAJERO",
+    "phone": "8119560337",
+    "email": "josemartinezmata25@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcX2kXrbNJGWXbt0WB1bNVu6HwvHVwfRvF9wMbBTyvB9pI_lz7q47HFaTLuQh7FRPQSDjd0M4Bo2BqSq_DvrCx2XBFCmykrsXYVtPIv_dG-rVG8d4mRmfMoYRHBuATsWFziIIHNLcwafTqAQfa-gixIFXduUiiiXvgU15jRJQ=s600",
+    "localPhotoUrl": "/images/employees/jose_soledad_martinez_mata.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "DYLAN YAIR VILLARREAL DELGADO",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "7295713435",
+    "email": "villarrealdylanyair@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOchbjguLMWcN0p8SF4jMsB4fBkGSg0uQlQIxjrgajR9JX6teXYbQAXeZyey5lVNIvqgPypr7guaoI4nEN94GbwhEfMsjIoW_JvUKHEPq0QmrM1UTOJolpYB9Y_6MJL_9qtS6HkM0elqAn6ThszlfrKrG9_J2P7D9g7sZ3u7492E=s600",
+    "localPhotoUrl": "/images/employees/dylan_yair_villarreal_delgado.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "RAFAEL ARACEN PEREZ",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8686226743",
+    "email": "rafaelaracenperez070424@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdYElPzSWVkZTlOwWnHPCSBWkxOvKp1mQCg5Hq9jcLgzIFLgZ1T2UOEOo0igd_0KAV7WfmZx16sBLdX4D_NcPE5SclA3WsqBQhSzKnar0ajPlq9BQuAeCtkDJdJ2jKtgM99tfttM89l2Lj75KJW92gJIPJ0LYvFJCMwyJBNn027=s600",
+    "localPhotoUrl": "/images/employees/rafael_aracen_perez.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "GERARDO MORALES CONTRERAS",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8119544252",
+    "email": "gm318336@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcea-2PkXd1bJ3yKG9G3gnCZGg8LLC5Q4DiqXFo6R7SaxI4X7AuRT5tt2NGAV__eP7KLuhHxoNJa-hGXgCoMEmMocSJVDf8uWXOgqPNGU1tL60cOzt7hhU7gg90eTdTkIbWl1tXEeOCnBMSccWZF5EMz8MtsG_vjwhA5qAOe_Iq=s600",
+    "localPhotoUrl": "/images/employees/gerardo_morales_contreras.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "JUAN PABLO SAUCEDO ORTEGA",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8123555281",
+    "email": "jpablosaucedo05@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcW0W-r7vxo-YFqvXszG6pQm8cOCRN-oJVvQCgFujNjPnwd7v_O4H9t-SxKtROcE4mUkpNqQhcg0-zlS0DBYCvLa-zpC0X_Suj5ToTf7OX826-02YxqtDDyAKbqD5EGM2dNhMR8M_LQG5OKcgaz59EhYwFwtLoJFYlplruxGGcm=s600",
+    "localPhotoUrl": "/images/employees/juan_pablo_saucedo_ortega.jpg"
+  },
+  {
+    "sucursal": "SAN ROQUE",
+    "nombre": "SAN JUANA SUSANA OBREGON GARZA",
+    "puesto": "AYUDANTE GENERAL(CARNES FRIAS Y FRUTAS Y VERDURAS)",
+    "phone": "8110111581",
+    "email": "almamtzavalos@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOd3_yxnnQgOrK6u7btnijWPGXFK3OEC4PfNjAWRFwspMmmxF7xxVJ3yfHGGgDnhzwwlz5trqQ33bpG9M9sPZyk7FsWUueDSt1Yfa-cfOm7NwxnFG-zgre5cES2wrjOrClIQ9UIcB5EC94VCN_ZYwl9EsXHliz7Z1Wk_QyeJ7w=s600",
+    "localPhotoUrl": "/images/employees/san_juana_susana_obregon_garza.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "JOSE MIGUEL CARDENAS GODINEZ",
+    "puesto": "ENCARGADO DE TIENDA",
+    "phone": "8121797350",
+    "email": "jomicago@outlook.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdr4l58V9NLED1V4UQWaYAgjSCYpUWu8W6-lW14QmzzfC2Y4VZ4bC2Fb8_lGFbVuj2dRKH5PT7kZyOENkLUFRDtLyGEOmSVVqi2ijsPDwRnMKlFahW-klJk4s0UOKqinRiPBWZp_NG96EWQPBNcYLNnKjB2uLCU2PI7RlrahHr0=s600",
+    "localPhotoUrl": "/images/employees/jose_miguel_cardenas_godinez.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "ANA KAREN ALVAREZ VEGA",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8147969214",
+    "email": "karenvega839@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfGdxE_Lmcn5YQ5I_XT4Gg8P62sS66Rpoyv_0oPCZucBNH8tYw5RPL7E354DXqNdccOnwcc8QlhTefflLq7BGPxzRYSNnR3Zonp63KxhHAQqfBGdnaI0ylNlNPtnIWPQHBorC-leiqEYBM5GQwfxclHvv_osFOuy4xZEcdK8NAu=s600",
+    "localPhotoUrl": "/images/employees/ana_karen_alvarez_vega.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "LILIANA GUZMAN SANTIAGO",
+    "puesto": "CAJERA",
+    "phone": "8113837907",
+    "email": "lilyanaaguzman@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfDU0CosAJoND1rtiV963IlWI8Vudkwh7KUJafrS-uxI9Oc_WHnl7N7CPujNo2CG3MMQljX-YSElPEAlBt34VF7vqrTkzhXb3iadufDbDo7jZBtpejk0A4wDLgg9ohO43isw1PDeYMllZmY8xI896zgOoNRgrh26S_pufFuv4dT=s600",
+    "localPhotoUrl": "/images/employees/liliana_guzman_santiago.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "EVA JANETH RUIZ PEREZ",
+    "puesto": "CAJERA",
+    "phone": "8132489106",
+    "email": "evaperez070801@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "KARLA YAZMIN RODRIGUEZ LIRA",
+    "puesto": "CAJERA",
+    "phone": "8124170842",
+    "email": "8115641918yazmin@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcDBphrWEUVL_1L5sjRS88Rqadf6Lkw3Lw6sC_daE-zIXk7slqK2i0JKnaiALfYGZU1pQc76ZICNtS2sYLGYkZA-5S6Qjo2dlrst8ly8bHxysvno7DnzTgp5a1rktASDDAflE4F9KthUq94a6FyfMDEspCI9M-Avtq5qLzjmy2p=s600",
+    "localPhotoUrl": "/images/employees/karla_yazmin_rodriguez_lira.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "NORA CRYSTAL ROBLEDO GAYTAN",
+    "puesto": "CAJERA",
+    "phone": "8180943143",
+    "email": "gaytannora039@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcvYs6XJoZnrXGiKXNAot2nrFdVwXELLEv07de_CZteg7tqiUNbpwyOtqzCb5_SGm_Ln_XIGpAs_fGd6A7mIFdhRs9TJ2oFP3NQNb1L80NWg42L5jHUup6l0GsQWiay7kJaczQ4O3CdpLwYbAemMny28WNlT7oJsxTFf3Rd_KU1=s600",
+    "localPhotoUrl": "/images/employees/nora_crystal_robledo_gaytan.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "ALEJANDRO ABELINO RUBIO",
+    "puesto": "TABLAJERO",
+    "phone": "8131136044",
+    "email": "aleabelrub@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOctdli7CWw5RKNstMMTEiVd7W3x2jZYvOTh7slp7s6v_H5e8QyndAsZB-0Ot0fJFBCGHBoBeyFJNA2CRcLUtWA1aGXTsuG0LEYFeSpVh19xLACbEcl4BDBALTWy0yCMd9Ut1rXVzfX2hNEDIPkHr4_8Bg1RUDG0vbwTGSXw4sBp=s600",
+    "localPhotoUrl": "/images/employees/alejandro_abelino_rubio.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "FAUSTO VARGAS HERNANDEZ",
+    "puesto": "TABLAJERO",
+    "phone": "8671185816",
+    "email": "faustovargashdez12@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfsWgmlPhYhy6XXyxhE1FBDVkPoDdZGwTC5ZL4USiKUdEi0m1wF16LxWex1TEsu48z7o2SbwDVr-4HvvlKKVcrtLpTjZdp0B8DBnVGQml9LhkWtPIwGEpXkn6sCGvp6K1WL5ooAs60YdHSPK5NCUQFJR5D8ySRd4ZdBi-XzRfBG=s600",
+    "localPhotoUrl": "/images/employees/fausto_vargas_hernandez.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "JUAN PABLO RAMIREZ RAMIREZ",
+    "puesto": "TABLAJERO",
+    "phone": "8110086876",
+    "email": "",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOd6ALroQM3yCxm3GCx27V9pKDPbG3-TXI47Wg-oJmeLIWj1ZpcXrX4CXEm3KEfd8mWa1_HMpr0g7Wfool71GydX__Saxxg8d4hP-WNImGi8bRpoU7-0-JvRfibf7Qm0ri_qOyUNZiBw3ck0OSerAuqlWRYCAj89UMGpcT3xAsFc=s600",
+    "localPhotoUrl": "/images/employees/juan_pablo_ramirez_ramirez.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "JOSUE ESPINOZA BAUTISTA",
+    "puesto": "TABLAJERO",
+    "phone": "8138506764",
+    "email": "ke8582432@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdDFixQQiLtV8aKxlfY_TYcpts8yFsPy5VA45Eh4vitBw9ZVccuiHhbuET735A-NKsWJI-jqdvn4auN7bwckbQDiNqLfEaKMDLkTmhKTKfKidUzoV86GAMgURW-L4GCfmGs9QUDs4fuo_j4fxlD3yDz9qN-dlfuOdk2FpXRtNnF=s600",
+    "localPhotoUrl": "/images/employees/josue_espinoza_bautista.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "FERNANDO DIAZ CRISPIN",
+    "puesto": "TABLAJERO",
+    "phone": "8135991219",
+    "email": "fernandodiazcristin@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "JESUS ADRIAN CRUZ LEAL",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8241751846",
+    "email": "jesse121198@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdnmoSjYbP-EZHZZTt2-Wuhrxv_vvHHUnr8YntVEVBFa3P4t8fE4RtFDwgQ21XbpXiWyjV4uyNfnQrxSDAKchlKlzYTJM57nTYvBo_GbxMMgAw-yv02o9IO0Mu3hkdiVi1Ce94LnGpDa7tNXWO7wC3NVKiJ-ZdCOJwLnbyEzA=s600",
+    "localPhotoUrl": "/images/employees/jesus_adrian_cruz_leal.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "EDMAR ALDAHIR HERNANDEZ CALVA",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "7711026315",
+    "email": "calvaedmaraldahir@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcrRkzMjkjLNjiz9rtdEEFxGeMEb57fwTJcCaNskgX538fllIwn01mdi3ZrriqUdhS5oPZuVNTYn6-6oM5G_3IOvEBqT5PXwVq7_fFcHscv3flBVMMZICQuaCD4lRvJrx8hRHGt6PIVdOLMRr1PUUDThtT-4nwALKeYMwIYvhI3=s600",
+    "localPhotoUrl": "/images/employees/edmar_aldahir_hernandez_calva.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "DEHA VICTORIA FAVELA CHAVEZ",
+    "puesto": "AYUDANTE GENERAL(FRUTAS Y VERDURAS)",
+    "phone": "8140244488",
+    "email": "dheavvs@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOd-sCWs5cOgABtxbE0ZyAnDiutijV0K2t50sey4m6adMqcTq8KPa_UAKJrxrsNBLMJDrQvqwbYi1EJvvUTarf_qQWxtC_EfOHdg9f-PDZ7zd-HyQqZyPcmFkshVnyIluouaElsILg8hu3JtMpp-PCzaKm1vkHPaC-0OSPNpZdW-=s600",
+    "localPhotoUrl": "/images/employees/deha_victoria_favela_chavez.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "EULALIO AGUILAR CASTILLO",
+    "puesto": "AYUDANTE GENERAL(FRUTAS Y VERDURAS)",
+    "phone": "8343070815",
+    "email": "eulaliocastillo302@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdMEprn-FSluJYHYbtCQDhZmWMetG9T6XJhTsrtD9_wdnW_Y8GgvKbb9OgS603iN2D9kLWADt_XXKZEyKnw7oznwhB6HuK5Tt-NmoNvI9tKtlTCqrvJB-y90Taar5i6IoCxukH6aMqvdyp-gTCTBW-HtRu0Zm1wIRrLIXvKTLRH=s600",
+    "localPhotoUrl": "/images/employees/eulalio_aguilar_castillo.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "MAYELA SOTO CRUZ",
+    "puesto": "AYUDANTE GENERAL(SALCHICHONERIA)",
+    "phone": "8113499640",
+    "email": "mayela.sotocruz@outlook.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOddSMhJbttxM31Zl1ZFSM8NbUi4xzyV2mmdcBgMUCUkF5K2wQdLxB0XO5d-Umon546izzq9jV6nZVR9W4JUMiTnrqvqfkAByebZvWKtcMJafY63OuAYLh6pPR9fnwlKfJZ56N2cjcLnXRHMHcWQRiSpFjktbX6_bZFs5vSDXoTg=s600",
+    "localPhotoUrl": "/images/employees/mayela_soto_cruz.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "JUAN ALBERTO MERCADO DE LA ROSA",
+    "puesto": "AYUDANTE GENERAL(SALCHICHONERIA)",
+    "phone": "8113473777",
+    "email": "1albertodelarosa0@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOe83V9cNzETHWi4TulqLRgXSUPSB5N-hXH80mn02T4yeSKeBX9k8cWidXYQ_t4KdNslejIhYzn-RjYTRjG__yEjtvdO4P1wkyJetCvJ0q6emhNdGkS0eUd8JQwtsEK5NiJEx9FlSua5dUhVJ_g5cnNluLzSqavehJvIkLh_jg=s600",
+    "localPhotoUrl": "/images/employees/juan_alberto_mercado_de_la_rosa.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "PEDRO DOMINGUEZ RUBIO HERNANDEZ",
+    "puesto": "PREVENCION",
+    "phone": "8134746734",
+    "email": "pedrodomingorh181120@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdJ-Jt4kb1fLM0ahDdR8HtkQB5HD0ZHiiTs4civ3Rom4H9MuY0YI78IRTRf8WsdwrCBD3sBp_7N5XxskOdlRPNNCt8G1RuK5oRKMqTk7g6mRk809Md3ooWPjyQUWQcZ0P7csWkJfMMEIJXNaSYn741oYtGFzCkhQd0BBxTHNz3G=s600",
+    "localPhotoUrl": "/images/employees/pedro_dominguez_rubio_hernandez.jpg"
+  },
+  {
+    "sucursal": "ESTANZUELA",
+    "nombre": "ALMA LETICIA PERALES CORDERO",
+    "puesto": "RECIBO",
+    "phone": "8117859281",
+    "email": "almaperales0607@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdcwUtLKeD-5sonnq1qK7S_wRWyat6eG14O4Mx0r8pAqDbQ-QRpt0-VIItCB9ZKru6vg42YU80ycP4uA1i2uoxCIB1B2ifnNm684AVX9zUdW9QW5VnERCEaO71cc9bF-q_5IScTPqrU8kWX2j2g94x9H23g_mHXxxDo4iHAp0Dc=s600",
+    "localPhotoUrl": "/images/employees/alma_leticia_perales_cordero.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "DIANA ISABEL PEREZ REYNA",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8122232416",
+    "email": "diana3012.rivera@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdjnTBcrBkHHHTtgXt-CN4PAgNV2JGaoH8blP_D5wksHZtHhTTcaj1xe17MYaAXXCCszISFbP0KbIfMDYOYu3ZFldCaIOXvwLE6lMZmoCiTO0oDR8fWXEiFiSV1hlM9STPbf6qdQlcB75STi9euH6gTtgrI2nt-GX-l3Ra-fg=s600",
+    "localPhotoUrl": "/images/employees/diana_isabel_perez_reyna.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "GABRIELA IRENE CALDERON TORRES",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8115171529",
+    "email": "calderontorresgabrielairene@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeD7SlDzPZvaBEqVNiu4-n713TtWLXY-KR_ctNUbPFhD7OWJrrTi7OQW3OWgWUi9Ki7arnqz1ZluiGdyzFHLGgtgaOq7Toy-1mTO08YkvQhodUJCMp50HZmdlVRvW0cjGwAhca28KGblVHXNEU5o5amX_rUSYEzlU4_11mBNkI-=s600",
+    "localPhotoUrl": "/images/employees/gabriela_irene_calderon_torres.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "JAQUELIN ELENA LUNA FLORES",
+    "puesto": "CAJERA",
+    "phone": "8116138929",
+    "email": "jaaqeline.34@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOfxffDuYcpLFucl5w4wimiFOI5sli_O_1LZrb_49PYycAozOeacf6By7_ZpbmEqpo8PNVty501ku9yLpvY5e7M5tW6r0KyMQRJuR0SqRG1dAobu4uFL1vBdST6n_Xi0hMgnDN8DGT_b0Rl-S00B6mE7kMEik6ZFRAS9X7j3mRFI=s600",
+    "localPhotoUrl": "/images/employees/jaquelin_elena_luna_flores.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "CELINA GUADALUPE PIEDRA",
+    "puesto": "CAJERA",
+    "phone": "8127008060",
+    "email": "celyjrz@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOchUhn6lalhp1Ee_NZvGFZtr3Hgf7OORAE3H2DpK3ngXPWT71x3RNQSCZos5c0TAqHmu11PlF7SWPAz-0oJoSMx93aaWvIOqsIqRYcfGiIzTKE3gp26y6tfWGv8peKFh9dTFYBS1olmGTCjD4XfgwSp7DgMcc_Ox3n_Q0r4B5BV=s600",
+    "localPhotoUrl": "/images/employees/celina_guadalupe_piedra.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "KARINA BUSTOS ESPINOZA",
+    "puesto": "CAJERA",
+    "phone": "8181765624",
+    "email": "karisalvaje32@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcCgFG0AdUIclB-jSeoHbaQMZcTBs4iJhEBwiM1TLn5usjPo_QrU5RPdC_XCH15HLtSqsNJ1BDVEBvpCPuw36n0UexOk9pHCtkViB7q7VCA5nh21kRfe_YH0PAs9LZEX-jRajkT2DFKdtwj-7vWpJggV8k8pG8AdB16Fbc-8paz=s600",
+    "localPhotoUrl": "/images/employees/karina_bustos_espinoza.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "ALEJANDRO CARMONA DAMIAN",
+    "puesto": "TABLAJERO",
+    "phone": "8135359644",
+    "email": "jesus.carmona21@icloud.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOc9buUG62a78zN-yuNq5uD64Bbx4KGV6EDescM4ua5bhuD2ssUh6hy843OR8bAkK_Qe5HMWo_q3RfvDiziI_Ec9cTOzDA5MRahc8991Px80rzzsLaePV3Jo_BAgqfdR4LrYmv8IeswrGE__Xztfr6u3aHjZ8_SPNfNehWZvwGCu=s600",
+    "localPhotoUrl": "/images/employees/alejandro_carmona_damian.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "MIGUEL ANGEL CHAVE CAMARILLO",
+    "puesto": "TABLAJERO",
+    "phone": "8117808747",
+    "email": "chavezmiguel952@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOf40_VK8-LxPPbsbqJdiCqXuV4l0aH47uBhDjG4xcMN3WsOAUeQ2yVE8i9WIAagTP2CoafniAkBg10pq8vB4y4_841-QvEbVRftmVx4gkQO6bZOt9S2qhQkSDWBYYDl1rmXnJ5ZH3snf1M1Kvt-WFYEdIIWjwr2kaR_FODPpQ=s600",
+    "localPhotoUrl": "/images/employees/miguel_angel_chave_camarillo.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "MARGARITO MARTINZ VAZUEZ",
+    "puesto": "TABLAJERO",
+    "phone": "8181204642",
+    "email": "mavm23martinez@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdYCYXkio14FcYJbcIf0xqxnggio7rFy2y1gZ41hrES7JkQY2_h1E7RpYfIFuUdhIAiIyEM8mX7epRrAKBaBVjnud4ikMLGi6IAv8QgNaWoPgOuoCG5OgxZFtQ7sI0IypuoGzhNCWrwNos1HHpt4MmvCjdZzKaZXbmZso2Uo8kJ=s600",
+    "localPhotoUrl": "/images/employees/margarito_martinz_vazuez.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "ANGEL ANTONIO CRUZ",
+    "puesto": "TABLAJERO",
+    "phone": "",
+    "email": "antoniocruzangel502@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcakJ7ReeIi8zKNiDDJbFL5F0rzKkrhLY8TxlqCQkEQyP2je2_G3tzS4dpha-AOG4YzJf4wLxY0MOhm7ZG2XGSqGi8d3uTLsbN-kSkgDAdPdeR4TEvWUHzDcWBtXDBdg_Vuf2ocHx7L4wHFeltncmd1sCX9h7A2N-YYw9JIM0Er=s600",
+    "localPhotoUrl": "/images/employees/angel_antonio_cruz.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "ERICK DE JESUS TORRES REYES",
+    "puesto": "AYUDANTE DE TABLAJERO",
+    "phone": "6181123618",
+    "email": "",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOepH_V7Kr1Q69ydUqgxCGUqX_QP00rzvzmktidGqZ6oTqWJFHXQo0VA1yQem8V-Gy6468jzJVUWBNyTy0MZ0L91DVp8GZuq_V5mw9cPPx4Tw-4zJrQtmr-91sqbN7Q57oax7A1rNxNP3eUXwtQkY2eHuVEzeIRMTydVS2wYX0MQ=s600",
+    "localPhotoUrl": "/images/employees/erick_de_jesus_torres_reyes.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "ZURI SADAI VARGAS SANTIZ",
+    "puesto": "AYUDANTE GENERAL(CARNES)",
+    "phone": "8125211581",
+    "email": "sadaisantiz12@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcIsO2sjs_ahqqlXu6gaRiE0dInp1vwfcBubrfGXxJ7O66LN671hSPRjzBuX3-3781A4j24lGj0zPitmIuOHkOgM4K0XEozd5frI1xBkgZ9zOM3LuLYSQg_qPuhlOYpx8c7GOPX3RNb6qi-E8itU_hIKiXmrt9XDL_XMdSZ-Gd6=s600",
+    "localPhotoUrl": "/images/employees/zuri_sadai_vargas_santiz.jpg"
+  },
+  {
+    "sucursal": "SANTA ISABEL",
+    "nombre": "DIEGO HERVERT LUNA",
+    "puesto": "RECIBO",
+    "phone": "8135625911",
+    "email": "diegohervert7@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcoLTeI2lhI01Y6QSgN_BVqIA23rj8jk1id_QEXdsepypOGmUxNkBUEKgriKxKlfMvEG1Mpbxr9x2Ic1noFv7CRXb1_jC10Sz6LqYIIfF0T_vGrrRt74ItkdCRBtlzED0F3NhxCYcCRO0-8LjRivHCAPLaSLuMF93eb07Sl1Fjw=s600",
+    "localPhotoUrl": "/images/employees/diego_hervert_luna.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "AIDEE ARACELY RIVERA RODRIGUEZ",
+    "puesto": "ENCARGADA DE TIENDA",
+    "phone": "8120761998",
+    "email": "ad.riiveraa@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeewV_vLJ2UKT2XVA7BcPaDR1TALywpC0djkpb-u1HPiot-2lkqyJdI91DdEG2AOl8fE9mn9y7AOh2nRhgjTbWE0o82pnCNF6e6nd04AIoxojtG5XwpwjdNlPSIUa4No5MNI9jU_b_A76XVnwQ2W1vhylFN3dQvaIbwsX_75xwy=s600",
+    "localPhotoUrl": "/images/employees/aidee_aracely_rivera_rodriguez.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "JOSE DE JESUS JUAREZ TAMEZ",
+    "puesto": "ENCARGADO DE TIENDA",
+    "phone": "8123821488",
+    "email": "",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOdSoMXErOUsxfrxWIRO8QWqqNYQ4lVmQ6Q8E3IIR-7d6w4TDzawiUrioQJz2El42WnSGsZ9aPqBO-aoYypVGdwGC6S3nhMnBIAUK1teCGBT2kzEvBQg91MeJdzFXOVEGd6xiAPsl9pMNs1pnzDnjvy2aj8M5HbYWWqrOAlwhg=s600",
+    "localPhotoUrl": "/images/employees/jose_de_jesus_juarez_tamez.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "SHARON ALEXIA ESPINOZA ALANIZ",
+    "puesto": "CAJERA",
+    "phone": "8993058103",
+    "email": "espinozakimberly2002@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOedw2M2gX7mg-jbuWYJM682yRsFbMo-vXyC_mKnaP0qDrz431XrxgFBjda9P2ANP8mqcjG52uzlxW650TYailR8isntZOUiYgjyLL4XiWX5vXpBDJ0mqdckwYKLGUivuhfd_PXynR7u0EKIOREP4Gr2Er-44XHF5YhMrHiCpkei=s600",
+    "localPhotoUrl": "/images/employees/sharon_alexia_espinoza_alaniz.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "NANCY GABRIELA CORONADO OLIVARES",
+    "puesto": "CAJERA",
+    "phone": "8112894318",
+    "email": "gabriela84feliz@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOemSXvWe4y55ChrBHsIqvAa-S18NSdiMJKmjXB1OjlwxKoysgs7jkkiE_WSt5QPpfpTH0n5Av86imUfUOj1rIWU7dsgNHiy18v1F0OE24irYCYDXR9O_OdNnmKpDmYLYtQtlTPKwU4m091hd0_HbEiWkwfP1ZmuTf1fUFEN1BJK=s600",
+    "localPhotoUrl": "/images/employees/nancy_gabriela_coronado_olivares.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "ERIKA YAZMIN LOZANO ESCALANTE",
+    "puesto": "CAJERA",
+    "phone": "8117174906",
+    "email": "lozanoesca@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeGyQOjVvgVawIxLzibZDFBEUs9jhXWtCiCrmpSZLsbYcxLf-4huwTJrsghQzPtqgIjLXSTkTYJCRteuY5V_Tl1GepCsg9yGcbWGkFNsEk7hR9-rsxCEOKAxjuCWyhcCLo5yfEanfi4l8aayBkzKy7jjRHOmwy6N7UTAoBY2SIT=s600",
+    "localPhotoUrl": "/images/employees/erika_yazmin_lozano_escalante.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "PEDRO MARTINEZ SANTIAGO",
+    "puesto": "TABLAJERO",
+    "phone": "8144901896",
+    "email": "pmartinezjr95@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeydPJICfKrMa0Wc4T-l_zHv0ZVaGvhDPhOR44Sq5h6XwO2fF27uIgwe6Ko_LQNmAGyYEEHVE0BUp2GbSKcbO_9s9tzwyIXjF5CJADdHjyIF4RkxApPi7GHBkv71-fre5zI-x8lv1uUNj8n6YNTQ5YybZ3T_ArnPJ2Fcw2Ip-ol=s600",
+    "localPhotoUrl": "/images/employees/pedro_martinez_santiago.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "BRAYAN MARTINEZ MANUEL",
+    "puesto": "TABLAJERO",
+    "phone": "8125859098",
+    "email": "bryanmartinezmanuel7@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOcAHrHJ1jTFrHal-3s766REekkIAY7jipHuaiSJj8t6kUmvEOS0VVCUizts4sl6lMFtoJHg1-Kt7O9JdKPXvNCxXT98sXZdrJg2Dx1_P_Guph87xQ0cDgaHVmI8hL9DEZdKc0WdzwunrV0gSpo6WbkyocQEoBe3iBzSPYhs0Q=s600",
+    "localPhotoUrl": "/images/employees/brayan_martinez_manuel.jpg"
+  },
+  {
+    "sucursal": "MONTEBELLO",
+    "nombre": "ABRAHAM JAEL MORALES LEIJA",
+    "puesto": "AYUDANTE DE TABLAJERO",
+    "phone": "8131546605",
+    "email": "abrahammoralesleija@gmail.com",
+    "photoUrl": "https://docs.google.com/docs-images-rt/APuouOeZ8cD9Z1z7Jt_6W520SGNz_a3xPnzXl5oJuhCt5WUFUmSaR2quV2DQAh-9DrsLxOF0efIjal9BvVSSIIApiLTSmjrhOYF3F9bPI7_scO_HVoIxKsp8-RW_HRya-foXyXW5UkkLmYNz0qs8VrF2iShq2TNItarRO9h0ypcnPN2z=s600",
+    "localPhotoUrl": "/images/employees/abraham_jael_morales_leija.jpg"
+  },
+  {
+    "sucursal": "GENERAL",
+    "nombre": "JESUS ALBERTO SANCHEZ MERCADO",
+    "puesto": "MANTENIMIENTO",
+    "phone": "8131390510",
+    "email": "jesus.mercado114@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "GENERAL",
+    "nombre": "MARTIN FELIPE GALLEGOS GONZALEZ",
+    "puesto": "MANTENIMIENTO",
+    "phone": "8110473729",
+    "email": "martingallegos26@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  },
+  {
+    "sucursal": "GENERAL",
+    "nombre": "HUGO ARMANDO PEREZ GRANILLO",
+    "puesto": "INVENTARIOS",
+    "phone": "8183090913",
+    "email": "armandoperez13cv@gmail.com",
+    "photoUrl": null,
+    "localPhotoUrl": null
+  }
+]

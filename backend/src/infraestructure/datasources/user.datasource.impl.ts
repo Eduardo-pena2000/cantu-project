@@ -324,6 +324,12 @@ export class UserDatasourceImpl implements UserDatasource {
           through: { attributes: [] },
           model: Area,
         },
+        {
+          as: "roles",
+          attributes: ["id", "name", "slug"],
+          through: { attributes: [] },
+          model: Role,
+        },
       ],
     });
 

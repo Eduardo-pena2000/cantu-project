@@ -7,6 +7,14 @@ import { cn } from "@/lib";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { SubDataTable } from "./sub-data-table";
 
 function getEmployeeScore(score) {
   if (score === null) {
@@ -21,19 +29,6 @@ function getEmployeeScore(score) {
 }
 
 export const columns = [
-  {
-    id: "expander",
-    header: () => null,
-    cell: ({ row }) => {
-      return row.getCanExpand() ? (
-        <Button onClick={row.getToggleExpandedHandler()} variant="icon" className="cursor-pointer">
-          <ChevronRight
-            className={cn("transition-transform duration-300", row.getIsExpanded() && "rotate-90")}
-          />
-        </Button>
-      ) : null;
-    },
-  },
   {
     accessorKey: "name",
     header: "Nombre",
@@ -64,6 +59,23 @@ export const columns = [
     accessorKey: "status",
     header: "Estado",
     meta: { label: "Estado" },
-    cell: ({ row }) => getEmployeeScore(row.original.score),
+    cell: ({ row }) => {
+      const employee = row.original;
+      return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="ghost" className="p-0 h-auto hover:bg-transparent justify-start font-normal text-left">
+              {getEmployeeScore(employee.score)}
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Detalles de Tareas</DialogTitle>
+            </DialogHeader>
+            <SubDataTable row={row} />
+          </DialogContent>
+        </Dialog>
+      );
+    },
   },
 ];

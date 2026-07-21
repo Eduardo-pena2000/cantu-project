@@ -14,10 +14,8 @@ export class SocketHandler {
     const user = await this.authenticateSocket(socket);
 
     if (!user) {
-      socket.emit("error", { message: "Autenticación fallida" });
-
-      socket.disconnect();
-
+      // Allow anonymous connection for public TV dashboard
+      this.joinRoom(socket, "public-dashboard");
       return;
     }
 

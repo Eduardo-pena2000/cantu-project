@@ -1,16 +1,18 @@
-import { FindOptions, Sequelize } from "sequelize";
+import { FindOptions, Op, Sequelize } from "sequelize";
 
 import {
   ActivitieAssignmentEntity,
   ActivitieDatasource,
   ActivitieEntity,
   AssigmentActivitieDto,
+  BulkAssignmentActivitieDto,
   CreateActivitieDto,
   IGetActivitiesParams,
   QualifyActivitieDto,
 } from "../../domain";
 import { PaginatedResponse, Paginator } from "../../shared";
 
+import { SequelizeDatabase } from "../database/sequelize";
 import Activitie from "../database/models/activitie.model";
 import Area from "../database/models/area.model";
 import User from "../database/models/user.model";
@@ -30,6 +32,50 @@ export class ActivitieDatasourceImpl implements ActivitieDatasource {
     const assignment = await ActivityAssignment.create(data);
 
     return ActivitieAssignmentEntity.fromObject(assignment);
+  }
+
+  async bulkAssignment(data: BulkAssignmentActivitieDto): Promise<ActivitieAssignmentEntity[]> {
+    const { assistance_id, assignments } = data;
+    const sequelize = SequelizeDatabase.getSequelizeInstance();
+
+    const activityIds = assignments.map((a) => a.activitie_id);
+
+    // Find already-assigned activity ids for this assistance today to avoid duplicates
+    const existing = await ActivityAssignment.findAll({
+      attributes: ["activitie_id"],
+      where: {
+        assistance_id,
+        activitie_id: { [Op.in]: activityIds },
+      },
+    });
+
+    const existingIds = new Set(existing.map((e) => (e as any).activitie_id));
+    const newAssignments = assignments.filter((a) => !existingIds.has(a.activitie_id));
+
+    const createdIds: number[] = [];
+
+    if (newAssignments.length > 0) {
+      await sequelize.transaction(async (t) => {
+        const records = newAssignments.map((a) => ({
+          assistance_id,
+          activitie_id: a.activitie_id,
+          deadline: a.deadline,
+          is_completed: false,
+        }));
+
+        const created = await ActivityAssignment.bulkCreate(records, { transaction: t });
+        created.forEach((c) => createdIds.push((c as any).id));
+      });
+    }
+
+    // Fetch full entities for all newly created assignments
+    const results: ActivitieAssignmentEntity[] = [];
+    for (const id of createdIds) {
+      const found = await this.findAssignedActivitieById(id);
+      if (found) results.push(found);
+    }
+
+    return results;
   }
 
   async create(data: CreateActivitieDto): Promise<ActivitieEntity> {

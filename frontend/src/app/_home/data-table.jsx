@@ -4,7 +4,6 @@ import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
-  getExpandedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -16,15 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SubDataTable } from "./sub-data-table";
 
 export function DataTable({ columns, data }) {
   const table = useReactTable({
     data,
     columns,
-    getRowCanExpand: (row) => row.original.assignments.length,
     getCoreRowModel: getCoreRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
   });
 
   return (
@@ -56,14 +52,6 @@ export function DataTable({ columns, data }) {
                     </TableCell>
                   ))}
                 </TableRow>
-
-                {row.getIsExpanded() && (
-                  <TableRow className="hover:bg-transparent">
-                    <TableCell colSpan={row.getVisibleCells().length}>
-                      <SubDataTable row={row} />
-                    </TableCell>
-                  </TableRow>
-                )}
               </React.Fragment>
             ))
           ) : (

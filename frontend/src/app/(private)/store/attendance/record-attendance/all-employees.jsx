@@ -79,7 +79,7 @@ export function AllEmployees({
     }
     if (image) {
       const blob = await fetch(image).then((res) => res.blob());
-      data.append("image", blob);
+      data.append("image", blob, "assistance-photo.jpg");
     }
 
     takeAttendance.mutate(data, {

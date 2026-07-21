@@ -14,6 +14,7 @@ export const MENU_ITEMS = {
         { id: 1, label: "Usuarios", url: "/users", icon: UsersRound, description: "Gestión de usuarios del sistema" },
         { id: 2, label: "Tiendas", url: "/stores", icon: Store, description: "Administración de tiendas" },
         { id: 9, label: "Supervisión", url: "/supervisor", icon: UsersRound, description: "Panel de supervisión de encargados" },
+        { id: 10, label: "Reportes", url: "/reports", icon: ClipboardList, description: "Historial de cumplimiento y reportes" },
     ],
     secondary: [
         { id: 3, label: "Empleados", url: "/store/employees", icon: UsersRound, description: "Gestión de personal de tienda" },

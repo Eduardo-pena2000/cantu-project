@@ -73,38 +73,40 @@ export function WelcomeHero({ session: initialSession }) {
             </div>
 
             {/* Quick Access Cards */}
-            <div className="grid md:grid-cols-2 gap-6">
-                {session?.store ? (
-                    <QuickAccessCard
-                        href="#"
-                        onClick={handleCompleteStoreManagement}
-                        icon={DoorOpen}
-                        title="Finalizar gestión de tienda"
-                        description="Regresar al menú principal para elegir sucursal."
-                    />
-                ) : isSupervisorOnly ? (
-                    <QuickAccessCard
-                        href="/supervisor"
-                        icon={Users}
-                        title="Supervisión"
-                        description="Administra sucursales de encargados y personal."
-                    />
-                ) : (
-                    <QuickAccessCard
-                        href="/stores"
-                        icon={Store}
-                        title="Gestión de Tiendas"
-                        description="Administra sucursales y configuraciones."
-                    />
-                )}
+            {!hasRole(session, [ROLES.SHIFT_MANAGER.slug, ROLES.TEMPORARY_SHIFT_MANAGER.slug]) && (
+                <div className="grid md:grid-cols-2 gap-6">
+                    {session?.store ? (
+                        <QuickAccessCard
+                            href="#"
+                            onClick={handleCompleteStoreManagement}
+                            icon={DoorOpen}
+                            title="Finalizar gestión de tienda"
+                            description="Regresar al menú principal para elegir sucursal."
+                        />
+                    ) : isSupervisorOnly ? (
+                        <QuickAccessCard
+                            href="/supervisor"
+                            icon={Users}
+                            title="Supervisión"
+                            description="Administra sucursales de encargados y personal."
+                        />
+                    ) : (
+                        <QuickAccessCard
+                            href="/stores"
+                            icon={Store}
+                            title="Gestión de Tiendas"
+                            description="Administra sucursales y configuraciones."
+                        />
+                    )}
 
-                <QuickAccessCard
-                    href="/reports"
-                    icon={FileText}
-                    title="Reportes"
-                    description="Visualiza métricas y asistencia."
-                />
-            </div>
+                    <QuickAccessCard
+                        href="/reports"
+                        icon={FileText}
+                        title="Reportes"
+                        description="Visualiza métricas y asistencia."
+                    />
+                </div>
+            )}
         </div>
     );
 }

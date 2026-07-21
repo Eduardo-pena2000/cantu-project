@@ -1,20 +1,10 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { Eye, MoreHorizontal, Vote } from "lucide-react";
 
-import { formatTime, getActivityScore, getAssigmentStatus, safeUrlEncode } from "@/utils";
+import { formatTime, getActivityScore, getAssigmentStatus } from "@/utils";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -23,12 +13,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 
 function rowsAdapter(assignments) {
   return assignments.map((assignment) => ({
     id: assignment.id,
     name: assignment.activity.name,
+    assignedAt: formatTime(assignment.assignedAt || "08:00:00"),
     deadline: formatTime(assignment.deadline),
     description: assignment.activity.description,
     status: getAssigmentStatus(assignment),
@@ -36,27 +26,6 @@ function rowsAdapter(assignments) {
   }));
 }
 
-function TableActions({ assignment }) {
-  return (
-    <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="size-8 p-0">
-          <span className="sr-only">Abrir opciones</span>
-          <MoreHorizontal className="size-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href={`/assignment/details/${safeUrlEncode(assignment.id)}`}>
-            <Eye /> Ver detalles
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
 
 const columns = [
   {
@@ -65,9 +34,14 @@ const columns = [
     meta: { label: "Actividad" },
   },
   {
+    accessorKey: "assignedAt",
+    header: "Hora Asignada",
+    meta: { label: "Hora Asignada" },
+  },
+  {
     accessorKey: "deadline",
-    header: "Hora límite",
-    meta: { label: "Hora límite" },
+    header: "Hora Límite",
+    meta: { label: "Hora Límite" },
   },
   {
     accessorKey: "status",
@@ -80,39 +54,40 @@ const columns = [
     meta: { label: "Calificación" },
     cell: ({ row }) => getActivityScore(row.original.score),
   },
-  {
-    id: "actions",
-    meta: { label: "Acciones" },
-    cell: ({ row }) => <TableActions assignment={row.original} />,
-  },
 ];
 
 export function SubDataTable({ row }) {
   return (
-    <div className="grid gap-2">
-      <div className="grid grid-cols-2 gap-2">
-        <div className="col-span-2">
-          <span className="font-semibold">Resumen actividades</span>
+    <div className="grid gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="col-span-2 sm:col-span-4 border-b pb-2 mb-2">
+          <span className="font-semibold text-lg text-primary">Rendimiento Empleados de Tienda</span>
+          <p className="text-sm text-muted-foreground leading-tight">Resumen global de actividad en toda la vida</p>
         </div>
-        <div className="grid">
-          <span className="font-semibold">Asignadas</span>
-          <span>{row.original.assignments.length}</span>
+        <div className="flex flex-col gap-1 bg-muted/20 p-4 rounded-xl border shadow-sm transition-all hover:shadow-md">
+          <span className="font-semibold text-sm">Totales Asignadas</span>
+          <span className="text-2xl font-bold">{(row.original.completed || 0) + (row.original.pending || 0) + (row.original.late || 0)}</span>
         </div>
-        <div className="grid">
-          <span className="font-semibold">Completadas</span>
-          <span>{row.original.completed}</span>
+        <div className="flex flex-col gap-1 bg-green-500/10 p-4 rounded-xl border border-green-500/20 shadow-sm transition-all hover:shadow-md">
+          <span className="font-semibold text-sm text-green-700">Completadas</span>
+          <span className="text-2xl font-bold text-green-700">{row.original.completed}</span>
         </div>
-        <div className="grid">
-          <span className="font-semibold">Pendientes</span>
-          <span>{row.original.pending}</span>
+        <div className="flex flex-col gap-1 bg-yellow-500/10 p-4 rounded-xl border border-yellow-500/20 shadow-sm transition-all hover:shadow-md">
+          <span className="font-semibold text-sm text-yellow-700">Pendientes</span>
+          <span className="text-2xl font-bold text-yellow-700">{row.original.pending}</span>
         </div>
-        <div className="grid">
-          <span className="font-semibold">Tardías</span>
-          <span>{row.original.late}</span>
+        <div className="flex flex-col gap-1 bg-red-500/10 p-4 rounded-xl border border-red-500/20 shadow-sm transition-all hover:shadow-md">
+          <span className="font-semibold text-sm text-red-700">Tardías</span>
+          <span className="text-2xl font-bold text-red-700">{row.original.late}</span>
         </div>
       </div>
 
-      <DataTable columns={columns} data={rowsAdapter(row.original.assignments)} />
+      <div className="space-y-3">
+        <div className="border-b pb-2">
+          <span className="font-semibold text-lg text-primary">Tareas Pendientes Activas</span>
+        </div>
+        <DataTable columns={columns} data={rowsAdapter(row.original.assignments)} />
+      </div>
     </div>
   );
 }
@@ -132,7 +107,7 @@ function DataTable({ columns, data }) {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="whitespace-normal text-xs sm:text-sm">
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -146,7 +121,7 @@ function DataTable({ columns, data }) {
           {table.getRowModel().rows.map((row) => (
             <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell key={cell.id} className="whitespace-normal min-w-[100px] text-xs sm:text-sm">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}

@@ -1,4 +1,5 @@
 import { FileRepository, ICreateStoreRequest, StoreEntity, StoreRepository } from "../../../domain";
+import { TemplateInjectorService } from "../../services/template-injector.service";
 
 export class CreateStoreUseCase {
   constructor(private storeRepository: StoreRepository, private fileRepository: FileRepository) {}
@@ -31,6 +32,9 @@ export class CreateStoreUseCase {
       avatar_url,
       avatar_name,
     });
+
+    // Auto-inject default roles and activities templates for the new store
+    await TemplateInjectorService.injectForStore(data.id);
 
     return data;
   }

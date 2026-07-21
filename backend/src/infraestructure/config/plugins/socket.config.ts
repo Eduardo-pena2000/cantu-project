@@ -16,8 +16,12 @@ export class SocketConfig {
     if (!SocketConfig.io) {
       SocketConfig.io = new SocketIOServer(httpServer, {
         cors: {
-          origin: "*", // Allow all origins for now to rule out CORS issues
+          origin: [
+            /^(http:\/\/)?localhost:[0-9]{1,5}$/,
+            "https://stores-project-frontend.vercel.app",
+          ],
           methods: ["GET", "POST"],
+          credentials: true,
         },
       });
 
