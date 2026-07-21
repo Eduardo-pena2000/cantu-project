@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Image from "next/image";
 import { SubDataTable } from "@/app/_home/sub-data-table";
 
 export function EmployeePerformanceGrid({ employees }) {
@@ -86,9 +87,18 @@ export function EmployeePerformanceGrid({ employees }) {
                                 
                                 <div className="flex items-center gap-4 overflow-hidden ml-2">
                                     <div className="relative shrink-0">
-                                        <Avatar className="size-10 border shadow-sm">
-                                            <AvatarImage src={employee.image} alt={employee.shortFullName} />
-                                            <AvatarFallback>{employee.shortFullName?.substring(0, 2).toUpperCase()}</AvatarFallback>
+                                        <Avatar className="size-10 border shadow-sm relative overflow-hidden">
+                                            {employee.image ? (
+                                                <Image 
+                                                    src={employee.image} 
+                                                    alt={employee.shortFullName} 
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="40px"
+                                                />
+                                            ) : (
+                                                <AvatarFallback>{employee.shortFullName?.substring(0, 2).toUpperCase()}</AvatarFallback>
+                                            )}
                                         </Avatar>
                                         {employee.late > 0 && (
                                             <span className="absolute -bottom-1 -right-1 bg-yellow-400 text-yellow-900 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-white">

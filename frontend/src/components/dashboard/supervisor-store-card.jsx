@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Crown, Store as StoreIcon, Users, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { safeUrlEncode } from "@/utils";
@@ -59,9 +60,18 @@ export function SupervisorStoreCard({ store, teams }) {
                         <div className="space-y-3">
                             {teams.map((team, idx) => (
                                 <div key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-background/50 border hover:bg-background/80 transition-colors">
-                                    <Avatar className="size-8 border-2 border-background">
-                                        <AvatarImage src={team.manager?.image} />
-                                        <AvatarFallback className="bg-muted text-muted-foreground"><Users className="size-4" /></AvatarFallback>
+                                    <Avatar className="size-8 border-2 border-background relative overflow-hidden">
+                                        {team.manager?.image ? (
+                                            <Image 
+                                                src={team.manager.image} 
+                                                alt={team.manager.fullName || "Manager"} 
+                                                fill
+                                                className="object-cover"
+                                                sizes="32px"
+                                            />
+                                        ) : (
+                                            <AvatarFallback className="bg-muted text-muted-foreground"><Users className="size-4" /></AvatarFallback>
+                                        )}
                                     </Avatar>
                                     <div className="overflow-hidden">
                                         <p className="text-sm font-medium truncate">{team.manager?.fullName || "Sin asignar"}</p>
