@@ -6,7 +6,7 @@ import {
   CreateAssistanceDto,
   GetAssistanceHistoryDto,
 } from "../../domain";
-import { PaginatedResponse } from "../../../shared";
+import { PaginatedResponse } from "../../shared";
 import Assistance from "../database/models/assistence.model";
 import User from "../database/models/user.model";
 import ActivityAssignment from "../database/models/activity-assignment.model";
@@ -100,12 +100,13 @@ export class AssistanceDatasourceImpl implements AssistanceDatasource {
       distinct: true, // important when using findAndCountAll with joins
     });
 
+    const last_page = Math.ceil(count / limit);
     return {
       data: rows.map((r) => AssistanceEntity.fromObject(r)),
-      limit,
-      page,
-      total: count,
-      totalPages: Math.ceil(count / limit),
+      current_page: page,
+      total_records: count,
+      last_page,
+      has_more_pages: page < last_page,
     };
   }
 }

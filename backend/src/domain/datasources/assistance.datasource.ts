@@ -1,6 +1,6 @@
 import { CreateAssistanceDto, GetAssistanceHistoryDto } from "../dtos";
 import { AssistanceEntity } from "../entities";
-import { PaginatedResponse } from "../../../shared";
+import { PaginatedResponse } from "../../shared";
 
 export abstract class AssistanceDatasource {
   abstract create(dto: CreateAssistanceDto): Promise<AssistanceEntity>;

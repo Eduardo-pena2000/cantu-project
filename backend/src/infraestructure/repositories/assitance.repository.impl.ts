@@ -5,7 +5,7 @@ import {
   CreateAssistanceDto,
   GetAssistanceHistoryDto,
 } from "../../domain";
-import { PaginatedResponse } from "../../../shared";
+import { PaginatedResponse } from "../../shared";
 
 export class AssistanceRepositoryImpl implements AssistanceRepository {
   constructor(private assistanceDatasource: AssistanceDatasource) {}

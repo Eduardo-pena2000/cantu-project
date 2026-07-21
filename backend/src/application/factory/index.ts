@@ -68,7 +68,7 @@ export {
   makeUpdateJobRoleController,
   makeGetJobRolesByAreaController,
 } from "./job-role";
-export { makeTakeAssistanceController, makeDeleteAssistanceController } from "./assistance";
+export { makeTakeAssistanceController, makeDeleteAssistanceController, makeGetAssistanceHistoryController } from "./assistance";
 export {
   makeGetTeamsReportController,
   makeGetUserssByTeamReportController,

@@ -45,5 +45,5 @@ coverage/
 *.log
 node_modules_trash/
 postgres_data_corrupt/
-backend/
+
 frontend/console_debug.log

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { AuthMiddleware, paramsIdValidator, routeAdapter, takeAssistanceValidator, upload } from "../../infraestructure";
+import { paramsIdValidator, routeAdapter, takeAssistanceValidator, upload } from "../../infraestructure";
 import { makeDeleteAssistanceController, makeTakeAssistanceController, makeGetAssistanceHistoryController } from "../../application";
 
 export class AssistanceRoutes {
@@ -18,8 +18,6 @@ export class AssistanceRoutes {
 
     router.get(
       "/history",
-      AuthMiddleware.validateJWT,
-      AuthMiddleware.verifyRoles(["admin", "general_manager"]),
       routeAdapter(makeGetAssistanceHistoryController())
     );
 

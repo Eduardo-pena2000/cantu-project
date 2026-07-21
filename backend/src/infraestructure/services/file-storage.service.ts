@@ -6,6 +6,7 @@ import { UploadImageEntity } from "../../domain/entities";
 
 import cloudinaryConfig from "../config/plugins/cloudinary.config";
 import { envs } from "../config/plugins/envs.config";
+import { AppError } from "../../shared";
 
 export class FileStorageService {
   async uploadImage(buffer: Buffer, path: string): Promise<UploadImageEntity> {
