@@ -47,10 +47,8 @@ import { Input } from "@/components/ui/input";
 const filtersSchema = z.object({
   date: z
     .object({
-      from: z.date({
-        required_error: "Debes seleccionar una fecha.",
-      }),
-    }),
+      from: z.date().optional(),
+    }).optional(),
   store: z.preprocess(
     (val) => {
       if (val === "") return undefined;
@@ -106,7 +104,7 @@ export function Filters({ defaultValues, onSubmit }) {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="w-fit">
-              Día de Trabajo <span className="text-destructive">*</span>
+              Día de Trabajo (Opcional)
             </FormLabel>
             <Popover modal>
               <PopoverTrigger asChild>
@@ -130,6 +128,15 @@ export function Filters({ defaultValues, onSubmit }) {
                   onSelect={(date) => field.onChange({ from: date })}
                   initialFocus
                 />
+                <div className="p-3 border-t border-border">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-center text-muted-foreground hover:text-foreground"
+                    onClick={() => field.onChange({ from: undefined })}
+                  >
+                    Borrar selección (Ver todo el historial)
+                  </Button>
+                </div>
               </PopoverContent>
             </Popover>
             <FormMessage />

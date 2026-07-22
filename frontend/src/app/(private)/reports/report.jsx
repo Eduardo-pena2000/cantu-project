@@ -8,7 +8,7 @@ import { getAssistanceHistory } from "@/lib/queries";
 import { employeeAssignmentDto } from "@/dtos";
 
 import { Filters } from "@/app/(private)/reports/filters";
-import { EmployeePerformanceGrid } from "@/components/dashboard/employee-performance-grid";
+import { ReportsDetailList } from "@/components/reports/reports-detail-list";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Title } from "@/components/title";
 
@@ -33,27 +33,33 @@ export function Report() {
         role_id: filters.role,
         name: filters.name,
       }),
-    enabled: !!filters.date.from && !!filters.store,
+    enabled: !!filters.store,
   });
 
   function handleFilter(newFilters) {
     setFilters(newFilters);
   }
 
-  // Use the exact same formatting we use for the live dashboard
   const adaptedData = React.useMemo(() => {
     if (!data?.data) return [];
     
-    // The endpoint returns an array of AssistanceEntity joined with User.
-    // Wait, the backend endpoint returns Assistance models which have `employee` (User).
-    // The employeeAssignmentDto expects { id, avatar_url, email, names, username, last_names, assistance }
-    return data.data.map((assistance) => {
+    // Agrupar asistencias por empleado para que cada trabajador tenga un "baúl" con todo su historial
+    const grouped = data.data.reduce((acc, assistance) => {
       const user = assistance.employee;
-      return employeeAssignmentDto({
-        ...user,
-        assistance: assistance,
-      });
-    });
+      if (!user) return acc;
+      
+      if (!acc[user.id]) {
+        acc[user.id] = {
+          ...user,
+          assistances: [],
+        };
+      }
+      
+      acc[user.id].assistances.push(assistance);
+      return acc;
+    }, {});
+
+    return Object.values(grouped);
   }, [data]);
 
   return (
@@ -76,7 +82,7 @@ export function Report() {
               {adaptedData.length} registros
             </span>
           </div>
-          <EmployeePerformanceGrid employees={adaptedData} />
+          <ReportsDetailList employees={adaptedData} />
         </div>
       )}
 
