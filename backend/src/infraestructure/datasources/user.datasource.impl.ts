@@ -337,46 +337,12 @@ export class UserDatasourceImpl implements UserDatasource {
   }
 
   async findWithoutTeam(store_id: number, team_id: number): Promise<UserEntity[]> {
-    const filterIdQuery: WhereAttributeHash = {};
-
-    if (team_id) {
-      Object.assign(filterIdQuery, {
-        [Op.or]: [
-          Sequelize.literal(`id IN (SELECT user_id FROM team_users WHERE team_id = $teamId)`),
-          Sequelize.literal(`id NOT IN (SELECT user_id FROM team_users)`),
-        ],
-        [Op.notIn]: Sequelize.literal(`(SELECT user_id FROM team_managers)`),
-      });
-    } else {
-      Object.assign(filterIdQuery, {
-        [Op.and]: [
-          {
-            [Op.notIn]: Sequelize.literal(`(
-              SELECT tm.user_id 
-              FROM team_managers tm
-              INNER JOIN teams t ON t.id = tm.team_id
-              WHERE t.is_active = true
-            )`),
-          },
-          {
-            [Op.notIn]: Sequelize.literal(`(
-              SELECT tu.user_id 
-              FROM team_users tu
-              INNER JOIN teams t ON t.id = tu.team_id
-              WHERE t.is_active = true
-            )`),
-          },
-        ],
-      });
-    }
-
     const users = await User.findAll({
       attributes: ["id", "names", "last_names", "email", "username", "avatar_url", "avatar_name"],
       where: {
         store_id,
-        id: filterIdQuery,
       },
-      bind: { teamId: team_id },
+      order: [["names", "ASC"]],
     });
 
     return users.map(UserEntity.fromObject);
