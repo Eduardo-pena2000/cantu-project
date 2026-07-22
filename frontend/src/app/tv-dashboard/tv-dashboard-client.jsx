@@ -409,13 +409,10 @@ export function TvDashboardClient() {
                         <div className={`absolute inset-0 ring-4 ring-offset-4 ring-offset-white ${isKing ? 'ring-[#F5C518]' : status.ring} rounded-[2.5rem] opacity-50 blur-[2px]`} />
                         
                         <Avatar className={`w-40 h-40 md:w-48 md:h-48 rounded-[2.5rem] shadow-md relative z-10 bg-slate-50 overflow-hidden ring-2 ${isKing ? 'ring-[#F5C518]' : 'ring-white'}`}>
-                          {emp.avatar_url ? (
-                            <Image src={emp.avatar_url} alt={emp.names} fill sizes="192px" className="object-cover" />
-                          ) : (
-                            <AvatarFallback className="text-6xl font-bold bg-slate-50 text-[#1B4F8F]">
-                              {emp.names?.charAt(0)}{emp.last_names?.charAt(0)}
-                            </AvatarFallback>
-                          )}
+                              <AvatarImage src={emp.avatar_url || ""} className="object-cover" />
+                              <AvatarFallback className="text-4xl bg-[#1B4F8F] text-white">
+                                {emp.names?.charAt(0)}
+                              </AvatarFallback>
                         </Avatar>
                       </div>
                       
@@ -465,11 +462,8 @@ export function TvDashboardClient() {
                  <DialogHeader className="relative z-10">
                    <div className="flex items-center gap-4 mb-2">
                      <Avatar className="w-16 h-16 border-2 border-white/20 shadow-md bg-white relative overflow-hidden">
-                        {selectedEmployeeTask.avatar_url ? (
-                          <Image src={selectedEmployeeTask.avatar_url} alt={selectedEmployeeTask.names} fill sizes="64px" className="object-cover" />
-                        ) : (
-                          <AvatarFallback className="text-xl bg-[#1B4F8F] text-white">{selectedEmployeeTask.names?.charAt(0)}</AvatarFallback>
-                        )}
+                        <AvatarImage src={selectedEmployeeTask.avatar_url || ""} className="object-cover" />
+                        <AvatarFallback className="text-xl bg-[#1B4F8F] text-white">{selectedEmployeeTask.names?.charAt(0)}</AvatarFallback>
                      </Avatar>
                      <div className="text-left">
                        <DialogTitle className="text-2xl font-bold font-heading tracking-tight">{selectedEmployeeTask.names} {selectedEmployeeTask.last_names}</DialogTitle>

@@ -61,17 +61,10 @@ export function SupervisorStoreCard({ store, teams }) {
                             {teams.map((team, idx) => (
                                 <div key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-background/50 border hover:bg-background/80 transition-colors">
                                     <Avatar className="size-8 border-2 border-background relative overflow-hidden">
-                                        {team.manager?.image ? (
-                                            <Image 
-                                                src={team.manager.image} 
-                                                alt={team.manager.fullName || "Manager"} 
-                                                fill
-                                                className="object-cover"
-                                                sizes="32px"
-                                            />
-                                        ) : (
-                                            <AvatarFallback className="bg-muted text-muted-foreground"><Users className="size-4" /></AvatarFallback>
-                                        )}
+                                        <AvatarImage src={team.manager?.image || ""} className="object-cover" />
+                                        <AvatarFallback className="bg-primary/10 text-primary text-xs">
+                                            {team.manager?.names?.charAt(0)}{team.manager?.last_names?.charAt(0)}
+                                        </AvatarFallback>
                                     </Avatar>
                                     <div className="overflow-hidden">
                                         <p className="text-sm font-medium truncate">{team.manager?.fullName || "Sin asignar"}</p>

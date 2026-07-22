@@ -78,17 +78,8 @@ export function SupervisorStoreView({ session, store, schedule, scheduleEmployee
                             {manager ? (
                                 <>
                                     <Avatar className="size-24 border-4 border-sidebar-primary/20 relative overflow-hidden">
-                                        {manager.image ? (
-                                            <Image 
-                                                src={manager.image} 
-                                                alt={manager.shortFullName || "Encargado"} 
-                                                fill
-                                                className="object-cover"
-                                                sizes="96px"
-                                            />
-                                        ) : (
-                                            <AvatarFallback>{manager.shortFullName?.charAt(0)}</AvatarFallback>
-                                        )}
+                                        <AvatarImage src={manager.image || ""} className="object-cover" />
+                                        <AvatarFallback>{manager.shortFullName?.charAt(0)}</AvatarFallback>
                                     </Avatar>
                                     <div>
                                         <h3 className="font-bold text-xl">{manager.shortFullName}</h3>
